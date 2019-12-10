@@ -31,6 +31,7 @@ public class mybatisTest {
         try {
             sqlSession = sessionFactory.openSession();
             Person person = sqlSession.selectOne("personMapper.selectPerson",1);
+            sqlSession.commit();
             System.out.println(person.toString());
 
         } finally {
