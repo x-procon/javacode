@@ -1,5 +1,17 @@
 ##ignore this file##
-/target/
+# IntelliJ IDEA Project files
+
+*.iml
+*.ipr
+*.iws
+idea
+.idea
+*/idea/
+*/.idea/
+*/target/
+target
+*/out/
+out
 
 .classpath
 .project
@@ -37,4 +49,4 @@ Icon?  
 ehthumbs.db  
 Thumbs.db 
 test-classes
-target
+
