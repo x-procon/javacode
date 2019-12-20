@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>../study/mybatis</module>
+        <module>../study/redis</module>
     </modules>
     <packaging>pom</packaging>
     <name>parent</name>
@@ -34,6 +35,10 @@
         <mysql.version>5.1.43</mysql.version>
         <!-- httpClient版本-->
         <httpclient.version>4.5.10</httpclient.version>
+        <!-- apache commons-pool2版本 -->
+        <commons-pool2.version>2.7.0</commons-pool2.version>
+        <!-- jedis version -->
+        <jedis.version>2.9.0</jedis.version>
     </properties>
 
     <dependencyManagement>
@@ -159,6 +164,19 @@
                 <version>${httpclient.version}</version>
             </dependency>
 
+            <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-pool2 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-pool2</artifactId>
+                <version>${commons-pool2.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
 
 
         </dependencies>
