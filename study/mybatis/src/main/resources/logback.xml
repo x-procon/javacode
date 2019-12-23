@@ -2,12 +2,12 @@
 <!-- logback整合日志-->
 <configuration scan="true" scanPeriod="60 seconds" debug="true">
     <property name="FILE_LOG_PATTERN"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %X{user.username} %X{req.requestURI} %X{req.queryString} %logger{36}: %msg%n" />
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %X{user.username} %X{req.requestURI} %X{req.queryString} %logger{36}: %msg%n"/>
     <property name="CONSOLE_LOG_PATTERN"
-              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %X{user.username} %X{req.requestURI} %X{req.queryString} %logger{36}: %msg%n" />
+              value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %X{user.username} %X{req.requestURI} %X{req.queryString} %logger{36}: %msg%n"/>
 
     <!-- 定义日志文件 输入位置 -->
-    <property name="log_dir" value="D:\\AppCache\\logs\\" />
+    <property name="log_dir" value="D:\\AppCache\\logs\\"/>
     <!-- 日志最大的历史 30天 -->
     <property name="maxHistory" value="30"/>
 
@@ -22,7 +22,7 @@
     <!-- ERROR级别日志 -->
     <!-- 滚动记录文件，先将日志记录到指定文件，当符合某个条件时，将日志记录到其他文件 RollingFileAppender-->
     <appender name="ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <!--        <file>${log_dir}/%d{yyyy-MM-dd}/error.log</file>-->
+        <!--        <file>${log_dir}/%d{yyyy-MM-dd}/error.log</file>-->
 
         <!-- 最常用的滚动策略，它根据时间来制定滚动策略.既负责滚动也负责出发滚动 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
@@ -49,9 +49,6 @@
             <pattern>${FILE_LOG_PATTERN}</pattern>
         </encoder>
     </appender>
-
-
-
 
 
     <!-- INFO级别日志 appender -->
@@ -97,29 +94,29 @@
 
 
     <!--输出到mysql数据库的appender配置     -->
-<!--    <appender name="db" class="ch.qos.logback.classic.db.DBAppender">-->
-<!--        <connectionSource-->
-<!--                class="ch.qos.logback.core.db.DriverManagerConnectionSource">-->
-<!--            <driverClass>com.mysql.jdbc.Driver</driverClass>-->
-<!--            <url>jdbc:mysql://120.0.0.1:3306/logback_member?characterEncoding=utf8</url>-->
-<!--            <user>root</user>-->
-<!--            <password>123456789</password>-->
-<!--        </connectionSource>-->
-<!--    </appender>-->
+    <!--    <appender name="db" class="ch.qos.logback.classic.db.DBAppender">-->
+    <!--        <connectionSource-->
+    <!--                class="ch.qos.logback.core.db.DriverManagerConnectionSource">-->
+    <!--            <driverClass>com.mysql.jdbc.Driver</driverClass>-->
+    <!--            <url>jdbc:mysql://120.0.0.1:3306/logback_member?characterEncoding=utf8</url>-->
+    <!--            <user>root</user>-->
+    <!--            <password>123456789</password>-->
+    <!--        </connectionSource>-->
+    <!--    </appender>-->
 
-<!--    <logger name="org.mybatis" level="debug" />-->
-<!--    <logger name="ch.qos.logback"/>-->
+    <!--    <logger name="org.mybatis" level="debug" />-->
+    <!--    <logger name="ch.qos.logback"/>-->
 
     <!-- 就是这个监控了mybatis日志输出，配合上面的“dao” -->
     <!--    <logger name="dao" level="DEBUG"/>-->
 
     <root level="DEBUG">
         <!-- 控制台输出 -->
-        <appender-ref ref="STDOUT" />
+        <appender-ref ref="STDOUT"/>
         <!--<!– 文件输出 –>-->
-        <appender-ref ref="ERROR" />
-        <appender-ref ref="INFO" />
-        <appender-ref ref="DEBUG" />
+        <appender-ref ref="ERROR"/>
+        <appender-ref ref="INFO"/>
+        <appender-ref ref="DEBUG"/>
     </root>
 
     <logger name="gyo.hazer" level="DEBUG"/>

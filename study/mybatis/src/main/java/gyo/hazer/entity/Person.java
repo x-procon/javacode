@@ -13,6 +13,7 @@ public class Person {
     int id;
     int age;
     String name;
+    String sex;
 
     public int getId() {
         return id;
@@ -38,12 +39,37 @@ public class Person {
         this.name = name;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
                 "id=" + id +
                 ", age=" + age +
                 ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
                 '}';
+    }
+
+    public Person() {
+    }
+
+    public Person(int age, String name, String sex) {
+        this.age = age;
+        this.name = name;
+        this.sex = sex;
+    }
+
+    public Person(int id, int age, String name, String sex) {
+        this.id = id;
+        this.age = age;
+        this.name = name;
+        this.sex = sex;
     }
 }

@@ -8,7 +8,7 @@
        resultType：sql语句查询结果集的封装类型,tb_user即为数据库中的表
      -->
     <select id="selectUserById" resultType="gyo.hazer.entity.User" parameterType="int">
-      select * from user where id = #{id}
+        select * from user where id = #{id}
     </select>
 
     <select id="selectAll" resultType="gyo.hazer.entity.User">

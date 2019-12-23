@@ -30,8 +30,11 @@ public class mybatisTest {
         SqlSession sqlSession = null;
         try {
             sqlSession = sessionFactory.openSession();
-            Person person = sqlSession.selectOne("personMapper.selectPerson",1);
+            Person person1 = new Person(25, "zzccc", "女");
+            sqlSession.insert("personMapper.insertPerson", person1);
             sqlSession.commit();
+            Person person = sqlSession.selectOne("personMapper.selectPerson", 3);
+
             System.out.println(person.toString());
 
         } finally {

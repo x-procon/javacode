@@ -29,6 +29,7 @@ import static org.junit.Assert.*;
 public class UserDaoImplTest {
     public UserDao userDao;
     public SqlSession sqlSession;
+
     @Before
     public void setUp() throws Exception {
         //指定全局文件

@@ -11,7 +11,7 @@ import redis.clients.jedis.Jedis;
  */
 public class PingTest {
     public static void main(String[] args) {
-        Jedis jedis = new Jedis("122.51.94.168",6379);
+        Jedis jedis = new Jedis("122.51.94.168", 6380);
         System.out.println(jedis.ping());
     }
 }
