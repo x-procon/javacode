@@ -1,9 +1,16 @@
 package gyo.hazer.springboot.config;
 
+import gyo.hazer.springboot.component.LoginInteInterceptor;
+import gyo.hazer.springboot.component.MyLocalResolver;
+import org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.Locale;
 
 
 /**
@@ -23,6 +30,17 @@ public class MyWebConfig implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("login");
         registry.addViewController("/index.html").setViewName("login");
-        registry.addViewController("/main.html").setViewName("dashboard");
+        registry.addViewController("/main.html").setViewName("main");
+    }
+
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new LoginInteInterceptor()).addPathPatterns("/**").
+//                excludePathPatterns("/index.html","/user/login");
+//    }
+
+    @Bean
+    public LocaleResolver myLocaleResolver(){
+        return new MyLocalResolver();
     }
 }

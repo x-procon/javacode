@@ -91,7 +91,7 @@
     </appender>
 
     <!--分别设置对应的日志输出节点 -->
-    <root level="info">
+    <root level="debug">
         <appender-ref ref="console" />
         <appender-ref ref="debug" />
         <appender-ref ref="info" />

@@ -2,10 +2,15 @@ server:
   port: 8081
 spring:
   profiles:
-    active: prod
+    active: dev
+  messages:
+    basename: i18n.login
+  thymeleaf:
+    cache: false
+
 ---
 server:
-  port: 8082
+  port: 8080
 spring:
   profiles: dev
 ---
