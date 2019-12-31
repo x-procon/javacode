@@ -8,8 +8,12 @@
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="cacheManager" ref="cacheManager"/>
         <property name="authenticator" ref="authenticator"></property>
-
-        <property name="realm" ref="jdbcRealm"></property>
+        <property name="realms">
+            <list>
+                <ref bean="jdbcRealm"/>
+                <ref bean="secondRealm"/>
+            </list>
+        </property>
 
     </bean>
 
@@ -43,7 +47,22 @@
     	3. 配置 Realm
     	3.1 直接配置实现了 org.apache.shiro.realm.Realm 接口的 bean
     -->
-    <bean id="jdbcRealm" class="com.hazer.realms.ShiroRealm"></bean>
+    <bean id="jdbcRealm" class="com.hazer.realms.ShiroRealm">
+        <property name="credentialsMatcher">
+            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <property name="hashAlgorithmName" value="MD5"></property>
+                <property name="hashIterations" value="1024"></property>
+            </bean>
+        </property>
+    </bean>
+    <bean id="secondRealm" class="com.hazer.realms.SecondRealm">
+        <property name="credentialsMatcher">
+            <bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+                <property name="hashAlgorithmName" value="SHA1"></property>
+                <property name="hashIterations" value="1024"></property>
+            </bean>
+        </property>
+    </bean>
 
     <!-- =========================================================
          Shiro Spring-specific integration
@@ -94,14 +113,25 @@
         	4). roles 角色过滤器
         -->
 
-        <property name="filterChainDefinitions">
-            <value>
-                /login.html = anon
-                /login.jsp = anon
-                /admin/login = anon
-                /** = authc
-            </value>
-        </property>
+<!--        <property name="filterChainDefinitions">-->
+<!--            <value>-->
+<!--                /login.html = anon-->
+<!--                /login.jsp = anon-->
+<!--                /admin/login = anon-->
+<!--                /** = authc-->
+<!--            </value>-->
+<!--        </property>-->
+
+
 
     </bean>
+    <!-- 配置一个 bean, 该 bean 实际上是一个 Map. 通过实例工厂方法的方式 -->
+    <bean id="filterChainDefinitionMap"
+          factory-bean="filterChainDefinitionMapBuilder" factory-method="buildFilterChainDefinitionMap"></bean>
+
+    <bean id="filterChainDefinitionMapBuilder"
+          class="com.hazer.factory.FilterChainDefinitionMapBuilder"></bean>
+
+    <bean id="shiroService"
+          class="com.atguigu.shiro.services.ShiroService"></bean>
 </beans>
