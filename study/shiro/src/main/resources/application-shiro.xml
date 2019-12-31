@@ -132,6 +132,5 @@
     <bean id="filterChainDefinitionMapBuilder"
           class="com.hazer.factory.FilterChainDefinitionMapBuilder"></bean>
 
-    <bean id="shiroService"
-          class="com.atguigu.shiro.services.ShiroService"></bean>
+
 </beans>
