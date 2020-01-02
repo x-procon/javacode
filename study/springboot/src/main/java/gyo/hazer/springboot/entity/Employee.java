@@ -1,6 +1,6 @@
 package gyo.hazer.springboot.entity;
 
-import java.util.Date;
+
 
 public class Employee {
 
@@ -10,8 +10,7 @@ public class Employee {
     private String email;
     //1 male, 0 female
     private Integer gender;
-    private Department department;
-    private Date birth;
+    private Integer dId;
 
     public Integer getId() {
         return id;
@@ -45,30 +44,20 @@ public class Employee {
         this.gender = gender;
     }
 
-    public Department getDepartment() {
-        return department;
+    public Integer getdId() {
+        return dId;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
+    public void setdId(Integer dId) {
+        this.dId = dId;
     }
 
-    public Date getBirth() {
-        return birth;
-    }
-
-    public void setBirth(Date birth) {
-        this.birth = birth;
-    }
-    public Employee(Integer id, String lastName, String email, Integer gender,
-                    Department department) {
-        super();
+    public Employee(Integer id, String lastName, String email, Integer gender,  Integer dId) {
         this.id = id;
         this.lastName = lastName;
         this.email = email;
         this.gender = gender;
-        this.department = department;
-        this.birth = new Date();
+        this.dId = dId;
     }
 
     public Employee() {
@@ -81,10 +70,7 @@ public class Employee {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", gender=" + gender +
-                ", department=" + department +
-                ", birth=" + birth +
+                ", dId=" + dId +
                 '}';
     }
-	
-	
 }
