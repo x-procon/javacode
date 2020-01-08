@@ -7,19 +7,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.File;
+import java.util.Date;
 
 
 @SpringBootTest
 class SpringbootApplicationTests {
 
     @Autowired
-    EmployeeMapper employeeMapper;
+    private EmployeeMapper employeeMapper;
 
     @Autowired
-    StringRedisTemplate stringRedisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    RedisTemplate<Object, Employee> redisTemplate;
+    private RedisTemplate<Object, Employee> redisTemplate;
+
+    @Autowired
+    private JavaMailSenderImpl javaMailSender;
 
 
 
@@ -51,4 +61,21 @@ class SpringbootApplicationTests {
         System.out.println(employee);
     }
 
+    @Test
+    void sendMail(){
+        try {
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
+
+            mimeMessageHelper.setSubject("make love baby");
+            mimeMessageHelper.setText("<h1 style='color:red'>今晚来我家！</h1>",true);
+            mimeMessageHelper.setFrom("1187147080@qq.com","gyo");
+            mimeMessageHelper.setSentDate(new Date());
+            mimeMessageHelper.setTo(new String[]{"huangpuguang@foxmail.com","huangpuguang@outlook.com"});
+            //mimeMessageHelper.addAttachment("saber",new File("F:\\AppData\\JetBrains\\jetbrains-agent.jar"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }
