@@ -21,7 +21,7 @@
         <package name="gyo.hazer.entity"/>
     </typeAliases>
     <typeHandlers>
-        <typeHandler handler="gyo.hazer.convert.StringToIntConverter" javaType="java.lang.String"
+        <typeHandler handler="com.hazer.gyo.hazer.convert.StringToIntConverter" javaType="java.lang.String"
                      jdbcType="INTEGER"></typeHandler>
     </typeHandlers>
 

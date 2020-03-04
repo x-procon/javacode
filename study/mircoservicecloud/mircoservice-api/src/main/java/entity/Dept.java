@@ -21,7 +21,7 @@ import java.io.Serializable;
 @Accessors(chain = true)
 public class Dept implements Serializable {
     private Long deptNo;
-    private String deptname;
+    private String dname;
     private String dbSource;
 
 }
