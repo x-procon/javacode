@@ -11,6 +11,7 @@
         <module>../study/mybatis</module>
         <module>../study/redis</module>
         <module>../study/shiro</module>
+        <module>../study/com.hazer.java8</module>
     </modules>
     <packaging>pom</packaging>
     <name>parent</name>
