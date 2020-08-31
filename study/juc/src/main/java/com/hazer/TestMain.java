@@ -1,11 +1,22 @@
 package com.hazer;
 
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
+import sun.misc.BASE64Decoder;
 
 
-
+import javax.crypto.Cipher;
+import java.io.ByteArrayOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.security.Key;
+import java.security.KeyFactory;
+import java.security.PublicKey;
+import java.security.Security;
+import java.security.spec.PKCS8EncodedKeySpec;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -15,57 +26,65 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class TestMain {
     public static void main(String[] args) throws Exception {
-        String rsaKey = "MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAIKgYudpaDtJpYfkHht0/2GJDfnVRysOOv3aEh1gsPrBKSA50UiXY77qs6RsmMwVeKqlLWXT8SLrMnfboed1X2mu1pKBvb881ag02hmQRqJeXBrdTh8m7fh3I4a55idKIGaeRkOkygwYfI0VUetcA/vYuhxR3mhuVB4vbpHBCVY7AgMBAAECgYAinxPXtc5UeG6RF9sK9/WACm1T3D1iogDsq1HFy4zcyTl3OxvHG6jqPxah686LuN0kjWb86DGvSZs0vVeqGyfQX9rIXohxA7tgTxuDaYKdI1kWXHZL40EX+33z2JBD5vgoIVjE+IWWFcIHwSbCv5HJb74coCiZ/vkoNBSDCUkMcQJBAMFOM+MBLlKQrOCRUnws5IFNQX0+1G7omlM/3qTHFKV1C+fT9sDsaB8epFcJJt0rW38nehUgwM4GCt+7jkX1JZUCQQCs/hB9LkqkOnzXEoixJhywT1jdtOm4Nnx2ZNSkjOxlAAXjRDHuDmofRXsLl600Wii2myWbuWhviNVdITzfrfiPAkBxMgMuVh2zGacyZcbgkkVI9l14IxewzqK4RzlwUmfjr9PF8JiZRpZ+Sqo/kUthzibpIcvanXBp9J3ff+wDSVe1AkA/4vgd8tmX+w2ds/eNTKDtr/AGuMhTwrOGWch6GJ0406BZBRdXbjVc5SEC7/oESoOcpIFoGDnsbuE1KpA7nxkbAkA+k+6zo1tX/0JfjomEB/vPxsov3rc6AFVjjGPbDZepOBDDdyirM9buGyVuJoWa5++XNN+oM2pC8iwAWHo68zKI";
-        String appId = "fd00658c-994c-49e4-994c-59072c982417";
-        String version = "v1.0";
-        String timeStamp = String.valueOf(System.currentTimeMillis());
-        System.out.println(timeStamp);
-        String sign = version+appId+timeStamp;
-        String signMd5 = DigestUtils.md5Hex(sign);
-        System.out.println("MD5:"+signMd5);
-        String sign2 = RSAUtil.encryptByPrivateKey(signMd5, rsaKey);
-        System.out.println("生成的签名是："+sign2);
+        String privateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBALZjydq9lPHQwR7eK64ozcD8QdJQ5IGMHECu3hRK422j3FInLLVP8C9wXoDZaSa+bjsJJGqd6RII6xpQxKAfiSg/qZwBPNJmTRVwRA5zaPQBWo5mjEtccfox+ooIGQ6LX5j3B+LY//0BF2GJybNa1AoZB8r56srRAJalg6LG7woJAgMBAAECgYBag7NNRwB/8WWl+AQdbkqOF6JiyZpdYDc1MpMr5u5vHv7cFmztnjpIkK+Vqk+w1pjF24ejEbL1LE/gw2yROpVJ+bHj8VdYnz45v8Q/DuyFirx6kNR24a/2dJBc8J92diK0ywrwwKLU8t3JGTjYkeZt7cBaNgW3fxSAbkKddZuZwQJBANpXCYEuq0CGwd5Ami9MQuIOZRtEf0R+JZ/aTv6A9omp9wuLrgf062ZvQwhyKdbyts5XAE1WlZCO9hAEAr7ey3UCQQDV2VgiVOocPnaYzGWp76JMhlWVFm6RXZXhkgj4LhfGEZtjiZa8jNXNQx4KcP51T43Bxz2Ky/R7Yfu9vj/4gHXFAkA/O53BD+cA1QYoe8UrlYZ5OXoGn5vMFkyHMw5VnrvHurWVXmqUW1YhYG+lboq3eat/rqqju0OtjfmtQbwZ0yRRAkB7ZDCVhrea2nPmELJsjqfwTebd4paj7AMKqA/i2/29vPUTRxWh8AWBrcOMtMwudlvOPx+EkdCczNnMDxWsVrsdAkEA1M9zDd+1xg0qmoMjr4BRNdKJAk2SCrgS7FmPC3ejWaJf3IJB5AlOLocTpitaVVQG8OrZnCX3P+BvyTtZJu1OKA==";
+        String appId = "dd7eda52-d1f9-4fa2-ae46-a8b3a4410d91";
+//        String version = "v1.0";
+//        String timeStamp = String.valueOf(System.currentTimeMillis());
+//        System.out.println(timeStamp);
+//        String sign = version + appId + "1596698508058";
+//        String signMd5 = DigestUtils.md5Hex(sign);
+//        String sign2 = RSAUtil.encryptByPrivateKey(signMd5, privateKey);
+//        System.out.println("生成的签名是：" + sign2);
+        String sign = "Vjgg/P3m6gsNtKQL422ZMAhsHhXn/TuGtkDLcXwKR5e2HRN+3gsJrHiH0+0NgtP7R17q5MxOv1m6xVQCSh4BHE9MEjkDl5PDew8TmWUYh1JgqqQbnBbHv2ey4XFLq5CZ+7+IfMTi7znt7ufWZ5h7gC9Ed8s9Sz4O2LrE/TSsDKM=";
+        String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC2Y8navZTx0MEe3iuuKM3A/EHSUOSBjBxArt4USuNto9xSJyy1T/AvcF6A2Wkmvm47CSRqnekSCOsaUMSgH4koP6mcATzSZk0VcEQOc2j0AVqOZoxLXHH6MfqKCBkOi1+Y9wfi2P/9ARdhicmzWtQKGQfK+erK0QCWpYOixu8KCQIDAQAB";
+        RSAUtil.decryptByPublicKey(sign,publicKey);
     }
 
-    @org.junit.Test
-    public void testR(){
-         String path = "166.3.100.162/wsxtshare/reviewTest/test//XY1000660048/0/20181030/idcard_back.png";
-         String pathWhiteList = "166.3.100.162,/home/AnyChatCloud/html/AnyChatFaceX/";
-        //路径白名单校验
-
-        String[] pathArray = pathWhiteList.split(",");
-        boolean flag = false;
-        for(String pathWhite:pathArray){
-            if(path.contains(pathWhite)){
-                flag = true;
+    public static String decrypt(byte[] text, PublicKey key) {
+        byte[] dectyptedText = null;
+        try {
+            //秘钥初始化时加入制定默认的算法库
+            Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
+            //使用第三方算法加密库 BC
+            final Cipher cipher = Cipher.getInstance("RSA/None/PKCS1Padding");
+            cipher.init(Cipher.DECRYPT_MODE, key);
+            //分段
+            int inputLen = text.length;
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            int offSet = 0;
+            byte[] cache;
+            int i = 0;
+            // 对数据分段解密
+            while (inputLen - offSet > 0) {
+                if (inputLen - offSet > 128) {
+                    cache = cipher.doFinal(text, offSet, 128);
+                } else {
+                    cache = cipher.doFinal(text, offSet, inputLen - offSet);
+                }
+                out.write(cache, 0, cache.length);
+                i++;
+                offSet = i * 128;
             }
+            dectyptedText = out.toByteArray();
+            out.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        if(!flag){
-            System.out.println("路径非法");
-        }
-
+        return new String(dectyptedText);
     }
 
-    @org.junit.Test
-    public void testD(){
-        AtomicInteger index = new AtomicInteger(0);
-        System.out.println("原始值："+index);
-        int j;
-        for(int i=0;i<18;i++){
-            new Thread(()-> {
 
-            },"线程--"+i).start();
-            j=    index.getAndIncrement() % 1;
-            System.out.println(Thread.currentThread().getName()+":执行后的值："+j);
-
-
-        }
+    public static PublicKey getPublicKey(String key) throws Exception {
+        byte[] keyBytes;
+        keyBytes = (new BASE64Decoder()).decodeBuffer(key);
+        X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
+        KeyFactory keyFactory = KeyFactory.getInstance("RSA");
+        PublicKey publicKey = keyFactory.generatePublic(keySpec);
+        return publicKey;
     }
 
-    @Test
-    public void testSplit(){
-        String className = "com.bairuitech.anychat.facex.controller.admin.AdminAppConfigController";
-        String a [] = className.split("\\.");
-        System.out.println(a);
-    }
+
+    public static String str2HexStr(String str,String charset) throws UnsupportedEncodingException {
+               return Hex.encodeHexString(str.getBytes(charset));
+            }
 }

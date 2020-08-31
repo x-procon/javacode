@@ -229,6 +229,7 @@ public class RSAUtil {
         return bytes;
     }
 
+
     private static char[] HEXCHAR = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
 
     public static String hexStr2Str(String hexStr) {
