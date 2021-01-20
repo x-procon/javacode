@@ -8,6 +8,7 @@ package com.hazer.adapter.classtype;
 public interface Target {
     /**
      * 目标接口
+     *
      * @param: []
      * @return: void
      */

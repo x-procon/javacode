@@ -25,23 +25,23 @@ public class ForkJoinTest extends RecursiveTask<Long> {
         //forkJoinTest.add3();   //结果：500000000500000000共耗时224毫秒
     }
 
-    public Long add(){
+    public Long add() {
         Long count = 0L;
         LocalDateTime startTime = LocalDateTime.now();
-        for(Long i =0L;i<=1_000_000_000L;i++){
-            count = count+i;
+        for (Long i = 0L; i <= 1_000_000_000L; i++) {
+            count = count + i;
         }
         LocalDateTime endTime = LocalDateTime.now();
         Duration between = Duration.between(startTime, endTime);
         long millis = between.toMillis();
-        System.out.println("结果："+count+"共耗时"+millis+"毫秒");
+        System.out.println("结果：" + count + "共耗时" + millis + "毫秒");
         return count;
     }
 
 
     public Long add2() throws ExecutionException, InterruptedException {
         LocalDateTime startTime = LocalDateTime.now();
-        ForkJoinTest task = new ForkJoinTest(0L,1_000_000_000L);
+        ForkJoinTest task = new ForkJoinTest(0L, 1_000_000_000L);
         ForkJoinPool forkJoinPool = new ForkJoinPool();
         //forkJoinPool.execute(task);
         ForkJoinTask<Long> submit = forkJoinPool.submit(task); //提交任务有结果
@@ -49,7 +49,7 @@ public class ForkJoinTest extends RecursiveTask<Long> {
         LocalDateTime endTime = LocalDateTime.now();
         Duration between = Duration.between(startTime, endTime);
         long millis = between.toMillis();
-        System.out.println("结果："+count+"共耗时"+millis+"毫秒");
+        System.out.println("结果：" + count + "共耗时" + millis + "毫秒");
         return count;
     }
 
@@ -57,29 +57,28 @@ public class ForkJoinTest extends RecursiveTask<Long> {
     protected Long compute() {
 
         Long temp = 10000L;
-        if(end-start<temp){
-          return   add();
-        }else {
-            Long middle = (end +start)/2;
-            ForkJoinTest forkJoinTest = new ForkJoinTest(start,middle);
+        if (end - start < temp) {
+            return add();
+        } else {
+            Long middle = (end + start) / 2;
+            ForkJoinTest forkJoinTest = new ForkJoinTest(start, middle);
             forkJoinTest.fork();
-            ForkJoinTest forkJoinTest2 = new ForkJoinTest(middle+1,end);
+            ForkJoinTest forkJoinTest2 = new ForkJoinTest(middle + 1, end);
             forkJoinTest2.fork();
-            return forkJoinTest.join()+forkJoinTest2.join();
+            return forkJoinTest.join() + forkJoinTest2.join();
         }
 
 
     }
 
 
-
-    public void add3(){
+    public void add3() {
         LocalDateTime startTime = LocalDateTime.now();
         Long reduce = LongStream.rangeClosed(0, 1_000_000_000).parallel().reduce(0, Long::sum);
         LocalDateTime endTime = LocalDateTime.now();
         Duration between = Duration.between(startTime, endTime);
         long millis = between.toMillis();
-        System.out.println("结果："+reduce+"共耗时"+millis+"毫秒");
+        System.out.println("结果：" + reduce + "共耗时" + millis + "毫秒");
     }
 
     public ForkJoinTest() {

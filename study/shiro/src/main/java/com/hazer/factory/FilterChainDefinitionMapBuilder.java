@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
  * @Version: 1.0
  */
 public class FilterChainDefinitionMapBuilder {
-    public LinkedHashMap<String, String> buildFilterChainDefinitionMap(){
+    public LinkedHashMap<String, String> buildFilterChainDefinitionMap() {
         LinkedHashMap<String, String> map = new LinkedHashMap<>();
 
         map.put("/login.jsp", "anon");

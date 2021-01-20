@@ -10,16 +10,17 @@ public class SuperClass {
     static {
         System.out.println("父类初始化了！");
     }
+
     public static int value = 1234456;
 }
 
-class SubClass extends SuperClass{
+class SubClass extends SuperClass {
     static {
         System.out.println("子类被初始化了！");
     }
 }
 
-class Test{
+class Test {
     public static void main(String[] args) {
         SubClass[] sub = new SubClass[10];
         //System.out.println(SubClass.value);

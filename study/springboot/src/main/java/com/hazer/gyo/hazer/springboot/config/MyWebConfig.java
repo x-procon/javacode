@@ -35,7 +35,7 @@ public class MyWebConfig implements WebMvcConfigurer {
 //    }
 
     @Bean
-    public LocaleResolver myLocaleResolver(){
+    public LocaleResolver myLocaleResolver() {
         return new MyLocalResolver();
     }
 }

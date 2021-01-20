@@ -46,24 +46,24 @@ public class EsController {
             List<Content> contents = JsoupUtil.parseJD(keyword);
             BulkRequest bulkRequest = new BulkRequest();
             bulkRequest.timeout(TimeValue.timeValueSeconds(600));
-            for(int i= 0;i<contents.size();i++){
-                IndexRequest indexRequest =new IndexRequest("hazer-es");
-                bulkRequest.add(indexRequest.source(JSON.toJSONString(contents.get(i)),XContentType.JSON));
+            for (int i = 0; i < contents.size(); i++) {
+                IndexRequest indexRequest = new IndexRequest("hazer-es");
+                bulkRequest.add(indexRequest.source(JSON.toJSONString(contents.get(i)), XContentType.JSON));
             }
             BulkResponse response = restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
             return ResultModel.success(!response.hasFailures());
         } catch (IOException e) {
             e.printStackTrace();
         }
-            return  ResultModel.fail();
+        return ResultModel.fail();
     }
 
     @GetMapping(value = "page/{keyword}/{pageNo}/{pageSize}")
     public ResultModel searchPage(@PathVariable("keyword") String keyword,
                                   @PathVariable("pageNo") Integer pageNo,
                                   @PathVariable("pageSize") Integer pageSize) throws IOException {
-        if(pageNo<0){
-            return ResultModel.fail("参数错误",null);
+        if (pageNo < 0) {
+            return ResultModel.fail("参数错误", null);
         }
         //条件搜索
         SearchRequest request = new SearchRequest("hazer-es");
@@ -81,10 +81,10 @@ public class EsController {
         //解析结果
         SearchHit[] hits = response.getHits().getHits();
         List<Map<String, Object>> maps = new ArrayList<>();
-        for(SearchHit documentFields: hits){
+        for (SearchHit documentFields : hits) {
             maps.add(documentFields.getSourceAsMap());
         }
-        return ResultModel.success("获取成功",maps);
+        return ResultModel.success("获取成功", maps);
     }
 }
 

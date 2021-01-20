@@ -46,7 +46,7 @@ public class BqTest {
 
         blockingQueue.offer("aa");
         System.out.println(blockingQueue);
-        blockingQueue.offer("bb",2, TimeUnit.SECONDS);
+        blockingQueue.offer("bb", 2, TimeUnit.SECONDS);
         System.out.println(blockingQueue);
         blockingQueue.offer("cc");
         System.out.println(blockingQueue.offer("dd"));

@@ -24,7 +24,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User queryUserById(Integer id) {
-        return this.sqlSession.selectOne("userDao.selectUserById",id);
+        return this.sqlSession.selectOne("userDao.selectUserById", id);
     }
 
     @Override
@@ -34,16 +34,16 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void insertUser(User user) {
-         this.sqlSession.insert("userDao.insertUser",user);
+        this.sqlSession.insert("userDao.insertUser", user);
     }
 
     @Override
     public void updateUser(User user) {
-        this.sqlSession.insert("userDao.updateUser",user);
+        this.sqlSession.insert("userDao.updateUser", user);
     }
 
     @Override
     public void deleteUser(Integer id) {
-        this.sqlSession.delete("userDao.deleteUser",id);
+        this.sqlSession.delete("userDao.deleteUser", id);
     }
 }

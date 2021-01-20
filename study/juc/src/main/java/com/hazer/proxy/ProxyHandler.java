@@ -22,10 +22,11 @@ public class ProxyHandler implements InvocationHandler {
      * @param: []
      * @return: java.lang.Object
      */
-    public Object getProxy(){
+    public Object getProxy() {
         return Proxy.newProxyInstance(target.getClass().getClassLoader(),
-                target.getClass().getInterfaces(),this);
+                target.getClass().getInterfaces(), this);
     }
+
     /**
      * @description: 处理代理实例并返回结果
      * @param: [proxy, method, args]
@@ -33,7 +34,7 @@ public class ProxyHandler implements InvocationHandler {
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        Object result =  method.invoke(target,args);
+        Object result = method.invoke(target, args);
         return result;
     }
 }

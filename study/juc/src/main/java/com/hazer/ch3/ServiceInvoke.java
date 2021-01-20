@@ -10,5 +10,5 @@ public class ServiceInvoke {
      * 保存类唯一实例
      */
     private static final ServiceInvoke INSTANCE = new ServiceInvoke();
-    
+
 }

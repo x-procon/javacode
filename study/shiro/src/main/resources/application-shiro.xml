@@ -113,15 +113,14 @@
         	4). roles 角色过滤器
         -->
 
-<!--        <property name="filterChainDefinitions">-->
-<!--            <value>-->
-<!--                /login.html = anon-->
-<!--                /login.jsp = anon-->
-<!--                /admin/login = anon-->
-<!--                /** = authc-->
-<!--            </value>-->
-<!--        </property>-->
-
+        <!--        <property name="filterChainDefinitions">-->
+        <!--            <value>-->
+        <!--                /login.html = anon-->
+        <!--                /login.jsp = anon-->
+        <!--                /admin/login = anon-->
+        <!--                /** = authc-->
+        <!--            </value>-->
+        <!--        </property>-->
 
 
     </bean>

@@ -27,14 +27,13 @@ public class ResultModel {
         return new ResultModel(0);
     }
 
-    public static ResultModel success( Object content) {
+    public static ResultModel success(Object content) {
         return new ResultModel(0, "", content);
     }
 
     public static ResultModel success(String msg, Object content) {
         return new ResultModel(0, msg, content);
     }
-
 
 
     public static ResultModel success(Integer errorCode, String msg, Object content) {
@@ -58,7 +57,9 @@ public class ResultModel {
         return new ResultModel(errorCode, msg, content);
     }
 
-    /** 构造方法 **/
+    /**
+     * 构造方法
+     **/
     public ResultModel(Integer errorCode) {
         this.errorCode = errorCode;
     }
@@ -69,7 +70,9 @@ public class ResultModel {
         this.content = content;
     }
 
-    /** setter&getter **/
+    /**
+     * setter&getter
+     **/
     public Integer getErrorCode() {
         return errorCode;
     }

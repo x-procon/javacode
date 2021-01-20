@@ -29,7 +29,7 @@ public class Person {
     private int age;
     private List<String> list;
     private String[] array;
-    private Map<String,Object> maps;
+    private Map<String, Object> maps;
 
     @Override
     public String toString() {

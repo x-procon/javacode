@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 public class Employee implements Serializable {
 
-	private Integer id;
+    private Integer id;
     private String lastName;
 
     private String email;
@@ -53,7 +53,7 @@ public class Employee implements Serializable {
         this.dId = dId;
     }
 
-    public Employee(Integer id, String lastName, String email, Integer gender,  Integer dId) {
+    public Employee(Integer id, String lastName, String email, Integer gender, Integer dId) {
         this.id = id;
         this.lastName = lastName;
         this.email = email;

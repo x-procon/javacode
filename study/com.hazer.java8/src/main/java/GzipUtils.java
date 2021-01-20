@@ -20,7 +20,7 @@ public class GzipUtils {
      * 字符串的压缩
      *
      * @param str 待压缩的字符串
-     * @return    返回压缩后的字符串
+     * @return 返回压缩后的字符串
      * @throws IOException
      */
     public static String compress(String str) throws IOException {
@@ -41,9 +41,8 @@ public class GzipUtils {
     /**
      * 字符串的解压
      *
-     * @param b
-     *            对字符串解压
-     * @return    返回解压缩后的字符串
+     * @param b 对字符串解压
+     * @return 返回解压缩后的字符串
      * @throws IOException
      */
     public static String unCompress(byte[] b) {

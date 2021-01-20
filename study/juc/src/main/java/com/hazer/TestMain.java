@@ -37,7 +37,7 @@ public class TestMain {
 //        System.out.println("生成的签名是：" + sign2);
         String sign = "Vjgg/P3m6gsNtKQL422ZMAhsHhXn/TuGtkDLcXwKR5e2HRN+3gsJrHiH0+0NgtP7R17q5MxOv1m6xVQCSh4BHE9MEjkDl5PDew8TmWUYh1JgqqQbnBbHv2ey4XFLq5CZ+7+IfMTi7znt7ufWZ5h7gC9Ed8s9Sz4O2LrE/TSsDKM=";
         String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC2Y8navZTx0MEe3iuuKM3A/EHSUOSBjBxArt4USuNto9xSJyy1T/AvcF6A2Wkmvm47CSRqnekSCOsaUMSgH4koP6mcATzSZk0VcEQOc2j0AVqOZoxLXHH6MfqKCBkOi1+Y9wfi2P/9ARdhicmzWtQKGQfK+erK0QCWpYOixu8KCQIDAQAB";
-        RSAUtil.decryptByPublicKey(sign,publicKey);
+        RSAUtil.decryptByPublicKey(sign, publicKey);
     }
 
     public static String decrypt(byte[] text, PublicKey key) {
@@ -84,7 +84,7 @@ public class TestMain {
     }
 
 
-    public static String str2HexStr(String str,String charset) throws UnsupportedEncodingException {
-               return Hex.encodeHexString(str.getBytes(charset));
-            }
+    public static String str2HexStr(String str, String charset) throws UnsupportedEncodingException {
+        return Hex.encodeHexString(str.getBytes(charset));
+    }
 }

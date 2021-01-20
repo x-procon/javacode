@@ -10,59 +10,59 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 public class CollectionTest {
     public static void main(String[] args) {
-       CollectionTest collectionTest = new CollectionTest();
-       // collectionTest.newArrayList();  //线程不安全ConcurrentModificationException
-       // collectionTest.newVector();  //增加synchronized关键字线程安全
-       // collectionTest.newCollections(); //增加synchronize代码块线程安全
+        CollectionTest collectionTest = new CollectionTest();
+        // collectionTest.newArrayList();  //线程不安全ConcurrentModificationException
+        // collectionTest.newVector();  //增加synchronized关键字线程安全
+        // collectionTest.newCollections(); //增加synchronize代码块线程安全
         collectionTest.newCopyOnWriteArrayList(); //增加lock锁线程安全
 
     }
 
     //arrayList
-    private void newArrayList(){
+    private void newArrayList() {
         List<String> list = new ArrayList();
-        for(int i = 0;i<30;i++){
-            new Thread(()->{
-                list.add(UUID.randomUUID().toString().substring(0,5));
+        for (int i = 0; i < 30; i++) {
+            new Thread(() -> {
+                list.add(UUID.randomUUID().toString().substring(0, 5));
                 System.out.println(list);
-            },"线程:"+i).start();
+            }, "线程:" + i).start();
         }
     }
 
     //Vector
-    private void newVector(){
+    private void newVector() {
         List<String> list = new Vector<>();
-        for(int i = 0;i<30;i++){
-            new Thread(()->{
-                list.add(UUID.randomUUID().toString().substring(0,5));
+        for (int i = 0; i < 30; i++) {
+            new Thread(() -> {
+                list.add(UUID.randomUUID().toString().substring(0, 5));
                 System.out.println(list);
-            },"线程:"+i).start();
+            }, "线程:" + i).start();
         }
     }
 
 
     //synchronizedList
-    private void newCollections(){
+    private void newCollections() {
 
-        List<String> list =  Collections.synchronizedList(new ArrayList<>());
-        for(int i = 0;i<30;i++){
-            new Thread(()->{
-                list.add(UUID.randomUUID().toString().substring(0,5));
+        List<String> list = Collections.synchronizedList(new ArrayList<>());
+        for (int i = 0; i < 30; i++) {
+            new Thread(() -> {
+                list.add(UUID.randomUUID().toString().substring(0, 5));
                 System.out.println(list);
-            },"线程:"+i).start();
+            }, "线程:" + i).start();
         }
     }
 
 
     //CopyOnWriteArrayList
-    private void newCopyOnWriteArrayList(){
+    private void newCopyOnWriteArrayList() {
 
-        List<String> list =  new CopyOnWriteArrayList<>();
-        for(int i = 0;i<30;i++){
-            new Thread(()->{
-                list.add(UUID.randomUUID().toString().substring(0,5));
+        List<String> list = new CopyOnWriteArrayList<>();
+        for (int i = 0; i < 30; i++) {
+            new Thread(() -> {
+                list.add(UUID.randomUUID().toString().substring(0, 5));
                 System.out.println(list);
-            },"线程:"+i).start();
+            }, "线程:" + i).start();
         }
     }
 }

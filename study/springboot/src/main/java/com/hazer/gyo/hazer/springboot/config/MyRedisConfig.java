@@ -36,6 +36,7 @@ public class MyRedisConfig {
         template.setDefaultSerializer(redisSerializer);
         return template;
     }
+
     @Bean
     public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
 

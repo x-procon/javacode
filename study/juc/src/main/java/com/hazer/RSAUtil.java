@@ -5,6 +5,7 @@ package com.hazer;
  * @author: Hazer
  * @date: 2020-06-23 09:33
  */
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.security.InvalidKeyException;
@@ -230,7 +231,7 @@ public class RSAUtil {
     }
 
 
-    private static char[] HEXCHAR = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+    private static char[] HEXCHAR = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
     public static String hexStr2Str(String hexStr) {
         String str = "0123456789ABCDEF";
@@ -250,8 +251,7 @@ public class RSAUtil {
      * 私钥加密
      *
      * @param
-     * @param privateKey
-     *            私钥(BASE64编码)
+     * @param privateKey 私钥(BASE64编码)
      * @return
      * @throws Exception
      */
@@ -347,11 +347,9 @@ public class RSAUtil {
     /**
      * RSA公钥加密
      *
-     * @param str
-     *            加密字符串 公钥
+     * @param str 加密字符串 公钥
      * @return 密文
-     * @throws Exception
-     *             加密过程中的异常信息
+     * @throws Exception 加密过程中的异常信息
      */
     public static String encryptBypublicKey(String str, String publicKeyString) throws Exception {
         byte[] data = str.getBytes();

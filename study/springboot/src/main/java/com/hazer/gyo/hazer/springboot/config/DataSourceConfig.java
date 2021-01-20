@@ -27,30 +27,32 @@ import java.util.Map;
 public class DataSourceConfig {
     @ConfigurationProperties(prefix = "spring.datasource")
     @Bean
-    public DataSource druid(){
-        return  new DruidDataSource();
+    public DataSource druid() {
+        return new DruidDataSource();
     }
+
     //配置druid监控
     //1.servlet
     @Bean
-    public ServletRegistrationBean<StatViewServlet> StatViewServlet(){
-        ServletRegistrationBean<StatViewServlet> servletRegistrationBean =  new ServletRegistrationBean<>(new StatViewServlet());
+    public ServletRegistrationBean<StatViewServlet> StatViewServlet() {
+        ServletRegistrationBean<StatViewServlet> servletRegistrationBean = new ServletRegistrationBean<>(new StatViewServlet());
         servletRegistrationBean.addUrlMappings("/druid/*");
-        Map<String,String> initParams = new HashMap<>();
-        initParams.put("loginUsername","admin");
-        initParams.put("loginPassword","123456");
+        Map<String, String> initParams = new HashMap<>();
+        initParams.put("loginUsername", "admin");
+        initParams.put("loginPassword", "123456");
 
         servletRegistrationBean.setInitParameters(initParams);
-        return  servletRegistrationBean;
+        return servletRegistrationBean;
     }
+
     //2.filter
     @Bean
-    public FilterRegistrationBean<WebStatFilter> StatViewFilter(){
-      FilterRegistrationBean<WebStatFilter> bean =   new FilterRegistrationBean<>(new WebStatFilter());
-        Map<String,String> initParams = new HashMap<>();
-        initParams.put("exclusions","*.js,*.css,/druid/*");
+    public FilterRegistrationBean<WebStatFilter> StatViewFilter() {
+        FilterRegistrationBean<WebStatFilter> bean = new FilterRegistrationBean<>(new WebStatFilter());
+        Map<String, String> initParams = new HashMap<>();
+        initParams.put("exclusions", "*.js,*.css,/druid/*");
         bean.setInitParameters(initParams);
         bean.setUrlPatterns(Arrays.asList("/*"));
-      return bean;
+        return bean;
     }
 }

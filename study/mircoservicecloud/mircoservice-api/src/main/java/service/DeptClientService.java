@@ -6,6 +6,7 @@ package service;
  * @Author Hazer
  * @Date 2020/1/31 10:54
  **/
+
 import java.util.List;
 
 import entity.Dept;
@@ -16,15 +17,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 
 @FeignClient(value = "MICROSERVICECLOUD-DEPT")
-public interface DeptClientService
-{
-    @RequestMapping(value = "/dept/get/{id}",method = RequestMethod.GET)
+public interface DeptClientService {
+    @RequestMapping(value = "/dept/get/{id}", method = RequestMethod.GET)
     public Dept get(@PathVariable("id") long id);
 
-    @RequestMapping(value = "/dept/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/dept/list", method = RequestMethod.GET)
     public List<Dept> list();
 
-    @RequestMapping(value = "/dept/add",method = RequestMethod.POST)
+    @RequestMapping(value = "/dept/add", method = RequestMethod.POST)
     public boolean add(Dept dept);
 }
 

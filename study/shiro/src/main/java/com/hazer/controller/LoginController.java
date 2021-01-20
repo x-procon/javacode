@@ -28,7 +28,7 @@ public class LoginController {
     @RequestMapping(value = "/login")
     @ResponseBody
     public ResultModel login(@RequestParam(value = "username") String username,
-                             @RequestParam(value = "password")String password){
+                             @RequestParam(value = "password") String password) {
 
         Subject currentUser = SecurityUtils.getSubject();
 
@@ -45,7 +45,7 @@ public class LoginController {
             // 所有认证时异常的父类.
             catch (AuthenticationException ae) {
                 //unexpected condition?  error?
-               LOGGER.info("登录失败: " + ae.getMessage());
+                LOGGER.info("登录失败: " + ae.getMessage());
             }
         }
         return ResultModel.success();

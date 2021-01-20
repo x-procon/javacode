@@ -9,9 +9,9 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  * @author: Hazer
  * @date: 2020-07-20 17:58
  */
-@SpringBootApplication(exclude= {DataSourceAutoConfiguration.class})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class EsApp {
     public static void main(String[] args) {
-        SpringApplication.run(EsApp.class,args);
+        SpringApplication.run(EsApp.class, args);
     }
 }

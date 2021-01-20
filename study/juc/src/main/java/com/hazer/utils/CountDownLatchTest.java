@@ -12,12 +12,12 @@ import java.util.concurrent.CountDownLatch;
 public class CountDownLatchTest {
     public static void main(String[] args) throws InterruptedException {
         CountDownLatch countDownLatch = new CountDownLatch(8);
-        for (int i = 0;i<8;i++){
+        for (int i = 0; i < 8; i++) {
 
-            new Thread(()->{
-                System.out.println(Thread.currentThread().getName()+"go out");
+            new Thread(() -> {
+                System.out.println(Thread.currentThread().getName() + "go out");
                 countDownLatch.countDown();
-            },"AA--"+i).start();
+            }, "AA--" + i).start();
 
         }
         countDownLatch.await();

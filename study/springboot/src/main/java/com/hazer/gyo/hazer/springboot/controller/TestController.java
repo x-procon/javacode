@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
     @RequestMapping("test")
-    public void testController(@RequestParam String s){
+    public void testController(@RequestParam String s) {
         System.out.printf(s);
     }
 }

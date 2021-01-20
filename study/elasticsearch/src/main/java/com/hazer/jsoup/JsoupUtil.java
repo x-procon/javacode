@@ -20,16 +20,16 @@ import java.util.List;
  */
 public class JsoupUtil {
     public static List<Content> parseJD(String keyword) throws IOException {
-        String url = "https://search.jd.com/Search?enc=utf-8&keyword="+keyword;
+        String url = "https://search.jd.com/Search?enc=utf-8&keyword=" + keyword;
         Document document = Jsoup.connect(url).get();
         Element element = document.getElementById("J_goodsList");
         Elements elements = element.getElementsByTag("li");
         List<Content> contents = new ArrayList<>();
-        for(Element el: elements){
+        for (Element el : elements) {
             String price = el.getElementsByClass("p-price").eq(0).text();
             String name = el.getElementsByClass("p-name").eq(0).text();
             String img = el.getElementsByTag("img").eq(0).attr("src");
-            Content content = new Content(img,name,price);
+            Content content = new Content(img, name, price);
             System.out.println(content);
             contents.add(content);
         }

@@ -11,19 +11,19 @@ import java.util.concurrent.TimeUnit;
 public class SemaphoreTest {
     public static void main(String[] args) {
         Semaphore semaphore = new Semaphore(3);
-        for (int i = 0; i <8 ; i++) {
-            new Thread(()->{
+        for (int i = 0; i < 8; i++) {
+            new Thread(() -> {
                 try {
                     semaphore.acquire();
-                    System.out.println(Thread.currentThread().getName()+"抢到车位！");
+                    System.out.println(Thread.currentThread().getName() + "抢到车位！");
                     TimeUnit.SECONDS.sleep(2);
-                    System.out.println(Thread.currentThread().getName()+"离开车位！");
+                    System.out.println(Thread.currentThread().getName() + "离开车位！");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                }finally {
+                } finally {
                     semaphore.release();
                 }
-            },String.valueOf(i)).start();
+            }, String.valueOf(i)).start();
         }
     }
 }

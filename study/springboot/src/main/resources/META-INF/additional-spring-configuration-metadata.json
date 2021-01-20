@@ -4,5 +4,6 @@
       "name": "spring.datasource.poolPreparedStatements",
       "type": "java.lang.String",
       "description": "Description for spring.datasource.poolPreparedStatements."
-  }
-] }
+    }
+  ]
+}

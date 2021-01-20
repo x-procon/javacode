@@ -7,7 +7,7 @@ package com.hazer.chapter02;
  */
 public class Divide {
 
-    private static int maxRec(int[]a ,int left, int right){
+    private static int maxRec(int[] a, int left, int right) {
         return 0;
     }
 }

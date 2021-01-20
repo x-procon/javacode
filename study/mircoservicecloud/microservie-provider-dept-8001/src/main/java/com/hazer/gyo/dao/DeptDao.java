@@ -16,6 +16,8 @@ import java.util.List;
 @Mapper
 public interface DeptDao {
     Boolean addDept(Dept dept);
+
     Dept findById(Long id);
+
     List<Dept> findAll();
 }

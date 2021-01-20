@@ -24,7 +24,7 @@ public class MyJob implements Job {
 
         //获取任务中的数据
 
-        System.out.println(LocalDateTime.now() +"---job执行,任务名："+name+"任务组："
-                +group);
+        System.out.println(LocalDateTime.now() + "---job执行,任务名：" + name + "任务组："
+                + group);
     }
 }

@@ -12,9 +12,9 @@ import org.springframework.context.annotation.ComponentScan;
  * @Date 2020/1/31 10:50
  **/
 @SpringBootApplication
-@EnableFeignClients(basePackages= {"com.hazer.springcloud"})
+@EnableFeignClients(basePackages = {"com.hazer.springcloud"})
 public class Curstomer80_Fegin_App {
     public static void main(String[] args) {
-        SpringApplication.run(Curstomer80_Fegin_App.class,args);
+        SpringApplication.run(Curstomer80_Fegin_App.class, args);
     }
 }

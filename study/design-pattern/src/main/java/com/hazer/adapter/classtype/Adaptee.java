@@ -8,10 +8,11 @@ package com.hazer.adapter.classtype;
 public class Adaptee {
     /**
      * 具体的调用类
+     *
      * @param: []
      * @return: void
      */
-    public void specificRequest(){
+    public void specificRequest() {
         System.out.println("适配者中的业务代码被调用");
     }
 }
