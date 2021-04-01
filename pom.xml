@@ -7,6 +7,7 @@
         <module>spring-security-jwt</module>
         <module>ElasticSearch</module>
         <module>RabbitMQ</module>
+        <module>XXL-JOB</module>
     </modules>
     <groupId>com.procon</groupId>
     <artifactId>parent</artifactId>
@@ -40,6 +41,7 @@
         <jwt.version>3.12.0</jwt.version>
         <jjwt.version>0.9.1</jjwt.version>
         <jsoup.version>1.13.1</jsoup.version>
+        <xxl.job.version>2.3.0</xxl.job.version>
     </properties>
     <!-- 依赖声明 -->
     <dependencyManagement>
@@ -211,6 +213,12 @@
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <version>${jsoup.version}</version>
+            </dependency>
+            <!-- XXL-JOB 分布式定时任务 -->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl.job.version}</version>
             </dependency>
 
         </dependencies>
