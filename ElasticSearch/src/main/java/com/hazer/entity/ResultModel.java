@@ -3,9 +3,9 @@ package com.hazer.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * @description: </br>
- * @author: Hazer
- * @date: 2020-07-20 17:23
+ *
+ * @author Hazer
+ * @date 2020-07-20 17:23
  */
 public class ResultModel {
     /**

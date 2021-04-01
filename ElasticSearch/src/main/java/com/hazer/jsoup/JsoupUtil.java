@@ -5,20 +5,20 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @description: </br>
- * @author: Hazer
- * @date: 2020-07-20 15:34
+ *
+ * @author Hazer
+ * @date 2020-07-20 15:34
  */
 public class JsoupUtil {
+    private static final Logger LOG = LoggerFactory.getLogger(JsoupUtil.class);
     public static List<Content> parseJD(String keyword) throws IOException {
         String url = "https://search.jd.com/Search?enc=utf-8&keyword=" + keyword;
         Document document = Jsoup.connect(url).get();
@@ -30,7 +30,7 @@ public class JsoupUtil {
             String name = el.getElementsByClass("p-name").eq(0).text();
             String img = el.getElementsByTag("img").eq(0).attr("src");
             Content content = new Content(img, name, price);
-            System.out.println(content);
+            LOG.info(String.valueOf(content));
             contents.add(content);
         }
         return contents;

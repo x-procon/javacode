@@ -5,14 +5,13 @@ import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @description: es配置类
- * @author: Hazer
- * @date: 2020-07-20 15:12
+ * @description es配置类
+ * @author Hazer
+ * @date 2020-07-20 15:12
  */
 @Configuration
 public class ElasticSearchConfig {
