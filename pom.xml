@@ -7,7 +7,7 @@
         <module>spring-security-jwt</module>
         <module>ElasticSearch</module>
         <module>RabbitMQ</module>
-        <module>XXL-JOB</module>
+        <module>DesignPattern</module>
     </modules>
     <groupId>com.procon</groupId>
     <artifactId>parent</artifactId>
