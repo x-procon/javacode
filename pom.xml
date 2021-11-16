@@ -8,6 +8,7 @@
         <module>ElasticSearch</module>
         <module>RabbitMQ</module>
         <module>DesignPattern</module>
+        <module>redis</module>
     </modules>
     <groupId>com.procon</groupId>
     <artifactId>parent</artifactId>
