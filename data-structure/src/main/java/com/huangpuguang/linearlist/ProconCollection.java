@@ -69,4 +69,9 @@ public interface ProconCollection<E> {
      * @return 元素所在的索引位置
      */
     int indexOf(E e);
+
+    /**
+     * 数组清空
+     */
+    void clear();
 }
