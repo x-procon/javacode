@@ -9,6 +9,7 @@
         <module>RabbitMQ</module>
         <module>DesignPattern</module>
         <module>redis</module>
+        <module>jsoup</module>
     </modules>
     <groupId>com.procon</groupId>
     <artifactId>parent</artifactId>
@@ -41,8 +42,8 @@
         <shiro.spring.version>1.7.0</shiro.spring.version>
         <jwt.version>3.12.0</jwt.version>
         <jjwt.version>0.9.1</jjwt.version>
-        <jsoup.version>1.14.3</jsoup.version>
         <xxl.job.version>2.3.0</xxl.job.version>
+        <jsoup.version>1.15.1</jsoup.version>
     </properties>
     <!-- 依赖声明 -->
     <dependencyManagement>
@@ -221,6 +222,7 @@
                 <artifactId>xxl-job-core</artifactId>
                 <version>${xxl.job.version}</version>
             </dependency>
+
 
         </dependencies>
     </dependencyManagement>
