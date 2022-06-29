@@ -99,6 +99,7 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
 	 * @return 请求体
 	 */
 	public String getBody(HttpServletRequest request) {
+
 		StringBuilder sb = new StringBuilder();
 		try(InputStream inputStream = request.getInputStream();
 			BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
@@ -108,7 +109,6 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
 			}
 		} catch (IOException e) {
 			log.error(e.getMessage(),e);
-		}
-		return sb.toString();
+		}return sb.toString();
 	}
 }

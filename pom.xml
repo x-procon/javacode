@@ -10,6 +10,7 @@
         <module>DesignPattern</module>
         <module>redis</module>
         <module>jsoup</module>
+        <module>jvm</module>
     </modules>
     <groupId>com.procon</groupId>
     <artifactId>parent</artifactId>
