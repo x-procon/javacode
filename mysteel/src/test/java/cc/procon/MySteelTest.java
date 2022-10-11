@@ -1,7 +1,6 @@
 package cc.procon;
 
 import cc.procon.service.ModifyColumnService;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,7 @@ public class MySteelTest {
     private ModifyColumnService modifyColumnService;
 
     @Test
-    public void modifyColumnTest(){
-        modifyColumnService.modifyColumn();
+    public void modifyTriggerTest(){
+        modifyColumnService.modifyTrigger();
    }
 }

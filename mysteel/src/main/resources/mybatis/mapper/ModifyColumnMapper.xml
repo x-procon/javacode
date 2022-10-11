@@ -2,6 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.procon.mapper.ModifyColumnMapper">
 
+    <insert id="mergeList" useGeneratedKeys="false">
+        MERGE INTO MB_INDEX_MAIN_DATA  TO_
+        USING
+        (
+        <foreach collection="param1" index="index" item="item" separator="UNION ALL">
+            SELECT #{item.indexCode} INDEX_CODE,
+            #{item.publishTime} PUBLISH_TIME,
+            #{item.msId} MS_ID,
+            #{item.dataDate} DATA_DATE,
+            #{item.dataCreateTime} DATA_CREATE_TIME,
+            #{item.dataUpdateTime} DATA_UPDATE_TIME
+            FROM dual
+        </foreach>
+        ) FROM_
+        ON (TO_.INDEX_CODE = FROM_.INDEX_CODE AND TO_.DATA_DATE = FROM_.DATA_DATE  AND TO_.MS_ID = FROM_.MS_ID )
+        WHEN MATCHED THEN
+        UPDATE
+        SET TO_.DATA_CREATE_TIME = FROM_.DATA_CREATE_TIME,
+        TO_.DATA_UPDATE_TIME = FROM_.DATA_UPDATE_TIME,TO_.IS_QUALIFY = 1
+    </insert>
 
-
+    <insert id="modifyTrigger" statementType="STATEMENT">
+CREATE OR REPLACE TRIGGER ${triggerName}
+before insert or update on  ${triggerName}
+for each row
+declare
+begin
+SELECT (sysdate-to_date('1970-01-01 08:00:00', 'yyyy-mm-dd hh24:mi:ss'))* 86400000  + TO_NUMBER(TO_CHAR(SYSTIMESTAMP(3), 'FF')) INTO :NEW.DATA_UPDATE_TIME FROM DUAL;
+end ${name};
+    </insert>
 </mapper>

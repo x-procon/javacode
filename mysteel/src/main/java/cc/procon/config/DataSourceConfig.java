@@ -21,7 +21,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Configuration
-public class OdsDataSourceConfig {
+public class DataSourceConfig {
 
     @Value("${mybatis.mapper-locations}")
     private String mapperLocations;
@@ -32,21 +32,21 @@ public class OdsDataSourceConfig {
      */
     @Primary
     @ConfigurationProperties(prefix = "spring.datasource")
-    @Bean(name = "odsDataSource")
+    @Bean(name = "dataSource")
     public DruidDataSource db1DataSource() {
         DruidDataSource dataSource = new DruidDataSource();
         return dataSource;
     }
 
-    @Bean(name = "odsConfiguration")
+    @Bean(name = "sessionConfiguration")
     @ConfigurationProperties(prefix = "mybatis.configuration")
     public org.apache.ibatis.session.Configuration configuration(){
         return new org.apache.ibatis.session.Configuration();
     }
 
-    @Bean(name = "odsSqlSessionFactory")
+    @Bean(name = "sqlSessionFactory")
     @Primary
-    public SqlSessionFactory odsSqlSessionFactory(@Qualifier("odsDataSource") DataSource dataSource, @Qualifier("odsConfiguration") org.apache.ibatis.session.Configuration configuration)
+    public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource, @Qualifier("sessionConfiguration") org.apache.ibatis.session.Configuration configuration)
             throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
@@ -58,16 +58,16 @@ public class OdsDataSourceConfig {
         return bean.getObject();
     }
 
-    @Bean(name = "odsTransactionManager")
+    @Bean(name = "transactionManager")
     @Primary
-    public DataSourceTransactionManager odsTransactionManager(@Qualifier("odsDataSource") DataSource dataSource) {
+    public DataSourceTransactionManager odsTransactionManager(@Qualifier("dataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
-    @Bean(name = "odsSqlSessionTemplate")
+    @Bean(name = "sqlSessionTemplate")
     @Primary
     public SqlSessionTemplate odsSqlSessionTemplate(
-            @Qualifier("odsSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
+            @Qualifier("sqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 }

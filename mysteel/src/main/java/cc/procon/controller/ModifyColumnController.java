@@ -1,6 +1,7 @@
 package cc.procon.controller;
 
 import cc.procon.service.ModifyColumnService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -11,14 +12,21 @@ import org.springframework.web.bind.annotation.RestController;
  * @author procon
  * @since 2022-09-20
  */
-@RestController("/test")
+@RestController
 public class ModifyColumnController {
 
     @Autowired
     private ModifyColumnService modifyColumnService;
 
-    @RequestMapping("/modifyColumn")
-    public void modifyColumn(){
-        modifyColumnService.modifyColumn();
+    @RequestMapping("/modifyTime")
+    public void modifyColumn(@Param("tableName") String tableName){
+        modifyColumnService.modifyTime(tableName);
     }
+
+    @RequestMapping("/modifyPage")
+    public void modifyPage(){
+        modifyColumnService.mbDataPage();
+    }
+
+
 }
