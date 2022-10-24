@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.SMMIndexMapper">
+
+    <insert id="mergeList" useGeneratedKeys="false">
+        MERGE INTO SMM_API_INDEX_DATA TO_
+        USING
+        (
+        <foreach collection="list" index="index" item="item" separator="UNION ALL">
+            SELECT #{item.quotaId} QUOTA_ID,
+            #{item.permissionState} PERMISSION_STATE,
+            #{item.calcType} CALC_TYPE,
+            #{item.dataDate} DATA_DATE,
+            #{item.dataValue} DATA_VALUE,
+            #{item.isDelete} IS_DELETE,
+            #{item.isQuality} IS_QUALITY,
+            #{item.dataCreateTime} DATA_CREATE_TIME,
+            #{item.dataUpdateTime} DATA_UPDATE_TIME
+            FROM dual
+        </foreach>
+        ) FROM_
+        ON (TO_.QUOTA_ID = FROM_.QUOTA_ID AND TO_.DATA_DATE = FROM_.DATA_DATE )
+        WHEN MATCHED THEN
+        UPDATE
+        SET TO_.DATA_VALUE = FROM_.DATA_VALUE,
+        TO_.DATA_UPDATE_TIME = FROM_.DATA_UPDATE_TIME
+        WHEN NOT MATCHED THEN
+        INSERT (QUOTA_ID,PERMISSION_STATE,CALC_TYPE,DATA_DATE,DATA_VALUE,IS_DELETE,IS_QUALITY,DATA_CREATE_TIME,DATA_UPDATE_TIME)
+        VALUES (FROM_.QUOTA_ID,FROM_.PERMISSION_STATE,FROM_.CALC_TYPE,FROM_.DATA_DATE,FROM_.DATA_VALUE,FROM_.IS_DELETE,FROM_.IS_QUALITY,FROM_.DATA_CREATE_TIME,FROM_.DATA_UPDATE_TIME)
+    </insert>
+</mapper>
