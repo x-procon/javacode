@@ -1,4 +1,4 @@
-package cc.procon.mapper;
+package cc.procon.mapper.ods;
 
 import cc.procon.model.po.ThsApiFuturesInfo;
 import org.apache.ibatis.annotations.Mapper;

@@ -1,6 +1,6 @@
 package cc.procon.service;
 
-import cc.procon.mapper.SMMIndexMapper;
+import cc.procon.mapper.ods.SMMIndexMapper;
 import cc.procon.model.po.SMMIndexDataPO;
 import cc.procon.util.MD5Util;
 import cn.hutool.core.collection.CollUtil;

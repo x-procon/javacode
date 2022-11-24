@@ -1,6 +1,6 @@
 package cc.procon.service;
 
-import cc.procon.mapper.ModifyColumnMapper;
+import cc.procon.mapper.ods.ModifyColumnMapper;
 import cc.procon.model.po.MbIndexPO;
 import cc.procon.model.po.TriggerPO;
 import cn.hutool.core.collection.CollUtil;

@@ -1,8 +1,9 @@
 package cc.procon.service;
 
 import Ths.JDIBridge;
-import cc.procon.mapper.ThsFuturesDataMapper;
-import cc.procon.mapper.ThsFuturesInfoMapper;
+import cc.procon.mapper.dw.DimIncrMapper;
+import cc.procon.mapper.ods.ThsFuturesDataMapper;
+import cc.procon.mapper.ods.ThsFuturesInfoMapper;
 import cc.procon.model.po.ThsApiFuturesData;
 import cc.procon.model.po.ThsApiFuturesInfo;
 import cn.hutool.core.collection.CollUtil;
@@ -12,6 +13,7 @@ import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.retry.support.RetryTemplate;
@@ -22,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.concurrent.ForkJoinPool;
 
 /**
  * 同花顺service
@@ -42,6 +45,18 @@ public class ThsService {
     @Autowired
     RetryTemplate retryTemplate;
 
+    @Autowired
+    private DimIncrMapper dimIncrMapper;
+
+
+
+    public void compensationRangeIndexFromIndex(int start,int end) {
+        List<ThsApiFuturesInfo> apiFuturesInfoList = thsFuturesInfoMapper.queryRangeFuturesFromIndex(start,end);
+        log.info("需要处理指标的数量:{}",apiFuturesInfoList.size());
+        ForkJoinPool forkJoinPool = new ForkJoinPool(10);
+        RangeForkJoinTask rangeForkJoinTask = new RangeForkJoinTask(0,apiFuturesInfoList.size(),apiFuturesInfoList);
+        forkJoinPool.submit(rangeForkJoinTask);
+    }
 
     public void thsCompensation(String indexCode, Date beginTime) {
         ThsApiFuturesInfo thsApiFuturesInfo = thsFuturesInfoMapper.queryFutureInfoByIndexCode(indexCode);
@@ -60,9 +75,14 @@ public class ThsService {
         if (CollUtil.isNotEmpty(futuresDataList)) {
             retryTemplate.execute(context -> {
                 long currentTimeMillis = System.currentTimeMillis();
-                int ret = thsFuturesDataMapper.mergeDataList(futuresDataList);
+                List<List<ThsApiFuturesData>> futuresPartition = Lists.partition(futuresDataList, 3000);
+                int ret = 0;
+                for (List<ThsApiFuturesData> thsApiFuturesData : futuresPartition) {
+                    int i = thsFuturesDataMapper.mergeDataList(thsApiFuturesData);
+                    ret = ret + i;
+                }
                 //通知对接码数据更新
-                //dimIncrMapper.insertOrUpdate(TABLE_NAME, currentTimeMillis, 1);
+                dimIncrMapper.insertOrUpdate(TABLE_NAME, currentTimeMillis, 1);
                 log.info("同花顺期货，指标:{},更新:{}个", indexCode, ret);
                 return true;
             });

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.dw.DimIncrMapper">
+
+    <sql id="tableName">T_DAMP_DEAL_DIM_INC</sql>
+
+    <insert id="insertOrUpdate">
+        merge into <include refid="tableName"/> to_
+        USING
+        (SELECT #{tableName} as TABLE_NAME,
+        #{minUpdateTime} as MIN_UPDATE_TIME,
+        #{sourceType} as SOURCE_TYPE from dual) from_
+        on (to_.TABLE_NAME = from_.TABLE_NAME and to_.SOURCE_TYPE = from_.SOURCE_TYPE and to_.DEAL_STATUS = 0)
+        WHEN MATCHED THEN
+        UPDATE SET to_.MIN_UPDATE_TIME = from_.MIN_UPDATE_TIME where to_.MIN_UPDATE_TIME > from_.MIN_UPDATE_TIME
+        WHEN NOT MATCHED THEN
+        INSERT (ID, TABLE_NAME, MIN_UPDATE_TIME, DEAL_STATUS , SOURCE_TYPE)
+        VALUES (rawtohex(sys_guid()), from_.TABLE_NAME, from_.MIN_UPDATE_TIME, 0, from_.SOURCE_TYPE)
+    </insert>
+</mapper>
