@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.ThsFuturesInfoMapper">
+
+    <resultMap id="infoMap" type="cc.procon.model.po.ThsApiFuturesInfo">
+        <result property="indexCode" column="INDEX_CODE"/>
+        <result property="bondType" column="BOND_TYPE"/>
+        <result property="exchangeName" column="EXCHANGE_NAME"/>
+        <result property="breedName" column="BREED_NAME"/>
+        <result property="contractCode" column="CONTRACT_CODE" />
+        <result property="indexClassify" column="INDEX_CLASSIFY" />
+        <result property="indexCnName" column="INDEX_CN_NAME"/>
+        <result property="indexEnName" column="INDEX_EN_NAME" />
+        <result property="indexCnMarks" column="INDEX_CN_MARKS" />
+
+        <result property="htUniqueCode" column="HT_UNIQUE_CODE" />
+        <result property="isQuality" column="IS_QUALITY" />
+        <result property="isDelete" column="IS_DELETE" />
+        <result property="dataCreateTime" column="DATA_CREATE_TIME" />
+        <result property="dataUpdateTime" column="DATA_UPDATE_TIME" />
+    </resultMap>
+
+
+    <insert id="insertBatchFuturesInfo" keyProperty="index_code" useGeneratedKeys="false">
+        insert into T_THS_API_FUTURES_INFO
+        SELECT A.* FROM (
+            <foreach collection="entities" item="entity"  separator="UNION ALL">
+                 SELECT
+                    #{entity.indexCode},
+                    #{entity.bondType},
+                    #{entity.exchangeName},
+                    #{entity.breedName},
+                    #{entity.contractCode},
+                    #{entity.indexClassify},
+                    #{entity.indexCnName},
+                    #{entity.indexEnName},
+                    #{entity.indexCnMarks},
+                    #{entity.isDelete},
+                    #{entity.isQuality},
+                    #{entity.htUniqueCode},
+                    #{entity.dataCreateTime},
+                    #{entity.dataUpdateTime}
+                FROM dual
+        </foreach>
+        ) A
+    </insert>
+
+    <insert id="insertFuturesInfo" parameterType="cc.procon.model.po.ThsApiFuturesInfo" useGeneratedKeys="false">
+        insert into T_THS_API_FUTURES_INFO (INDEX_CODE,BOND_TYPE,EXCHANGE_NAME,BREED_NAME,CONTRACT_CODE,INDEX_CLASSIFY,
+        INDEX_CN_NAME,INDEX_EN_NAME,INDEX_CN_MARKS,IS_DELETE,IS_QUALITY,HT_UNIQUE_CODE,DATA_CREATE_TIME,DATA_UPDATE_TIME)
+        values (#{indexCode},#{bondType},#{exchangeName},#{breedName},#{contractCode},#{indexClassify},#{indexCnName},
+        #{indexEnName}, #{indexCnMarks},#{isDelete},#{isQuality},#{htUniqueCode},#{dataCreateTime},#{dataUpdateTime})
+
+    </insert>
+
+    <select id="queryFuturesInfo" parameterType="String" resultType="java.lang.Integer">
+        select
+            count(*)
+        from T_THS_API_FUTURES_INFO t
+        WHERE t.INDEX_CODE = #{indexCode}
+
+    </select>
+
+    <select id="listFuturesInfo"  resultMap="infoMap">
+        select
+            INDEX_CODE,CONTRACT_CODE,INDEX_EN_NAME,INDEX_CLASSIFY
+        from T_THS_API_FUTURES_INFO WHERE IS_DELETE = 0
+
+    </select>
+
+    <select id="listFuturesRangInfo"  resultMap="infoMap">
+        select
+            INDEX_CODE,CONTRACT_CODE,INDEX_EN_NAME,INDEX_CLASSIFY
+        from T_THS_API_FUTURES_INFO where INDEX_CLASSIFY='行情指标|区间行情' AND IS_DELETE = 0
+
+    </select>
+
+    <select id="queryFutureInfoByIndexCode" resultMap="infoMap">
+        select
+            INDEX_CODE,CONTRACT_CODE,INDEX_EN_NAME,INDEX_CLASSIFY
+        from T_THS_API_FUTURES_INFO where INDEX_CODE= #{indexCode}
+    </select>
+
+
+    <select id="queryRangeFuturesFromIndex" resultMap="infoMap">
+        SELECT *
+        FROM (select INDEX_CODE,
+        CONTRACT_CODE,
+        INDEX_EN_NAME,
+        INDEX_CLASSIFY,
+        ROWNUM NUM
+        from T_THS_API_FUTURES_INFO
+        where INDEX_CLASSIFY = '行情指标|区间行情'
+        AND IS_DELETE = 0) A
+        WHERE NUM > #{start,jdbcType=INTEGER} AND NUM  <![CDATA[<=]]> #{end,jdbcType=INTEGER}
+    </select>
+</mapper>

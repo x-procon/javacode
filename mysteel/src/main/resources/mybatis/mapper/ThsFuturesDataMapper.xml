@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.ThsFuturesDataMapper">
+
+    <resultMap id="infoMap" type="cc.procon.model.po.ThsApiFuturesData">
+        <result property="indexCode" column="INDEX_CODE"/>
+        <result property="indexValue" column="INDEX_VALUE"/>
+        <result property="indexValueTime" column="INDEX_VALUE_TIME"/>
+
+        <result property="htUniqueCode" column="HT_UNIQUE_CODE" />
+        <result property="isQuality" column="IS_QUALITY" />
+        <result property="isDelete" column="IS_DELETE" />
+        <result property="dataCreateTime" column="DATA_CREATE_TIME" />
+        <result property="dataUpdateTime" column="DATA_UPDATE_TIME" />
+    </resultMap>
+
+
+    <insert id="insertFuturesData" parameterType="cc.procon.model.po.ThsApiFuturesData" useGeneratedKeys="false">
+        insert into T_THS_API_FUTURES_DATA (INDEX_CODE,INDEX_VALUE,INDEX_VALUE_TIME,IS_DELETE,IS_QUALITY,HT_UNIQUE_CODE,DATA_CREATE_TIME,DATA_UPDATE_TIME)
+        values (#{indexCode},#{indexValue},#{indexValueTime},#{isDelete},#{isQuality},#{htUniqueCode},#{dataCreateTime},#{dataUpdateTime})
+
+    </insert>
+
+    <select id="queryFuturesData" parameterType="cc.procon.model.po.ThsApiFuturesData" resultMap="infoMap">
+        select
+            *
+        from T_THS_API_FUTURES_DATA t
+        WHERE t.INDEX_CODE = #{indexCode} and t.INDEX_VALUE_TIME = #{indexValueTime}
+
+    </select>
+
+    <update id="updateFuturesData" parameterType="cc.procon.model.po.ThsApiFuturesData">
+        update T_THS_API_FUTURES_DATA t
+        <set>
+            <if test="indexValue != null">
+                t.INDEX_VALUE = #{indexValue},
+            </if>
+            <if test="dataUpdateTime != null">
+                t.DATA_UPDATE_TIME = #{dataUpdateTime},
+            </if>
+        </set>
+        WHERE t.INDEX_CODE = #{indexCode} and t.INDEX_VALUE_TIME = #{indexValueTime}
+    </update>
+
+    <select id="queryFuturesMaxDate" parameterType="String" resultMap="infoMap">
+        select
+            max(INDEX_VALUE_TIME) as INDEX_VALUE_TIME
+        from T_THS_API_FUTURES_DATA t
+        WHERE t.INDEX_CODE = #{indexCode}
+
+    </select>
+
+
+    <insert id="mergeDataList" useGeneratedKeys="false">
+        MERGE INTO T_THS_API_FUTURES_DATA TO_
+        USING
+        (
+        <foreach collection="entities" index="index" item="item" separator="UNION ALL">
+            SELECT #{item.indexCode,jdbcType=VARCHAR} INDEX_CODE,
+            #{item.indexValue,jdbcType=VARCHAR} INDEX_VALUE,
+            #{item.indexValueTime,jdbcType=DATE} INDEX_VALUE_TIME,
+            #{item.isDelete,jdbcType=INTEGER} IS_DELETE,
+            #{item.isQuality,jdbcType=INTEGER} IS_QUALITY,
+            #{item.dataCreateTime,jdbcType=BIGINT} DATA_CREATE_TIME,
+            #{item.dataUpdateTime,jdbcType=BIGINT} DATA_UPDATE_TIME
+            FROM dual
+        </foreach>
+        ) FROM_
+        ON (TO_.INDEX_CODE = FROM_.INDEX_CODE AND TO_.INDEX_VALUE_TIME = FROM_.INDEX_VALUE_TIME )
+        WHEN MATCHED THEN
+        UPDATE
+        SET TO_.INDEX_VALUE = FROM_.INDEX_VALUE,
+        TO_.DATA_UPDATE_TIME = FROM_.DATA_UPDATE_TIME
+        WHEN NOT MATCHED THEN
+        INSERT (INDEX_CODE,INDEX_VALUE,INDEX_VALUE_TIME,IS_DELETE,IS_QUALITY,DATA_CREATE_TIME,DATA_UPDATE_TIME)
+        VALUES (FROM_.INDEX_CODE,FROM_.INDEX_VALUE,FROM_.INDEX_VALUE_TIME,FROM_.IS_DELETE,FROM_.IS_QUALITY,FROM_.DATA_CREATE_TIME,FROM_.DATA_UPDATE_TIME)
+    </insert>
+</mapper>
