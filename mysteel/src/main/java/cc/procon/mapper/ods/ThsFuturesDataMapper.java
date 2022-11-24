@@ -15,13 +15,7 @@ import java.util.List;
 @Mapper
 public interface ThsFuturesDataMapper {
 
-    /**
-     * 批量插入指标信息
-     *
-     * @param entities
-     * @return
-     */
-    int insertBatchFuturesData(@Param("entities") List<ThsApiFuturesData> entities);
+
 
 
     /**

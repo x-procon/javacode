@@ -1,7 +1,6 @@
 package cc.procon.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -10,22 +9,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Properties;
 
 /**
  * @author procon
  * @since 2022-11-24
  */
-@Slf4j
+
 @Configuration
 public class DwDataSourceConfig {
     @Value("${mybatis.dw.mapper-locations}")
@@ -71,10 +66,7 @@ public class DwDataSourceConfig {
     private String connectionProperties;
 
 
-
-
     @Bean(name = "dwDataSource")
-    @Primary
     public DruidDataSource dwDataSource() {
         DruidDataSource datasource = new DruidDataSource();
         datasource.setUrl(this.dbUrl);
@@ -96,45 +88,46 @@ public class DwDataSourceConfig {
         try {
             datasource.setFilters(filters);
         } catch (SQLException e) {
-            log.error("异常", e);
+            e.printStackTrace();
         }
 
         datasource.setConnectionProperties(connectionProperties);
         return datasource;
     }
 
+    @Bean(name = "dwSqlSessionFactory")
+    @ConfigurationProperties(prefix = "mybatis")
+    public SqlSessionFactory dwSqlSessionFactory(@Qualifier("dwDataSource") DataSource dataSource)
+            throws Exception {
+        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+        bean.setDataSource(dataSource);
+        // 读取mybatis小配置文件
+        bean.setMapperLocations(new
+                PathMatchingResourcePatternResolver().getResources(mapperLocations));
 
+
+        Properties properties = new Properties();
+        //数据库
+        properties.setProperty("helperDialect", "oracle");
+        //是否将参数offset作为PageNum使用
+        properties.setProperty("offsetAsPageNum", "true");
+        //是否进行count查询
+        properties.setProperty("rowBoundsWithCount", "true");
+        //是否分页合理化
+        properties.setProperty("reasonable", "false");
+
+
+        return bean.getObject();
+    }
 
     @Bean(name = "dwTransactionManager")
-    @Primary
     public DataSourceTransactionManager dwTransactionManager(@Qualifier("dwDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
     }
 
     @Bean(name = "dwSqlSessionTemplate")
-    @Primary
     public SqlSessionTemplate dwSqlSessionTemplate(
             @Qualifier("dwSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
-    }
-
-    @Bean(name = "dwSessionConfiguration")
-    @ConfigurationProperties(prefix = "mybatis.dw.configuration")
-    public org.apache.ibatis.session.Configuration dwSessionConfiguration(){
-        return new org.apache.ibatis.session.Configuration();
-    }
-
-    @Bean(name = "dwSqlSessionFactory")
-    @Primary
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource, @Qualifier("dwSessionConfiguration") org.apache.ibatis.session.Configuration configuration)
-            throws Exception {
-        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-        bean.setDataSource(dataSource);
-        // 读取mybatis小配置文件
-        PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
-        List<Resource> res = new ArrayList<>(Arrays.asList(resourcePatternResolver.getResources(mapperLocations)));
-        bean.setMapperLocations(res.toArray(new Resource[res.size()]));
-        bean.setConfiguration(configuration);
-        return bean.getObject();
     }
 }

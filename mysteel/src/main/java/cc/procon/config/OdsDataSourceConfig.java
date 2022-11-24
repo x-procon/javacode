@@ -1,13 +1,12 @@
 package cc.procon.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import lombok.extern.slf4j.Slf4j;
+import com.google.common.collect.Lists;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -17,15 +16,15 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
-@Slf4j
+
 @Configuration
 public class OdsDataSourceConfig {
 
-    @Value("${mybatis.mapper-locations}")
+    @Value("${mybatis.ods.mapper-locations}")
     private String mapperLocations;
 
     @Value(value = "${spring.datasource.ods.url}")
@@ -93,7 +92,7 @@ public class OdsDataSourceConfig {
         try {
             datasource.setFilters(filters);
         } catch (SQLException e) {
-            log.error("异常", e);
+           e.printStackTrace();
         }
 
         datasource.setConnectionProperties(connectionProperties);
@@ -101,6 +100,30 @@ public class OdsDataSourceConfig {
     }
 
 
+    @Bean(name = "odsSqlSessionFactory")
+    @Primary
+    public SqlSessionFactory odsSqlSessionFactory(@Qualifier("odsDataSource") DataSource dataSource)
+            throws Exception {
+        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
+        bean.setDataSource(dataSource);
+        // 读取mybatis小配置文件
+        PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
+        List<Resource> res = Lists.newArrayList();
+        res.addAll(Arrays.asList(resourcePatternResolver.getResources(mapperLocations)));
+        bean.setMapperLocations(res.toArray(new Resource[res.size()]));
+        //分页插件
+
+        Properties properties = new Properties();
+        //数据库
+        properties.setProperty("helperDialect", "oracle");
+        //是否将参数offset作为PageNum使用
+        properties.setProperty("offsetAsPageNum", "true");
+        //是否进行count查询
+        properties.setProperty("rowBoundsWithCount", "true");
+        //是否分页合理化
+        properties.setProperty("reasonable", "false");
+        return bean.getObject();
+    }
 
     @Bean(name = "odsTransactionManager")
     @Primary
@@ -113,26 +136,6 @@ public class OdsDataSourceConfig {
     public SqlSessionTemplate odsSqlSessionTemplate(
             @Qualifier("odsSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
-    }
-
-    @Bean(name = "odsSessionConfiguration")
-    @ConfigurationProperties(prefix = "mybatis.configuration")
-    public org.apache.ibatis.session.Configuration odsSessionConfiguration(){
-        return new org.apache.ibatis.session.Configuration();
-    }
-
-    @Bean(name = "odsSqlSessionFactory")
-    @Primary
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("dataSource") DataSource dataSource, @Qualifier("odsSessionConfiguration") org.apache.ibatis.session.Configuration configuration)
-            throws Exception {
-        SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
-        bean.setDataSource(dataSource);
-        // 读取mybatis小配置文件
-        PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
-        List<Resource> res = new ArrayList<>(Arrays.asList(resourcePatternResolver.getResources(mapperLocations)));
-        bean.setMapperLocations(res.toArray(new Resource[res.size()]));
-        bean.setConfiguration(configuration);
-        return bean.getObject();
     }
 
 
