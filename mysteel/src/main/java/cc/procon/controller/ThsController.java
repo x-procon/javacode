@@ -24,8 +24,8 @@ public class ThsController {
     private ThsService thsService;
 
     @RequestMapping("/compensation")
-    public void compensation(@RequestParam(value = "start") String start,@RequestParam(value = "end") String end){
-        thsService.compensationRangeIndexFromIndex(201,500);
+    public void compensation(@RequestParam(value = "start") Integer start,@RequestParam(value = "end") Integer end){
+        thsService.compensationRangeIndexFromIndex(start,end);
 
 
     }
