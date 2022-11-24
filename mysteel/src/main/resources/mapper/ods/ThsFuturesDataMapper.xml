@@ -46,9 +46,9 @@
 
     <select id="queryFuturesMaxDate" parameterType="String" resultMap="infoMap">
         select
-            max(INDEX_VALUE_TIME) as INDEX_VALUE_TIME
+            min(INDEX_VALUE_TIME) as INDEX_VALUE_TIME
         from T_THS_API_FUTURES_DATA t
-        WHERE t.INDEX_CODE = #{indexCode}
+        WHERE t.INDEX_CODE = #{indexCode} AND INDEX_VALUE IS NULL
 
     </select>
 

@@ -2,10 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cc.procon.mapper.dw.DimIncrMapper">
 
-    <sql id="tableName">T_DAMP_DEAL_DIM_INC</sql>
+
 
     <insert id="insertOrUpdate">
-        merge into <include refid="tableName"/> to_
+        merge into T_DAMP_DEAL_DIM_INC to_
         USING
         (SELECT #{tableName} as TABLE_NAME,
         #{minUpdateTime} as MIN_UPDATE_TIME,

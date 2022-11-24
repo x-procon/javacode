@@ -58,14 +58,21 @@ public class ThsService {
         forkJoinPool.submit(rangeForkJoinTask);
     }
 
-    public void thsCompensation(String indexCode, Date beginTime) {
+    public void thsCompensation(String indexCode) {
         ThsApiFuturesInfo thsApiFuturesInfo = thsFuturesInfoMapper.queryFutureInfoByIndexCode(indexCode);
         if (Objects.isNull(thsApiFuturesInfo)) {
             log.error("指标{}信息不存在", indexCode);
             return;
         }
+        ThsApiFuturesData futuresData = thsFuturesDataMapper.queryFuturesMaxDate(indexCode);
+        String beginTimeStr;
+        if (Objects.nonNull(futuresData)) {
+            beginTimeStr = DateUtil.format(futuresData.getIndexValueTime(),DatePattern.NORM_DATE_PATTERN);
+        } else {
+            beginTimeStr = "2000-05-01";
+        }
         login();
-        String beginTimeStr = DateUtil.format(beginTime, DatePattern.NORM_DATE_PATTERN);
+        log.info("指标：{}，开始时间:{}",indexCode,beginTimeStr);
         String indexEnName = thsApiFuturesInfo.getIndexEnName();
         String contractCode = thsApiFuturesInfo.getContractCode();
         List<ThsApiFuturesData> futuresDataList;

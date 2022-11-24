@@ -1,19 +1,23 @@
 package cc.procon.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.google.common.collect.Lists;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -22,6 +26,8 @@ import java.util.Properties;
  */
 
 @Configuration
+@MapperScan(basePackages = "cc.procon.mapper.dw",
+        sqlSessionFactoryRef =  "dwSqlSessionFactory")
 public class DwDataSourceConfig {
     @Value("${mybatis.dw.mapper-locations}")
     private String mapperLocations;
@@ -95,16 +101,18 @@ public class DwDataSourceConfig {
         return datasource;
     }
 
+
     @Bean(name = "dwSqlSessionFactory")
-    @ConfigurationProperties(prefix = "mybatis")
     public SqlSessionFactory dwSqlSessionFactory(@Qualifier("dwDataSource") DataSource dataSource)
             throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         // 读取mybatis小配置文件
-        bean.setMapperLocations(new
-                PathMatchingResourcePatternResolver().getResources(mapperLocations));
-
+        PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
+        List<Resource> res = Lists.newArrayList();
+        res.addAll(Arrays.asList(resourcePatternResolver.getResources(mapperLocations)));
+        bean.setMapperLocations(res.toArray(new Resource[res.size()]));
+        //分页插件
 
         Properties properties = new Properties();
         //数据库
@@ -115,8 +123,6 @@ public class DwDataSourceConfig {
         properties.setProperty("rowBoundsWithCount", "true");
         //是否分页合理化
         properties.setProperty("reasonable", "false");
-
-
         return bean.getObject();
     }
 

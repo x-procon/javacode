@@ -2,8 +2,6 @@ package cc.procon.service;
 
 import cc.procon.model.po.ThsApiFuturesInfo;
 import cc.procon.util.SpringContextUtil;
-import cn.hutool.core.date.DatePattern;
-import cn.hutool.core.date.DateUtil;
 
 import java.util.List;
 import java.util.concurrent.RecursiveAction;
@@ -47,7 +45,7 @@ public class RangeForkJoinTask extends RecursiveAction {
         // 小于阈值直接执行
         if (end - start <= threadHold) {
             for (int i = start; i < end; i++) {
-                thsFuturesService.thsCompensation(infoList.get(i).getIndexCode(), DateUtil.parse("2000-05-01", DatePattern.NORM_DATE_PATTERN));
+                thsFuturesService.thsCompensation(infoList.get(i).getIndexCode());
             }
         } else {
             // 递归拆解任务

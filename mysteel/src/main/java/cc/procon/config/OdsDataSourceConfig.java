@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +23,8 @@ import java.util.Properties;
 
 
 @Configuration
+@MapperScan(basePackages = "cc.procon.mapper.ods",
+        sqlSessionFactoryRef =  "odsSqlSessionFactory")
 public class OdsDataSourceConfig {
 
     @Value("${mybatis.ods.mapper-locations}")
