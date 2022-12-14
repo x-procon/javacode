@@ -1,9 +1,11 @@
 package com.hazer.controller;
 
-import com.alibaba.fastjson.JSON;
+
+import com.alibaba.fastjson2.JSON;
 import com.hazer.entity.Content;
 import com.hazer.entity.ResultModel;
 import com.hazer.jsoup.JsoupUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -11,12 +13,12 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.common.unit.TimeValue;
-import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.core.TimeValue;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.index.query.TermQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,30 +31,36 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @description: </br>
- * @author: Hazer
- * @date: 2020-07-20 17:20
+ *
+ * @author Hazer
+ * @since  2020-07-20 17:20
  */
 @RestController
+@SuppressWarnings("deprecation")
 public class EsController {
 
-    @Autowired
-    private RestHighLevelClient restHighLevelClient;
+
+    private final RestHighLevelClient restHighLevelClient;
+
+
+    public EsController(@Autowired RestHighLevelClient restHighLevelClient) {
+        this.restHighLevelClient = restHighLevelClient;
+    }
 
     @RequestMapping(value = "add/{keyword}")
     public ResultModel addData(@PathVariable(value = "keyword") String keyword) {
         try {
-            List<Content> contents = JsoupUtil.parseJD(keyword);
+            List<Content> contents = JsoupUtil.parseJd(keyword);
             BulkRequest bulkRequest = new BulkRequest();
             bulkRequest.timeout(TimeValue.timeValueSeconds(600));
-            for (int i = 0; i < contents.size(); i++) {
+            for (Content content : contents) {
                 IndexRequest indexRequest = new IndexRequest("hazer-es");
-                bulkRequest.add(indexRequest.source(JSON.toJSONString(contents.get(i)), XContentType.JSON));
+                bulkRequest.add(indexRequest.source(JSON.toJSONString(content), XContentType.JSON));
             }
             BulkResponse response = restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
             return ResultModel.success(!response.hasFailures());
         } catch (IOException e) {
-            e.printStackTrace();
+          e.printStackTrace();
         }
         return ResultModel.fail();
     }

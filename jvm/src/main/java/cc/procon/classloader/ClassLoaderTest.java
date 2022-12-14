@@ -1,9 +1,6 @@
 package cc.procon.classloader;
 
 import lombok.extern.slf4j.Slf4j;
-import sun.misc.Launcher;
-
-import java.net.URL;
 
 /**
  * <p>classLoaderTest</p>
@@ -24,16 +21,5 @@ public class ClassLoaderTest  {
         ClassLoader bootstrapClassLoader = extClassLoader.getParent();
         //null
         log.info("引导类加载器内存地址:{}",bootstrapClassLoader);
-        //获取bootstrapClassLoader加载的路径
-        URL[] urLs = Launcher.getBootstrapClassPath().getURLs();
-        log.info("**********引导类加载路径列表**********");
-        for (URL url : urLs) {
-            log.info(url.toString());
-        }
-        log.info("**********扩展类加载路径列表**********");
-        String extDirs = System.getProperty("java.ext.dirs");
-        for (String dir : extDirs.split(";")) {
-            log.info(dir);
-        }
     }
 }

@@ -1,4 +1,4 @@
-package cc.procon.array;
+package cc.procon;
 
 import java.util.List;
 

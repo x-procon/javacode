@@ -3,6 +3,7 @@ package vip.procon;
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.json.JSON;
 import cn.hutool.json.JSONUtil;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * @author procon
  * @since 2022-08-25
  */
+@Slf4j
 public class TestBean {
         private int order;
         private String name;
@@ -36,7 +38,7 @@ public class TestBean {
         this.name = name;
     }
 }
-
+@Slf4j
 class Test {
     public static void main(String[] args) {
         List<TestBean> beans = new ArrayList<>();
@@ -49,6 +51,6 @@ class Test {
         beans = ListUtil.sortByProperty(beans, "name");
         ListUtil.reverse(beans);
         JSON parse = JSONUtil.parse(beans);
-        System.out.printf(parse.toString());
+        log.info("解析结果:{}",parse.toString());
     }
 }

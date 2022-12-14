@@ -1,9 +1,9 @@
 package com.hazer.entity;
 
 /**
- * @description: </br>
- * @author: Hazer
- * @date: 2020-07-20 15:56
+ * 内容
+ * @author Hazer
+ * @since  2020-07-20 15:56
  */
 public class Content {
     private String img;

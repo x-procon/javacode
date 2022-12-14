@@ -1,8 +1,19 @@
-es:
-  ip: 192.168.8.103
-  port: 9200
+elasticsearch:
   scheme: http
+  clusterNodes: 192.168.201.66:9200
+  connectTimeOut: 500000
+  socketTimeOut: 400000
+  connectionRequestTimeOut: 10000
+  maxConnectNum: 100
+  maxConnectPerRoute: 100
+  numberOfShards: 3
+  numberOfReplicas: 3
+  username: elastic
+  password: sa%YVP_8
+
 server:
   port: 9090
   servlet:
     context-path: /es
+
+

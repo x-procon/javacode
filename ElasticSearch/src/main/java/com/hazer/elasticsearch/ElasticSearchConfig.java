@@ -1,56 +1,64 @@
 package com.hazer.elasticsearch;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
+import org.apache.http.auth.AuthScope;
+import org.apache.http.auth.UsernamePasswordCredentials;
+import org.apache.http.client.CredentialsProvider;
+import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.ArrayList;
+
 /**
- * @description es配置类
- * @author Hazer
- * @date 2020-07-20 15:12
+ * @author procon
  */
 @Configuration
+@Slf4j
 public class ElasticSearchConfig {
+    private final EsProperties esProperties;
 
-    @Value("${es.port}")
-    private Integer port;
-    @Value("${es.ip}")
-    private String ip;
-    @Value("${es.scheme}")
-    private String scheme;
-
-    public Integer getPort() {
-        return port;
+    public ElasticSearchConfig(@Autowired EsProperties esProperties) {
+        this.esProperties = esProperties;
     }
 
-    public void setPort(Integer port) {
-        this.port = port;
-    }
+    @Bean("restHighLevelClient")
+    @SuppressWarnings("deprecation")
+    public RestHighLevelClient client() {
+        log.info("初始化RestHighLevelClient..."+esProperties.toString());
+        ArrayList<HttpHost> hostList = new ArrayList<>();
+        String[] hostStrs =esProperties.getClusterNodes().split(",");
 
-    public String getIp() {
-        return ip;
-    }
+        for (String host : hostStrs) {
+            String[] hostPort = host.split(":");
+            hostList.add(new HttpHost(hostPort[0], Integer.parseInt(hostPort[1]), esProperties.getScheme()));
+        }
+        RestClientBuilder builder = RestClient.builder(hostList.toArray(new HttpHost[0]));
 
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
+        // 异步httpclient连接延时配置
+        builder.setRequestConfigCallback(requestConfigBuilder -> {
+            requestConfigBuilder.setConnectTimeout(esProperties.getConnectTimeOut());
+            requestConfigBuilder.setSocketTimeout(esProperties.getSocketTimeOut());
+            requestConfigBuilder.setConnectionRequestTimeout(esProperties.getConnectionRequestTimeOut());
+            return requestConfigBuilder;
+        });
 
-    public String getScheme() {
-        return scheme;
-    }
+        // 异步httpclient连接数配置
+        builder.setHttpClientConfigCallback(httpClientBuilder -> {
+            CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
+            credentialsProvider.setCredentials(
+                    AuthScope.ANY, new UsernamePasswordCredentials(esProperties.getUsername(), esProperties.getPassword()));
+            httpClientBuilder.setDefaultCredentialsProvider(credentialsProvider);
+            httpClientBuilder.setMaxConnTotal(esProperties.getMaxConnectNum());
+            httpClientBuilder.setMaxConnPerRoute(esProperties.getMaxConnectPerRoute());
+            return httpClientBuilder;
+        });
 
-    public void setScheme(String scheme) {
-        this.scheme = scheme;
-    }
-
-    @Bean
-    public RestHighLevelClient restHighLevelClient() {
-        HttpHost httpHost = new HttpHost(ip, port, scheme);
-        RestClientBuilder builder = RestClient.builder(httpHost);
         return new RestHighLevelClient(builder);
     }
 }

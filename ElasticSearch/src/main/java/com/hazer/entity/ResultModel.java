@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  *
  * @author Hazer
- * @date 2020-07-20 17:23
+ * @since  2020-07-20 17:23
  */
 public class ResultModel {
     /**

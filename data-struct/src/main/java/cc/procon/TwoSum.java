@@ -1,4 +1,4 @@
-package cc.procon.array;
+package cc.procon;
 
 import lombok.extern.slf4j.Slf4j;
 

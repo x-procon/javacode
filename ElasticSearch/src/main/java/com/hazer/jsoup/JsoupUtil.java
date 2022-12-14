@@ -7,6 +7,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,14 +16,18 @@ import java.util.List;
 /**
  *
  * @author Hazer
- * @date 2020-07-20 15:34
+ * @since  2020-07-20 15:34
  */
 public class JsoupUtil {
+    private JsoupUtil() {
+    }
+
     private static final Logger LOG = LoggerFactory.getLogger(JsoupUtil.class);
-    public static List<Content> parseJD(String keyword) throws IOException {
+    public static List<Content> parseJd(String keyword) throws IOException {
         String url = "https://search.jd.com/Search?enc=utf-8&keyword=" + keyword;
         Document document = Jsoup.connect(url).get();
         Element element = document.getElementById("J_goodsList");
+        Assert.notNull(element,"element不能为空");
         Elements elements = element.getElementsByTag("li");
         List<Content> contents = new ArrayList<>();
         for (Element el : elements) {
