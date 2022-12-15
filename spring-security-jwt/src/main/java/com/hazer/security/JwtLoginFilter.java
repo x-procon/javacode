@@ -1,7 +1,8 @@
 package com.hazer.security;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
 import com.hazer.utils.HttpUtils;
 import com.hazer.utils.JwtTokenUtils;
 import org.slf4j.Logger;

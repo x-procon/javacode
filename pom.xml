@@ -10,6 +10,8 @@
         <module>jvm</module>
         <module>mysteel</module>
         <module>data-struct</module>
+        <module>jdbc</module>
+        <module>java-web</module>
     </modules>
     <groupId>com.procon</groupId>
     <artifactId>parent</artifactId>
@@ -48,6 +50,9 @@
         <slf4j-api.version>2.0.5</slf4j-api.version>
         <logback.version>1.4.5</logback.version>
         <hutool.version>5.8.10</hutool.version>
+        <mysql-connector.version>8.0.31</mysql-connector.version>
+        <junit.version>5.9.1</junit.version>
+        <jakarta.servlet-appi.version>5.0.0</jakarta.servlet-appi.version>
     </properties>
     <!-- 依赖声明 -->
     <dependencyManagement>
@@ -225,6 +230,14 @@
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+
+            <!-- mysql-connector-java -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

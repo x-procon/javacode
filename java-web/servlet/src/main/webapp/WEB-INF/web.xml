@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+         version="5.0">
+
+
+    <!--配置servlet类的-->
+    <servlet>
+        <servlet-name>my</servlet-name>
+        <servlet-class>cc.procon.MyServlet</servlet-class>
+
+    </servlet>
+
+
+    <!--配置请求地址和servlet的映射管理 -->
+    <!--也就是浏览器发送什么请求地址交给哪个servlet进行处理-->
+    <servlet-mapping>
+        <servlet-name>my</servlet-name>
+        <url-pattern>/my</url-pattern>
+    </servlet-mapping>
+
+</web-app>
