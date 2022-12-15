@@ -15,7 +15,7 @@ import java.io.IOException;
 public class MyServlet implements Servlet {
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
-        log.info("servlet init");
+        log.info("procon-servlet init");
     }
 
     @Override
@@ -36,6 +36,6 @@ public class MyServlet implements Servlet {
 
     @Override
     public void destroy() {
-        log.info("servlet destroy");
+        log.info("procon-servlet destroy");
     }
 }

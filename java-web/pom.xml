@@ -10,7 +10,7 @@
     </parent>
     <packaging>pom</packaging>
     <modules>
-        <module>servlet</module>
+        <module>procon-servlet</module>
     </modules>
 
     <artifactId>java-web</artifactId>

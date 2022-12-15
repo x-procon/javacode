@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * http servlet
+ * http procon-servlet
  *
  * @author procon
  * @since 2022-12-15
