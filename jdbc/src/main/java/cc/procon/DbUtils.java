@@ -85,5 +85,6 @@ public class DbUtils {
     public static void main(String[] args) throws SQLException {
         final Connection conn = getConnection();
         log.error("连接信息--{}",conn);
+
     }
 }
