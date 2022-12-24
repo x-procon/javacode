@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.dw.DwIndexMapper">
+    <select id="findByIndexIds" resultType="String">
+        select
+            ID
+        from T_DAMP_DW_INDEX WHERE ID IN
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+        AND IS_DELETE = 0 ORDER BY nlssort(INDEX_CN_NAME,'NLS_SORT=SCHINESE_PINYIN_M')
+    </select>
+</mapper>

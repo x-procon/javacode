@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.dm.DmRlDwIndexMapper">
+
+
+    <select id="queryFrameIdList" resultType="String">
+        select FRAME_ID
+        from T_DAMP_DM_RL_DW_INDEX
+        GROUP BY FRAME_ID HAVING COUNT(*) >1
+    </select>
+
+
+    <select id="queryList" resultType="cc.procon.model.po.DmFrameRelationDwIndexPO">
+        select FRAME_ID AS frameId,INDEX_ID AS indexId,SORT
+        from T_DAMP_DM_RL_DW_INDEX
+        WHERE  FRAME_ID = #{frameId,jdbcType=VARCHAR}
+    </select>
+
+    <update id="updateBatch">
+        <foreach collection="entities" item="entity" index="index" open="begin" close=";end;" separator=";">
+            update T_DAMP_DM_RL_DW_INDEX t
+            set t.sort = #{entity.sort}
+            where t.index_id = #{entity.indexId} and t.frame_id = #{entity.frameId}
+        </foreach>
+    </update>
+
+</mapper>
