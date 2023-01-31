@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.dw.DimDeriveJobMapper">
+
+    <sql id="selectAllData">
+        <foreach collection="data" item="map" separator="UNION ALL">
+            SELECT
+            <foreach collection="fields"  separator="," item="field">
+                <choose>
+                    <when test="map[field] != null">
+                        #{map.${field}}
+                    </when>
+                    <otherwise>
+                        NULL
+                    </otherwise>
+                </choose>
+                AS ${field}
+            </foreach>
+            FROM DUAL
+        </foreach>
+    </sql>
+
+
+
+    <insert id="mergeInto"  parameterType="java.util.Map">
+        MERGE INTO ${tableName} T1
+        USING (<include refid="selectAllData"/>) T2
+        ON (
+        <foreach collection="unique" item="field" separator="AND">
+            T1.${field} = T2.${field}
+        </foreach>
+        AND T1.IS_DELETE &lt;&gt; 1
+        )
+        WHEN MATCHED THEN
+        UPDATE SET
+        <foreach collection="mergeFields"  separator="," item="field">
+            T1.${field} = T2.${field}
+        </foreach>
+        WHEN NOT MATCHED THEN
+        INSERT
+        <foreach collection="fields"   open="(" close=")" separator="," item="field">
+            ${field}
+        </foreach>
+        VALUES
+        <foreach collection="fields"   open="(" close=")" separator="," item="field">
+            T2.${field}
+        </foreach>
+    </insert>
+
+
+    <insert id="insertInto" parameterType="java.util.Map">
+        INSERT ALL
+        <foreach collection="data" item="map">
+            INTO ${tableName}
+            <foreach collection="fields"  open="(" close=")" separator="," item="field">
+                ${field}
+            </foreach>
+            values
+            <foreach collection="fields"  open="(" close=")" separator="," item="field">
+                #{map.${field}}
+            </foreach>
+        </foreach>
+        SELECT 1 FROM DUAL
+    </insert>
+</mapper>

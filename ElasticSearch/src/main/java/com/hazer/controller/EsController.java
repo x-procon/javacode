@@ -5,7 +5,6 @@ import com.alibaba.fastjson2.JSON;
 import com.hazer.entity.Content;
 import com.hazer.entity.ResultModel;
 import com.hazer.jsoup.JsoupUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -92,6 +91,11 @@ public class EsController {
             maps.add(documentFields.getSourceAsMap());
         }
         return ResultModel.success("获取成功", maps);
+    }
+
+    @GetMapping(value = "dataSync")
+    public void dataSync(){
+
     }
 }
 

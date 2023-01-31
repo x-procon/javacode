@@ -47,6 +47,11 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.htf</groupId>
+            <artifactId>htf-log-trace</artifactId>
+            <version>0.0.6-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

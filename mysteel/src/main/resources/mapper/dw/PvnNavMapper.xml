@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.dw.PvnNavMapper">
+  <resultMap id="BaseResultMap" type="cc.procon.model.po.PvnNav">
+    <!--@mbg.generated-->
+    <!--@Table PVN_NAV-->
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="FUND_ID" jdbcType="VARCHAR" property="fundId" />
+    <result column="PRICE_DATE" jdbcType="TIMESTAMP" property="priceDate" />
+    <result column="NAV" jdbcType="DECIMAL" property="nav" />
+    <result column="CUMULATIVE_NAV" jdbcType="DECIMAL" property="cumulativeNav" />
+    <result column="CUMULATIVE_NAV_WITHDRAWAL" jdbcType="DECIMAL" property="cumulativeNavWithdrawal" />
+    <result column="ISHIGH_OR_LOW" jdbcType="DECIMAL" property="ishighOrLow" />
+    <result column="TOHIGH_NAV_RATIO" jdbcType="DECIMAL" property="tohighNavRatio" />
+    <result column="CREATORID" jdbcType="DECIMAL" property="creatorid" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="UPDATERID" jdbcType="DECIMAL" property="updaterid" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="ISVALID" jdbcType="DECIMAL" property="isvalid" />
+    <result column="IS_QUALITY" jdbcType="DECIMAL" property="isQuality" />
+    <result column="IS_DELETE" jdbcType="DECIMAL" property="isDelete" />
+    <result column="DATA_CREATE_TIME" jdbcType="DECIMAL" property="dataCreateTime" />
+    <result column="DATA_UPDATE_TIME" jdbcType="DECIMAL" property="dataUpdateTime" />
+    <result column="HT_UNIQUE_CODE" jdbcType="VARCHAR" property="htUniqueCode" />
+    <result column="NAV_SOURCE" jdbcType="DECIMAL" property="navSource" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, FUND_ID, PRICE_DATE, NAV, CUMULATIVE_NAV, CUMULATIVE_NAV_WITHDRAWAL, ISHIGH_OR_LOW, 
+    TOHIGH_NAV_RATIO, CREATORID, CREATETIME, UPDATERID, UPDATETIME, ISVALID, IS_QUALITY, 
+    IS_DELETE, DATA_CREATE_TIME, DATA_UPDATE_TIME, HT_UNIQUE_CODE, NAV_SOURCE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <!--@mbg.generated-->
+    select 
+    <include refid="Base_Column_List" />
+    from PVN_NAV
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <!--@mbg.generated-->
+    delete from PVN_NAV
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="cc.procon.model.po.PvnNav">
+    <!--@mbg.generated-->
+    insert into PVN_NAV (ID, FUND_ID, PRICE_DATE, 
+      NAV, CUMULATIVE_NAV, CUMULATIVE_NAV_WITHDRAWAL, 
+      ISHIGH_OR_LOW, TOHIGH_NAV_RATIO, CREATORID, 
+      CREATETIME, UPDATERID, UPDATETIME, 
+      ISVALID, IS_QUALITY, IS_DELETE, 
+      DATA_CREATE_TIME, DATA_UPDATE_TIME, HT_UNIQUE_CODE, 
+      NAV_SOURCE)
+    values (#{id,jdbcType=DECIMAL}, #{fundId,jdbcType=VARCHAR}, #{priceDate,jdbcType=TIMESTAMP}, 
+      #{nav,jdbcType=DECIMAL}, #{cumulativeNav,jdbcType=DECIMAL}, #{cumulativeNavWithdrawal,jdbcType=DECIMAL}, 
+      #{ishighOrLow,jdbcType=DECIMAL}, #{tohighNavRatio,jdbcType=DECIMAL}, #{creatorid,jdbcType=DECIMAL}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{updaterid,jdbcType=DECIMAL}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{isvalid,jdbcType=DECIMAL}, #{isQuality,jdbcType=DECIMAL}, #{isDelete,jdbcType=DECIMAL}, 
+      #{dataCreateTime,jdbcType=DECIMAL}, #{dataUpdateTime,jdbcType=DECIMAL}, #{htUniqueCode,jdbcType=VARCHAR}, 
+      #{navSource,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="cc.procon.model.po.PvnNav">
+    <!--@mbg.generated-->
+    insert into PVN_NAV
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="fundId != null and fundId != ''">
+        FUND_ID,
+      </if>
+      <if test="priceDate != null">
+        PRICE_DATE,
+      </if>
+      <if test="nav != null">
+        NAV,
+      </if>
+      <if test="cumulativeNav != null">
+        CUMULATIVE_NAV,
+      </if>
+      <if test="cumulativeNavWithdrawal != null">
+        CUMULATIVE_NAV_WITHDRAWAL,
+      </if>
+      <if test="ishighOrLow != null">
+        ISHIGH_OR_LOW,
+      </if>
+      <if test="tohighNavRatio != null">
+        TOHIGH_NAV_RATIO,
+      </if>
+      <if test="creatorid != null">
+        CREATORID,
+      </if>
+      <if test="createtime != null">
+        CREATETIME,
+      </if>
+      <if test="updaterid != null">
+        UPDATERID,
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME,
+      </if>
+      <if test="isvalid != null">
+        ISVALID,
+      </if>
+      <if test="isQuality != null">
+        IS_QUALITY,
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE,
+      </if>
+      <if test="dataCreateTime != null">
+        DATA_CREATE_TIME,
+      </if>
+      <if test="dataUpdateTime != null">
+        DATA_UPDATE_TIME,
+      </if>
+      <if test="htUniqueCode != null and htUniqueCode != ''">
+        HT_UNIQUE_CODE,
+      </if>
+      <if test="navSource != null">
+        NAV_SOURCE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="fundId != null and fundId != ''">
+        #{fundId,jdbcType=VARCHAR},
+      </if>
+      <if test="priceDate != null">
+        #{priceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nav != null">
+        #{nav,jdbcType=DECIMAL},
+      </if>
+      <if test="cumulativeNav != null">
+        #{cumulativeNav,jdbcType=DECIMAL},
+      </if>
+      <if test="cumulativeNavWithdrawal != null">
+        #{cumulativeNavWithdrawal,jdbcType=DECIMAL},
+      </if>
+      <if test="ishighOrLow != null">
+        #{ishighOrLow,jdbcType=DECIMAL},
+      </if>
+      <if test="tohighNavRatio != null">
+        #{tohighNavRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="creatorid != null">
+        #{creatorid,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterid != null">
+        #{updaterid,jdbcType=DECIMAL},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isvalid != null">
+        #{isvalid,jdbcType=DECIMAL},
+      </if>
+      <if test="isQuality != null">
+        #{isQuality,jdbcType=DECIMAL},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="dataCreateTime != null">
+        #{dataCreateTime,jdbcType=DECIMAL},
+      </if>
+      <if test="dataUpdateTime != null">
+        #{dataUpdateTime,jdbcType=DECIMAL},
+      </if>
+      <if test="htUniqueCode != null and htUniqueCode != ''">
+        #{htUniqueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="navSource != null">
+        #{navSource,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cc.procon.model.po.PvnNav">
+    <!--@mbg.generated-->
+    update PVN_NAV
+    <set>
+      <if test="fundId != null and fundId != ''">
+        FUND_ID = #{fundId,jdbcType=VARCHAR},
+      </if>
+      <if test="priceDate != null">
+        PRICE_DATE = #{priceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="nav != null">
+        NAV = #{nav,jdbcType=DECIMAL},
+      </if>
+      <if test="cumulativeNav != null">
+        CUMULATIVE_NAV = #{cumulativeNav,jdbcType=DECIMAL},
+      </if>
+      <if test="cumulativeNavWithdrawal != null">
+        CUMULATIVE_NAV_WITHDRAWAL = #{cumulativeNavWithdrawal,jdbcType=DECIMAL},
+      </if>
+      <if test="ishighOrLow != null">
+        ISHIGH_OR_LOW = #{ishighOrLow,jdbcType=DECIMAL},
+      </if>
+      <if test="tohighNavRatio != null">
+        TOHIGH_NAV_RATIO = #{tohighNavRatio,jdbcType=DECIMAL},
+      </if>
+      <if test="creatorid != null">
+        CREATORID = #{creatorid,jdbcType=DECIMAL},
+      </if>
+      <if test="createtime != null">
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterid != null">
+        UPDATERID = #{updaterid,jdbcType=DECIMAL},
+      </if>
+      <if test="updatetime != null">
+        UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isvalid != null">
+        ISVALID = #{isvalid,jdbcType=DECIMAL},
+      </if>
+      <if test="isQuality != null">
+        IS_QUALITY = #{isQuality,jdbcType=DECIMAL},
+      </if>
+      <if test="isDelete != null">
+        IS_DELETE = #{isDelete,jdbcType=DECIMAL},
+      </if>
+      <if test="dataCreateTime != null">
+        DATA_CREATE_TIME = #{dataCreateTime,jdbcType=DECIMAL},
+      </if>
+      <if test="dataUpdateTime != null">
+        DATA_UPDATE_TIME = #{dataUpdateTime,jdbcType=DECIMAL},
+      </if>
+      <if test="htUniqueCode != null and htUniqueCode != ''">
+        HT_UNIQUE_CODE = #{htUniqueCode,jdbcType=VARCHAR},
+      </if>
+      <if test="navSource != null">
+        NAV_SOURCE = #{navSource,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cc.procon.model.po.PvnNav">
+    <!--@mbg.generated-->
+    update PVN_NAV
+    set FUND_ID = #{fundId,jdbcType=VARCHAR},
+      PRICE_DATE = #{priceDate,jdbcType=TIMESTAMP},
+      NAV = #{nav,jdbcType=DECIMAL},
+      CUMULATIVE_NAV = #{cumulativeNav,jdbcType=DECIMAL},
+      CUMULATIVE_NAV_WITHDRAWAL = #{cumulativeNavWithdrawal,jdbcType=DECIMAL},
+      ISHIGH_OR_LOW = #{ishighOrLow,jdbcType=DECIMAL},
+      TOHIGH_NAV_RATIO = #{tohighNavRatio,jdbcType=DECIMAL},
+      CREATORID = #{creatorid,jdbcType=DECIMAL},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      UPDATERID = #{updaterid,jdbcType=DECIMAL},
+      UPDATETIME = #{updatetime,jdbcType=TIMESTAMP},
+      ISVALID = #{isvalid,jdbcType=DECIMAL},
+      IS_QUALITY = #{isQuality,jdbcType=DECIMAL},
+      IS_DELETE = #{isDelete,jdbcType=DECIMAL},
+      DATA_CREATE_TIME = #{dataCreateTime,jdbcType=DECIMAL},
+      DATA_UPDATE_TIME = #{dataUpdateTime,jdbcType=DECIMAL},
+      HT_UNIQUE_CODE = #{htUniqueCode,jdbcType=VARCHAR},
+      NAV_SOURCE = #{navSource,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+
+  <insert id="mergeInto">
+    MERGE INTO PVN_NAV TO_
+    USING
+    (
+    <foreach collection="list" index="index" item="item" separator="UNION ALL">
+      SELECT #{item.id,jdbcType=BIGINT} ID,
+      #{item.oldId,jdbcType=BIGINT} OLD_ID,
+      #{item.fundId,jdbcType=VARCHAR} FUND_ID,
+      #{item.priceDate,jdbcType=DATE} PRICE_DATE,
+      #{item.nav,jdbcType=NUMERIC} NAV,
+      #{item.cumulativeNav,jdbcType=NUMERIC} CUMULATIVE_NAV,
+      #{item.cumulativeNavWithdrawal,jdbcType=NUMERIC} CUMULATIVE_NAV_WITHDRAWAL,
+      #{item.ishighOrLow,jdbcType=BIGINT} ISHIGH_OR_LOW,
+      #{item.tohighNavRatio,jdbcType=NUMERIC} TOHIGH_NAV_RATIO,
+      #{item.createtime,jdbcType=DATE} CREATETIME,
+      #{item.updatetime,jdbcType=DATE} UPDATETIME,
+      #{item.isvalid,jdbcType=BIGINT} ISVALID,
+      #{item.isQuality,jdbcType=BIGINT} IS_QUALITY,
+      #{item.isDelete,jdbcType=BIGINT} IS_DELETE,
+      #{item.htUniqueCode,jdbcType=VARCHAR} HT_UNIQUE_CODE,
+      #{item.dataCreateTime,jdbcType=BIGINT} DATA_CREATE_TIME,
+      #{item.dataUpdateTime,jdbcType=BIGINT} DATA_UPDATE_TIME
+      FROM dual
+    </foreach>
+    ) FROM_
+    ON (TO_.ID = FROM_.ID AND TO_.IS_DELETE = 0 )
+    WHEN MATCHED THEN
+    UPDATE
+    SET TO_.CREATETIME = FROM_.CREATETIME,TO_.OLD_ID = FROM_.OLD_ID,TO_.FUND_ID =FROM_.FUND_ID,TO_.NAV = FROM_.NAV,
+    TO_.CUMULATIVE_NAV = FROM_.CUMULATIVE_NAV,TO_.ISHIGH_OR_LOW = FROM_.ISHIGH_OR_LOW,TO_.TOHIGH_NAV_RATIO = FROM_.TOHIGH_NAV_RATIO,
+    TO_.ISVALID = FROM_.ISVALID
+    WHEN NOT MATCHED THEN
+    INSERT (ID, OLD_ID,FUND_ID, PRICE_DATE,NAV, CUMULATIVE_NAV, CUMULATIVE_NAV_WITHDRAWAL,ISHIGH_OR_LOW, TOHIGH_NAV_RATIO,CREATETIME, UPDATETIME,ISVALID, IS_QUALITY, IS_DELETE,DATA_CREATE_TIME, DATA_UPDATE_TIME, HT_UNIQUE_CODE)
+    VALUES (FROM_.ID,FROM_.OLD_ID,FROM_.FUND_ID, FROM_.PRICE_DATE,FROM_.NAV, FROM_.CUMULATIVE_NAV, FROM_.CUMULATIVE_NAV_WITHDRAWAL,FROM_.ISHIGH_OR_LOW, FROM_.TOHIGH_NAV_RATIO, FROM_.CREATETIME, FROM_.UPDATETIME,FROM_.ISVALID, FROM_.IS_QUALITY, FROM_.IS_DELETE,FROM_.DATA_CREATE_TIME,FROM_.DATA_UPDATE_TIME, FROM_.HT_UNIQUE_CODE)
+  </insert>
+
+
+
+  <select id="batchInsert" >
+    insert into PVN_NAV (ID, OLD_ID,FUND_ID, PRICE_DATE,NAV, CUMULATIVE_NAV, CUMULATIVE_NAV_WITHDRAWAL,ISHIGH_OR_LOW,
+    TOHIGH_NAV_RATIO,CREATETIME, UPDATETIME,ISVALID, IS_QUALITY, IS_DELETE,DATA_CREATE_TIME, DATA_UPDATE_TIME, HT_UNIQUE_CODE)
+    SELECT A.* FROM (
+    <foreach collection="list" item="entity"  separator="UNION ALL">
+      SELECT
+      #{entity.id,jdbcType=BIGINT},
+      #{entity.oldId,jdbcType=BIGINT},
+      #{entity.fundId,jdbcType=VARCHAR},
+      #{entity.priceDate,jdbcType=DATE},
+      #{entity.nav,jdbcType=NUMERIC},
+      #{entity.cumulativeNav,jdbcType=NUMERIC},
+      #{entity.cumulativeNavWithdrawal,jdbcType=NUMERIC},
+      #{entity.ishighOrLow,jdbcType=BIGINT},
+      #{entity.tohighNavRatio,jdbcType=BIGINT},
+      #{entity.createtime,jdbcType=DATE},
+      #{entity.updatetime,jdbcType=DATE},
+      #{entity.isvalid,jdbcType=BIGINT},
+      #{entity.isQuality,jdbcType=BIGINT},
+      #{entity.isDelete,jdbcType=BIGINT},
+      #{entity.dataCreateTime,jdbcType=BIGINT},
+      #{entity.dataUpdateTime,jdbcType=BIGINT},
+      #{entity.htUniqueCode,jdbcType=VARCHAR}
+      FROM dual
+    </foreach>
+    ) A
+  </select>
+</mapper>

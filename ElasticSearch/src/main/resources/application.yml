@@ -1,6 +1,6 @@
 elasticsearch:
   scheme: http
-  clusterNodes: 192.168.201.66:9200
+  clusterNodes: 10.226.21.38:9200,10.226.21.39:9200,10.226.21.40:9200
   connectTimeOut: 500000
   socketTimeOut: 400000
   connectionRequestTimeOut: 10000
@@ -9,7 +9,7 @@ elasticsearch:
   numberOfShards: 3
   numberOfReplicas: 3
   username: elastic
-  password: sa%YVP_8
+  password: kw8LkFpsTmY3
 
 server:
   port: 9090
