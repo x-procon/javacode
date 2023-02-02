@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.ods.PvnFundFuturestypeMappingMapper">
+  <resultMap id="BaseResultMap" type="cc.procon.model.po.PvnFundFuturestypeMapping">
+    <!--@mbg.generated-->
+    <!--@Table PVN_FUND_FUTURESTYPE_MAPPING-->
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="FUND_ID" jdbcType="VARCHAR" property="fundId" />
+    <result column="FUTURES_TYPE" jdbcType="DECIMAL" property="futuresType" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="ISVALID" jdbcType="DECIMAL" property="isvalid" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="IS_QUALITY" jdbcType="DECIMAL" property="isQuality" />
+    <result column="IS_DELETE" jdbcType="DECIMAL" property="isDelete" />
+    <result column="DATA_CREATE_TIME" jdbcType="DECIMAL" property="dataCreateTime" />
+    <result column="DATA_UPDATE_TIME" jdbcType="DECIMAL" property="dataUpdateTime" />
+    <result column="HT_UNIQUE_CODE" jdbcType="VARCHAR" property="htUniqueCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, FUND_ID, FUTURES_TYPE, UPDATETIME, ISVALID, CREATETIME, IS_QUALITY, IS_DELETE, 
+    DATA_CREATE_TIME, DATA_UPDATE_TIME, HT_UNIQUE_CODE
+  </sql>
+
+  <select id="pageQuery" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" /> from
+    (SELECT t.*,ROWNUM rn FROM
+    (SELECT  <include refid="Base_Column_List" /> FROM PVN_FUND_FUTURESTYPE_MAPPING WHERE IS_DELETE = 0 ORDER BY ID ) t
+    WHERE  ROWNUM &lt;= #{endRow}) where rn > #{startRow}
+  </select>
+</mapper>

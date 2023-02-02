@@ -2,7 +2,7 @@ package cc.procon.service;
 
 import cc.procon.mapper.cog.DimensionDeriveMapper;
 import cc.procon.mapper.dw.DimDeriveJobMapper;
-import cc.procon.mapper.dw.PvnNavMapper;
+import cc.procon.mapper.dw.PvnNav2Mapper;
 import cc.procon.mapper.ods.DimDeriveMapper;
 import cc.procon.model.dto.DimDerRelationDto;
 import cc.procon.model.po.DimensionDeriveLogPo;
@@ -41,7 +41,7 @@ public class DimDeriveService {
     private DimensionDeriveMapper dimensionDeriveMapper;
 
     @Autowired
-    private PvnNavMapper pvnNavMapper;
+    private PvnNav2Mapper pvnNavMapper;
     public static final int PAGE_SIZE =3000;
 
     public void mergeInto(String tableName,String deriveId){
@@ -56,10 +56,7 @@ public class DimDeriveService {
             int startRow = i * PAGE_SIZE;
             int endRow = (i + 1) * PAGE_SIZE;
             List<PvnNav> pvnNavList = odsDimDeriveMapper.pageQuery(tableName, startRow, endRow);
-            pvnNavList.forEach(e -> {
-                e.setOldId(e.getId());
-                e.setHtUniqueCode(MD5Util.md5Encode(e.getId()));
-            });
+
             pvnNavMapper.batchInsert(pvnNavList);
 
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.ods.PvnNavMapper">
+  <resultMap id="BaseResultMap" type="cc.procon.model.po.PvnNav">
+    <!--@mbg.generated-->
+    <!--@Table PVN_NAV-->
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="FUND_ID" jdbcType="VARCHAR" property="fundId" />
+    <result column="PRICE_DATE" jdbcType="TIMESTAMP" property="priceDate" />
+    <result column="NAV" jdbcType="DECIMAL" property="nav" />
+    <result column="CUMULATIVE_NAV" jdbcType="DECIMAL" property="cumulativeNav" />
+    <result column="CUMULATIVE_NAV_WITHDRAWAL" jdbcType="DECIMAL" property="cumulativeNavWithdrawal" />
+    <result column="ISHIGH_OR_LOW" jdbcType="DECIMAL" property="ishighOrLow" />
+    <result column="TOHIGH_NAV_RATIO" jdbcType="DECIMAL" property="tohighNavRatio" />
+    <result column="CREATORID" jdbcType="DECIMAL" property="creatorid" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="UPDATERID" jdbcType="DECIMAL" property="updaterid" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="ISVALID" jdbcType="DECIMAL" property="isvalid" />
+    <result column="IS_QUALITY" jdbcType="DECIMAL" property="isQuality" />
+    <result column="IS_DELETE" jdbcType="DECIMAL" property="isDelete" />
+    <result column="DATA_CREATE_TIME" jdbcType="DECIMAL" property="dataCreateTime" />
+    <result column="DATA_UPDATE_TIME" jdbcType="DECIMAL" property="dataUpdateTime" />
+    <result column="HT_UNIQUE_CODE" jdbcType="VARCHAR" property="htUniqueCode" />
+    <result column="NAV_SOURCE" jdbcType="DECIMAL" property="navSource" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, FUND_ID, PRICE_DATE, NAV, CUMULATIVE_NAV, CUMULATIVE_NAV_WITHDRAWAL, ISHIGH_OR_LOW, 
+    TOHIGH_NAV_RATIO, CREATORID, CREATETIME, UPDATERID, UPDATETIME, ISVALID, IS_QUALITY, 
+    IS_DELETE, DATA_CREATE_TIME, DATA_UPDATE_TIME, HT_UNIQUE_CODE, NAV_SOURCE
+  </sql>
+
+
+  <select id="pageQuery" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" /> from
+    (SELECT t.*,ROWNUM rn FROM
+    (SELECT  <include refid="Base_Column_List" /> FROM PVN_NAV WHERE IS_DELETE = 0 ORDER BY ID ) t
+    WHERE  ROWNUM &lt;= #{endRow}) where rn > #{startRow}
+  </select>
+
+</mapper>

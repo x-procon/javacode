@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.ods.PvnFundRiskStatsMapper">
+  <resultMap id="BaseResultMap" type="cc.procon.model.po.PvnFundRiskStats">
+    <!--@mbg.generated-->
+    <!--@Table PVN_FUND_RISK_STATS-->
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="FUND_ID" jdbcType="VARCHAR" property="fundId" />
+    <result column="END_DATE" jdbcType="VARCHAR" property="endDate" />
+    <result column="STDDEV_1Y" jdbcType="DECIMAL" property="stddev1y" />
+    <result column="STDDEV_2Y" jdbcType="DECIMAL" property="stddev2y" />
+    <result column="STDDEV_3Y" jdbcType="DECIMAL" property="stddev3y" />
+    <result column="STDDEV_4Y" jdbcType="DECIMAL" property="stddev4y" />
+    <result column="STDDEV_5Y" jdbcType="DECIMAL" property="stddev5y" />
+    <result column="STDDEV_10Y" jdbcType="DECIMAL" property="stddev10y" />
+    <result column="STDDEV_INCEP" jdbcType="DECIMAL" property="stddevIncep" />
+    <result column="DOWNSIDEDEV_1Y" jdbcType="DECIMAL" property="downsidedev1y" />
+    <result column="DOWNSIDEDEV_2Y" jdbcType="DECIMAL" property="downsidedev2y" />
+    <result column="DOWNSIDEDEV_3Y" jdbcType="DECIMAL" property="downsidedev3y" />
+    <result column="DOWNSIDEDEV_4Y" jdbcType="DECIMAL" property="downsidedev4y" />
+    <result column="DOWNSIDEDEV_5Y" jdbcType="DECIMAL" property="downsidedev5y" />
+    <result column="DOWNSIDEDEV_10Y" jdbcType="DECIMAL" property="downsidedev10y" />
+    <result column="DOWNSIDEDEV_INCEP" jdbcType="DECIMAL" property="downsidedevIncep" />
+    <result column="ALPHA_1Y" jdbcType="DECIMAL" property="alpha1y" />
+    <result column="ALPHA_2Y" jdbcType="DECIMAL" property="alpha2y" />
+    <result column="ALPHA_3Y" jdbcType="DECIMAL" property="alpha3y" />
+    <result column="ALPHA_4Y" jdbcType="DECIMAL" property="alpha4y" />
+    <result column="ALPHA_5Y" jdbcType="DECIMAL" property="alpha5y" />
+    <result column="ALPHA_10Y" jdbcType="DECIMAL" property="alpha10y" />
+    <result column="ALPHA_INCEP" jdbcType="DECIMAL" property="alphaIncep" />
+    <result column="BETA_1Y" jdbcType="DECIMAL" property="beta1y" />
+    <result column="BETA_2Y" jdbcType="DECIMAL" property="beta2y" />
+    <result column="BETA_3Y" jdbcType="DECIMAL" property="beta3y" />
+    <result column="BETA_4Y" jdbcType="DECIMAL" property="beta4y" />
+    <result column="BETA_5Y" jdbcType="DECIMAL" property="beta5y" />
+    <result column="BETA_10Y" jdbcType="DECIMAL" property="beta10y" />
+    <result column="BETA_INCEP" jdbcType="DECIMAL" property="betaIncep" />
+    <result column="R2_1Y" jdbcType="DECIMAL" property="r21y" />
+    <result column="R2_2Y" jdbcType="DECIMAL" property="r22y" />
+    <result column="R2_3Y" jdbcType="DECIMAL" property="r23y" />
+    <result column="R2_4Y" jdbcType="DECIMAL" property="r24y" />
+    <result column="R2_5Y" jdbcType="DECIMAL" property="r25y" />
+    <result column="R2_10Y" jdbcType="DECIMAL" property="r210y" />
+    <result column="R2_INCEP" jdbcType="DECIMAL" property="r2Incep" />
+    <result column="SKEWNESS_1Y" jdbcType="DECIMAL" property="skewness1y" />
+    <result column="SKEWNESS_2Y" jdbcType="DECIMAL" property="skewness2y" />
+    <result column="SKEWNESS_3Y" jdbcType="DECIMAL" property="skewness3y" />
+    <result column="SKEWNESS_4Y" jdbcType="DECIMAL" property="skewness4y" />
+    <result column="SKEWNESS_5Y" jdbcType="DECIMAL" property="skewness5y" />
+    <result column="SKEWNESS_10Y" jdbcType="DECIMAL" property="skewness10y" />
+    <result column="SKEWNESS_INCEP" jdbcType="DECIMAL" property="skewnessIncep" />
+    <result column="KURTOSIS_1Y" jdbcType="DECIMAL" property="kurtosis1y" />
+    <result column="KURTOSIS_2Y" jdbcType="DECIMAL" property="kurtosis2y" />
+    <result column="KURTOSIS_3Y" jdbcType="DECIMAL" property="kurtosis3y" />
+    <result column="KURTOSIS_4Y" jdbcType="DECIMAL" property="kurtosis4y" />
+    <result column="KURTOSIS_5Y" jdbcType="DECIMAL" property="kurtosis5y" />
+    <result column="KURTOSIS_10Y" jdbcType="DECIMAL" property="kurtosis10y" />
+    <result column="KURTOSIS_INCEP" jdbcType="DECIMAL" property="kurtosisIncep" />
+    <result column="WORSTMONTH_1Y" jdbcType="DECIMAL" property="worstmonth1y" />
+    <result column="WORSTMONTH_2Y" jdbcType="DECIMAL" property="worstmonth2y" />
+    <result column="WORSTMONTH_3Y" jdbcType="DECIMAL" property="worstmonth3y" />
+    <result column="WORSTMONTH_4Y" jdbcType="DECIMAL" property="worstmonth4y" />
+    <result column="WORSTMONTH_5Y" jdbcType="DECIMAL" property="worstmonth5y" />
+    <result column="WORSTMONTH_10Y" jdbcType="DECIMAL" property="worstmonth10y" />
+    <result column="WORSTMONTH_INCEP" jdbcType="DECIMAL" property="worstmonthIncep" />
+    <result column="DOWNMONTH_PERCENT_1Y" jdbcType="DECIMAL" property="downmonthPercent1y" />
+    <result column="DOWNMONTH_PERCENT_2Y" jdbcType="DECIMAL" property="downmonthPercent2y" />
+    <result column="DOWNMONTH_PERCENT_3Y" jdbcType="DECIMAL" property="downmonthPercent3y" />
+    <result column="DOWNMONTH_PERCENT_4Y" jdbcType="DECIMAL" property="downmonthPercent4y" />
+    <result column="DOWNMONTH_PERCENT_5Y" jdbcType="DECIMAL" property="downmonthPercent5y" />
+    <result column="DOWNMONTH_PERCENT_10Y" jdbcType="DECIMAL" property="downmonthPercent10y" />
+    <result column="DOWNMONTH_PERCENT_INCEP" jdbcType="DECIMAL" property="downmonthPercentIncep" />
+    <result column="BATTINGAVERAGE_1Y" jdbcType="DECIMAL" property="battingaverage1y" />
+    <result column="BATTINGAVERAGE_2Y" jdbcType="DECIMAL" property="battingaverage2y" />
+    <result column="BATTINGAVERAGE_3Y" jdbcType="DECIMAL" property="battingaverage3y" />
+    <result column="BATTINGAVERAGE_4Y" jdbcType="DECIMAL" property="battingaverage4y" />
+    <result column="BATTINGAVERAGE_5Y" jdbcType="DECIMAL" property="battingaverage5y" />
+    <result column="BATTINGAVERAGE_10Y" jdbcType="DECIMAL" property="battingaverage10y" />
+    <result column="BATTINGAVERAGE_INCEP" jdbcType="DECIMAL" property="battingaverageIncep" />
+    <result column="GAINLOSS_RATIO_1Y" jdbcType="DECIMAL" property="gainlossRatio1y" />
+    <result column="GAINLOSS_RATIO_2Y" jdbcType="DECIMAL" property="gainlossRatio2y" />
+    <result column="GAINLOSS_RATIO_3Y" jdbcType="DECIMAL" property="gainlossRatio3y" />
+    <result column="GAINLOSS_RATIO_4Y" jdbcType="DECIMAL" property="gainlossRatio4y" />
+    <result column="GAINLOSS_RATIO_5Y" jdbcType="DECIMAL" property="gainlossRatio5y" />
+    <result column="GAINLOSS_RATIO_10Y" jdbcType="DECIMAL" property="gainlossRatio10y" />
+    <result column="GAINLOSS_RATIO_INCEP" jdbcType="DECIMAL" property="gainlossRatioIncep" />
+    <result column="LD_MONTHS_1Y" jdbcType="DECIMAL" property="ldMonths1y" />
+    <result column="LD_MONTHS_2Y" jdbcType="DECIMAL" property="ldMonths2y" />
+    <result column="LD_MONTHS_3Y" jdbcType="DECIMAL" property="ldMonths3y" />
+    <result column="LD_MONTHS_4Y" jdbcType="DECIMAL" property="ldMonths4y" />
+    <result column="LD_MONTHS_5Y" jdbcType="DECIMAL" property="ldMonths5y" />
+    <result column="LD_MONTHS_10Y" jdbcType="DECIMAL" property="ldMonths10y" />
+    <result column="LD_MONTHS_INCEP" jdbcType="DECIMAL" property="ldMonthsIncep" />
+    <result column="YTD_MAXDRAWDOWN" jdbcType="DECIMAL" property="ytdMaxdrawdown" />
+    <result column="M_MAXDRAWDOWN" jdbcType="DECIMAL" property="mMaxdrawdown" />
+    <result column="MAXDRAWDOWN_1Y" jdbcType="DECIMAL" property="maxdrawdown1y" />
+    <result column="MAXDRAWDOWN_MONTHS_1Y" jdbcType="DECIMAL" property="maxdrawdownMonths1y" />
+    <result column="MAXDRAWDOWN_PEAKDATE_1Y" jdbcType="VARCHAR" property="maxdrawdownPeakdate1y" />
+    <result column="MD_VALLEYDATE_1Y" jdbcType="VARCHAR" property="mdValleydate1y" />
+    <result column="MD_DATE_1Y" jdbcType="VARCHAR" property="mdDate1y" />
+    <result column="MD_MONTHS_1Y" jdbcType="DECIMAL" property="mdMonths1y" />
+    <result column="MAXDRAWDOWN_2Y" jdbcType="DECIMAL" property="maxdrawdown2y" />
+    <result column="MAXDRAWDOWN_MONTHS_2Y" jdbcType="DECIMAL" property="maxdrawdownMonths2y" />
+    <result column="MAXDRAWDOWN_PEAKDATE_2Y" jdbcType="VARCHAR" property="maxdrawdownPeakdate2y" />
+    <result column="MD_VALLEYDATE_2Y" jdbcType="VARCHAR" property="mdValleydate2y" />
+    <result column="MD_DATE_2Y" jdbcType="VARCHAR" property="mdDate2y" />
+    <result column="MD_MONTHS_2Y" jdbcType="DECIMAL" property="mdMonths2y" />
+    <result column="MAXDRAWDOWN_3Y" jdbcType="DECIMAL" property="maxdrawdown3y" />
+    <result column="MAXDRAWDOWN_MONTHS_3Y" jdbcType="DECIMAL" property="maxdrawdownMonths3y" />
+    <result column="MAXDRAWDOWN_PEAKDATE_3Y" jdbcType="VARCHAR" property="maxdrawdownPeakdate3y" />
+    <result column="MD_VALLEYDATE_3Y" jdbcType="VARCHAR" property="mdValleydate3y" />
+    <result column="MD_DATE_3Y" jdbcType="VARCHAR" property="mdDate3y" />
+    <result column="MD_MONTHS_3Y" jdbcType="DECIMAL" property="mdMonths3y" />
+    <result column="MAXDRAWDOWN_INCEP" jdbcType="DECIMAL" property="maxdrawdownIncep" />
+    <result column="MAXDRAWDOWN_MONTHS_INCEP" jdbcType="DECIMAL" property="maxdrawdownMonthsIncep" />
+    <result column="MAXDRAWDOWN_PEAKDATE_INCEP" jdbcType="VARCHAR" property="maxdrawdownPeakdateIncep" />
+    <result column="MD_VALLEYDATE_INCEP" jdbcType="VARCHAR" property="mdValleydateIncep" />
+    <result column="MD_DATE_INCEP" jdbcType="VARCHAR" property="mdDateIncep" />
+    <result column="MD_MONTHS_INCEP" jdbcType="DECIMAL" property="mdMonthsIncep" />
+    <result column="MAXDRAWDOWN_4Y" jdbcType="DECIMAL" property="maxdrawdown4y" />
+    <result column="MAXDRAWDOWN_MONTHS_4Y" jdbcType="DECIMAL" property="maxdrawdownMonths4y" />
+    <result column="MAXDRAWDOWN_PEAKDATE_4Y" jdbcType="VARCHAR" property="maxdrawdownPeakdate4y" />
+    <result column="MD_VALLEYDATE_4Y" jdbcType="VARCHAR" property="mdValleydate4y" />
+    <result column="MD_DATE_4Y" jdbcType="VARCHAR" property="mdDate4y" />
+    <result column="MD_MONTHS_4Y" jdbcType="DECIMAL" property="mdMonths4y" />
+    <result column="MAXDRAWDOWN_5Y" jdbcType="DECIMAL" property="maxdrawdown5y" />
+    <result column="MAXDRAWDOWN_MONTHS_5Y" jdbcType="DECIMAL" property="maxdrawdownMonths5y" />
+    <result column="MAXDRAWDOWN_PEAKDATE_5Y" jdbcType="VARCHAR" property="maxdrawdownPeakdate5y" />
+    <result column="MD_VALLEYDATE_5Y" jdbcType="VARCHAR" property="mdValleydate5y" />
+    <result column="MD_DATE_5Y" jdbcType="VARCHAR" property="mdDate5y" />
+    <result column="MD_MONTHS_5Y" jdbcType="DECIMAL" property="mdMonths5y" />
+    <result column="MAXDRAWDOWN_10Y" jdbcType="DECIMAL" property="maxdrawdown10y" />
+    <result column="MAXDRAWDOWN_MONTHS_10Y" jdbcType="DECIMAL" property="maxdrawdownMonths10y" />
+    <result column="MAXDRAWDOWN_PEAKDATE_10Y" jdbcType="VARCHAR" property="maxdrawdownPeakdate10y" />
+    <result column="MD_VALLEYDATE_10Y" jdbcType="VARCHAR" property="mdValleydate10y" />
+    <result column="MD_DATE_10Y" jdbcType="VARCHAR" property="mdDate10y" />
+    <result column="MD_MONTHS_10Y" jdbcType="DECIMAL" property="mdMonths10y" />
+    <result column="ISVALID" jdbcType="DECIMAL" property="isvalid" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="CREATORID" jdbcType="DECIMAL" property="creatorid" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="UPDATERID" jdbcType="DECIMAL" property="updaterid" />
+    <result column="WINRATE_YTD" jdbcType="DECIMAL" property="winrateYtd" />
+    <result column="WINRATE_6M" jdbcType="DECIMAL" property="winrate6m" />
+    <result column="WINRATE_1Y" jdbcType="DECIMAL" property="winrate1y" />
+    <result column="WINRATE_2Y" jdbcType="DECIMAL" property="winrate2y" />
+    <result column="WINRATE_3Y" jdbcType="DECIMAL" property="winrate3y" />
+    <result column="WINRATE_4Y" jdbcType="DECIMAL" property="winrate4y" />
+    <result column="WINRATE_5Y" jdbcType="DECIMAL" property="winrate5y" />
+    <result column="WINRATE_10Y" jdbcType="DECIMAL" property="winrate10y" />
+    <result column="WINRATE_INCEP" jdbcType="DECIMAL" property="winrateIncep" />
+    <result column="IS_QUALITY" jdbcType="DECIMAL" property="isQuality" />
+    <result column="IS_DELETE" jdbcType="DECIMAL" property="isDelete" />
+    <result column="DATA_CREATE_TIME" jdbcType="DECIMAL" property="dataCreateTime" />
+    <result column="DATA_UPDATE_TIME" jdbcType="DECIMAL" property="dataUpdateTime" />
+    <result column="HT_UNIQUE_CODE" jdbcType="VARCHAR" property="htUniqueCode" />
+    <result column="ALPHA_YTD" jdbcType="DECIMAL" property="alphaYtd" />
+    <result column="BETA_6M" jdbcType="DECIMAL" property="beta6m" />
+    <result column="BETA_YTD" jdbcType="DECIMAL" property="betaYtd" />
+    <result column="DOWNSIDEDEV_YTD" jdbcType="DECIMAL" property="downsidedevYtd" />
+    <result column="KURTOSIS_YTD" jdbcType="DECIMAL" property="kurtosisYtd" />
+    <result column="LONGESTDOWN_MONTHS_10Y" jdbcType="DECIMAL" property="longestdownMonths10y" />
+    <result column="LONGESTDOWN_MONTHS_1Y" jdbcType="DECIMAL" property="longestdownMonths1y" />
+    <result column="LONGESTDOWN_MONTHS_2Y" jdbcType="DECIMAL" property="longestdownMonths2y" />
+    <result column="LONGESTDOWN_MONTHS_3Y" jdbcType="DECIMAL" property="longestdownMonths3y" />
+    <result column="LONGESTDOWN_MONTHS_4Y" jdbcType="DECIMAL" property="longestdownMonths4y" />
+    <result column="LONGESTDOWN_MONTHS_5Y" jdbcType="DECIMAL" property="longestdownMonths5y" />
+    <result column="LONGESTDOWN_MONTHS_INCEP" jdbcType="DECIMAL" property="longestdownMonthsIncep" />
+    <result column="LONGESTDOWN_MONTHS_YTD" jdbcType="DECIMAL" property="longestdownMonthsYtd" />
+    <result column="MAXDRAWDOWN_1M" jdbcType="DECIMAL" property="maxdrawdown1m" />
+    <result column="MAXDRAWDOWN_3M" jdbcType="DECIMAL" property="maxdrawdown3m" />
+    <result column="MAXDRAWDOWN_6M" jdbcType="DECIMAL" property="maxdrawdown6m" />
+    <result column="MAXDRAWDOWN_MONTHS_6M" jdbcType="DECIMAL" property="maxdrawdownMonths6m" />
+    <result column="MAXDRAWDOWN_MONTHS_YTD" jdbcType="DECIMAL" property="maxdrawdownMonthsYtd" />
+    <result column="MAXDRAWDOWN_PEAKDATE_6M" jdbcType="TIMESTAMP" property="maxdrawdownPeakdate6m" />
+    <result column="MAXDRAWDOWN_PEAKDATE_YTD" jdbcType="TIMESTAMP" property="maxdrawdownPeakdateYtd" />
+    <result column="MAXDRAWDOWN_RECOVERYDATE_10Y" jdbcType="VARCHAR" property="maxdrawdownRecoverydate10y" />
+    <result column="MAXDRAWDOWN_RECOVERYDATE_1Y" jdbcType="VARCHAR" property="maxdrawdownRecoverydate1y" />
+    <result column="MAXDRAWDOWN_RECOVERYDATE_2Y" jdbcType="VARCHAR" property="maxdrawdownRecoverydate2y" />
+    <result column="MAXDRAWDOWN_RECOVERYDATE_3Y" jdbcType="VARCHAR" property="maxdrawdownRecoverydate3y" />
+    <result column="MAXDRAWDOWN_RECOVERYDATE_4Y" jdbcType="VARCHAR" property="maxdrawdownRecoverydate4y" />
+    <result column="MAXDRAWDOWN_RECOVERYDATE_5Y" jdbcType="VARCHAR" property="maxdrawdownRecoverydate5y" />
+    <result column="MAXDRAWDOWN_RECOVERYDATE_6M" jdbcType="VARCHAR" property="maxdrawdownRecoverydate6m" />
+    <result column="MAXDRAWDOWN_RECOVERYDATE_INCEP" jdbcType="VARCHAR" property="maxdrawdownRecoverydateIncep" />
+    <result column="MAXDRAWDOWN_RECOVERYDATE_YTD" jdbcType="VARCHAR" property="maxdrawdownRecoverydateYtd" />
+    <result column="MAXDRAWDOWN_RECOVERYMONTHS_10Y" jdbcType="DECIMAL" property="maxdrawdownRecoverymonths10y" />
+    <result column="MAXDRAWDOWN_RECOVERYMONTHS_1Y" jdbcType="DECIMAL" property="maxdrawdownRecoverymonths1y" />
+    <result column="MAXDRAWDOWN_RECOVERYMONTHS_2Y" jdbcType="DECIMAL" property="maxdrawdownRecoverymonths2y" />
+    <result column="MAXDRAWDOWN_RECOVERYMONTHS_3Y" jdbcType="DECIMAL" property="maxdrawdownRecoverymonths3y" />
+    <result column="MAXDRAWDOWN_RECOVERYMONTHS_4Y" jdbcType="DECIMAL" property="maxdrawdownRecoverymonths4y" />
+    <result column="MAXDRAWDOWN_RECOVERYMONTHS_5Y" jdbcType="DECIMAL" property="maxdrawdownRecoverymonths5y" />
+    <result column="MAXDRAWDOWN_RECOVERYMONTHS_6M" jdbcType="DECIMAL" property="maxdrawdownRecoverymonths6m" />
+    <result column="MAXDRAWDOWN_RECOVERYMONTHS_YTD" jdbcType="DECIMAL" property="maxdrawdownRecoverymonthsYtd" />
+    <result column="MAXDRAWDOWN_VALLEYDATE_10Y" jdbcType="VARCHAR" property="maxdrawdownValleydate10y" />
+    <result column="MAXDRAWDOWN_VALLEYDATE_1Y" jdbcType="VARCHAR" property="maxdrawdownValleydate1y" />
+    <result column="MAXDRAWDOWN_VALLEYDATE_2Y" jdbcType="VARCHAR" property="maxdrawdownValleydate2y" />
+    <result column="MAXDRAWDOWN_VALLEYDATE_3Y" jdbcType="VARCHAR" property="maxdrawdownValleydate3y" />
+    <result column="MAXDRAWDOWN_VALLEYDATE_4Y" jdbcType="VARCHAR" property="maxdrawdownValleydate4y" />
+    <result column="MAXDRAWDOWN_VALLEYDATE_5Y" jdbcType="VARCHAR" property="maxdrawdownValleydate5y" />
+    <result column="MAXDRAWDOWN_VALLEYDATE_6M" jdbcType="TIMESTAMP" property="maxdrawdownValleydate6m" />
+    <result column="MAXDRAWDOWN_VALLEYDATE_INCEP" jdbcType="VARCHAR" property="maxdrawdownValleydateIncep" />
+    <result column="MAXDRAWDOWN_VALLEYDATE_YTD" jdbcType="TIMESTAMP" property="maxdrawdownValleydateYtd" />
+    <result column="MAXDRAWDOWN_YTD" jdbcType="DECIMAL" property="maxdrawdownYtd" />
+    <result column="SKEWNESS_YTD" jdbcType="DECIMAL" property="skewnessYtd" />
+    <result column="STDDEV_1M" jdbcType="DECIMAL" property="stddev1m" />
+    <result column="STDDEV_3M" jdbcType="DECIMAL" property="stddev3m" />
+    <result column="STDDEV_6M" jdbcType="DECIMAL" property="stddev6m" />
+    <result column="STDDEV_YTD" jdbcType="DECIMAL" property="stddevYtd" />
+    <result column="WORSTMONTH_YTD" jdbcType="DECIMAL" property="worstmonthYtd" />
+    <result column="MAXDRAWDOWN_RECOVERY_INCEP" jdbcType="DECIMAL" property="maxdrawdownRecoveryIncep" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, FUND_ID, END_DATE, STDDEV_1Y, STDDEV_2Y, STDDEV_3Y, STDDEV_4Y, STDDEV_5Y, STDDEV_10Y, 
+    STDDEV_INCEP, DOWNSIDEDEV_1Y, DOWNSIDEDEV_2Y, DOWNSIDEDEV_3Y, DOWNSIDEDEV_4Y, DOWNSIDEDEV_5Y, 
+    DOWNSIDEDEV_10Y, DOWNSIDEDEV_INCEP, ALPHA_1Y, ALPHA_2Y, ALPHA_3Y, ALPHA_4Y, ALPHA_5Y, 
+    ALPHA_10Y, ALPHA_INCEP, BETA_1Y, BETA_2Y, BETA_3Y, BETA_4Y, BETA_5Y, BETA_10Y, BETA_INCEP, 
+    R2_1Y, R2_2Y, R2_3Y, R2_4Y, R2_5Y, R2_10Y, R2_INCEP, SKEWNESS_1Y, SKEWNESS_2Y, SKEWNESS_3Y, 
+    SKEWNESS_4Y, SKEWNESS_5Y, SKEWNESS_10Y, SKEWNESS_INCEP, KURTOSIS_1Y, KURTOSIS_2Y, 
+    KURTOSIS_3Y, KURTOSIS_4Y, KURTOSIS_5Y, KURTOSIS_10Y, KURTOSIS_INCEP, WORSTMONTH_1Y, 
+    WORSTMONTH_2Y, WORSTMONTH_3Y, WORSTMONTH_4Y, WORSTMONTH_5Y, WORSTMONTH_10Y, WORSTMONTH_INCEP, 
+    DOWNMONTH_PERCENT_1Y, DOWNMONTH_PERCENT_2Y, DOWNMONTH_PERCENT_3Y, DOWNMONTH_PERCENT_4Y, 
+    DOWNMONTH_PERCENT_5Y, DOWNMONTH_PERCENT_10Y, DOWNMONTH_PERCENT_INCEP, BATTINGAVERAGE_1Y, 
+    BATTINGAVERAGE_2Y, BATTINGAVERAGE_3Y, BATTINGAVERAGE_4Y, BATTINGAVERAGE_5Y, BATTINGAVERAGE_10Y, 
+    BATTINGAVERAGE_INCEP, GAINLOSS_RATIO_1Y, GAINLOSS_RATIO_2Y, GAINLOSS_RATIO_3Y, GAINLOSS_RATIO_4Y, 
+    GAINLOSS_RATIO_5Y, GAINLOSS_RATIO_10Y, GAINLOSS_RATIO_INCEP, LD_MONTHS_1Y, LD_MONTHS_2Y, 
+    LD_MONTHS_3Y, LD_MONTHS_4Y, LD_MONTHS_5Y, LD_MONTHS_10Y, LD_MONTHS_INCEP, YTD_MAXDRAWDOWN, 
+    M_MAXDRAWDOWN, MAXDRAWDOWN_1Y, MAXDRAWDOWN_MONTHS_1Y, MAXDRAWDOWN_PEAKDATE_1Y, MD_VALLEYDATE_1Y, 
+    MD_DATE_1Y, MD_MONTHS_1Y, MAXDRAWDOWN_2Y, MAXDRAWDOWN_MONTHS_2Y, MAXDRAWDOWN_PEAKDATE_2Y, 
+    MD_VALLEYDATE_2Y, MD_DATE_2Y, MD_MONTHS_2Y, MAXDRAWDOWN_3Y, MAXDRAWDOWN_MONTHS_3Y, 
+    MAXDRAWDOWN_PEAKDATE_3Y, MD_VALLEYDATE_3Y, MD_DATE_3Y, MD_MONTHS_3Y, MAXDRAWDOWN_INCEP, 
+    MAXDRAWDOWN_MONTHS_INCEP, MAXDRAWDOWN_PEAKDATE_INCEP, MD_VALLEYDATE_INCEP, MD_DATE_INCEP, 
+    MD_MONTHS_INCEP, MAXDRAWDOWN_4Y, MAXDRAWDOWN_MONTHS_4Y, MAXDRAWDOWN_PEAKDATE_4Y, 
+    MD_VALLEYDATE_4Y, MD_DATE_4Y, MD_MONTHS_4Y, MAXDRAWDOWN_5Y, MAXDRAWDOWN_MONTHS_5Y, 
+    MAXDRAWDOWN_PEAKDATE_5Y, MD_VALLEYDATE_5Y, MD_DATE_5Y, MD_MONTHS_5Y, MAXDRAWDOWN_10Y, 
+    MAXDRAWDOWN_MONTHS_10Y, MAXDRAWDOWN_PEAKDATE_10Y, MD_VALLEYDATE_10Y, MD_DATE_10Y, 
+    MD_MONTHS_10Y, ISVALID, CREATETIME, CREATORID, UPDATETIME, UPDATERID, WINRATE_YTD, 
+    WINRATE_6M, WINRATE_1Y, WINRATE_2Y, WINRATE_3Y, WINRATE_4Y, WINRATE_5Y, WINRATE_10Y, 
+    WINRATE_INCEP, IS_QUALITY, IS_DELETE, DATA_CREATE_TIME, DATA_UPDATE_TIME, HT_UNIQUE_CODE, 
+    ALPHA_YTD, BETA_6M, BETA_YTD, DOWNSIDEDEV_YTD, KURTOSIS_YTD, LONGESTDOWN_MONTHS_10Y, 
+    LONGESTDOWN_MONTHS_1Y, LONGESTDOWN_MONTHS_2Y, LONGESTDOWN_MONTHS_3Y, LONGESTDOWN_MONTHS_4Y, 
+    LONGESTDOWN_MONTHS_5Y, LONGESTDOWN_MONTHS_INCEP, LONGESTDOWN_MONTHS_YTD, MAXDRAWDOWN_1M, 
+    MAXDRAWDOWN_3M, MAXDRAWDOWN_6M, MAXDRAWDOWN_MONTHS_6M, MAXDRAWDOWN_MONTHS_YTD, MAXDRAWDOWN_PEAKDATE_6M, 
+    MAXDRAWDOWN_PEAKDATE_YTD, MAXDRAWDOWN_RECOVERYDATE_10Y, MAXDRAWDOWN_RECOVERYDATE_1Y, 
+    MAXDRAWDOWN_RECOVERYDATE_2Y, MAXDRAWDOWN_RECOVERYDATE_3Y, MAXDRAWDOWN_RECOVERYDATE_4Y, 
+    MAXDRAWDOWN_RECOVERYDATE_5Y, MAXDRAWDOWN_RECOVERYDATE_6M, MAXDRAWDOWN_RECOVERYDATE_INCEP, 
+    MAXDRAWDOWN_RECOVERYDATE_YTD, MAXDRAWDOWN_RECOVERYMONTHS_10Y, MAXDRAWDOWN_RECOVERYMONTHS_1Y, 
+    MAXDRAWDOWN_RECOVERYMONTHS_2Y, MAXDRAWDOWN_RECOVERYMONTHS_3Y, MAXDRAWDOWN_RECOVERYMONTHS_4Y, 
+    MAXDRAWDOWN_RECOVERYMONTHS_5Y, MAXDRAWDOWN_RECOVERYMONTHS_6M, MAXDRAWDOWN_RECOVERYMONTHS_YTD, 
+    MAXDRAWDOWN_VALLEYDATE_10Y, MAXDRAWDOWN_VALLEYDATE_1Y, MAXDRAWDOWN_VALLEYDATE_2Y, 
+    MAXDRAWDOWN_VALLEYDATE_3Y, MAXDRAWDOWN_VALLEYDATE_4Y, MAXDRAWDOWN_VALLEYDATE_5Y, 
+    MAXDRAWDOWN_VALLEYDATE_6M, MAXDRAWDOWN_VALLEYDATE_INCEP, MAXDRAWDOWN_VALLEYDATE_YTD, 
+    MAXDRAWDOWN_YTD, SKEWNESS_YTD, STDDEV_1M, STDDEV_3M, STDDEV_6M, STDDEV_YTD, WORSTMONTH_YTD, 
+    MAXDRAWDOWN_RECOVERY_INCEP
+  </sql>
+
+  <select id="pageQuery" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" /> from
+    (SELECT t.*,ROWNUM rn FROM
+    (SELECT  <include refid="Base_Column_List" /> FROM PVN_FUND_RISK_STATS WHERE IS_DELETE = 0 ORDER BY ID ) t
+    WHERE  ROWNUM &lt;= #{endRow}) where rn > #{startRow}
+  </select>
+
+</mapper>

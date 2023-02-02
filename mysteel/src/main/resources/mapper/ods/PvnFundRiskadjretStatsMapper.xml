@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.ods.PvnFundRiskadjretStatsMapper">
+  <resultMap id="BaseResultMap" type="cc.procon.model.po.PvnFundRiskadjretStats">
+    <!--@mbg.generated-->
+    <!--@Table PVN_FUND_RISKADJRET_STATS-->
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="FUND_ID" jdbcType="VARCHAR" property="fundId" />
+    <result column="END_DATE" jdbcType="VARCHAR" property="endDate" />
+    <result column="SHARPERATIO_1Y" jdbcType="DECIMAL" property="sharperatio1y" />
+    <result column="SHARPERATIO_2Y" jdbcType="DECIMAL" property="sharperatio2y" />
+    <result column="SHARPERATIO_3Y" jdbcType="DECIMAL" property="sharperatio3y" />
+    <result column="SHARPERATIO_4Y" jdbcType="DECIMAL" property="sharperatio4y" />
+    <result column="SHARPERATIO_5Y" jdbcType="DECIMAL" property="sharperatio5y" />
+    <result column="SHARPERATIO_10Y" jdbcType="DECIMAL" property="sharperatio10y" />
+    <result column="SHARPERATIO_INCEP" jdbcType="DECIMAL" property="sharperatioIncep" />
+    <result column="SORTINORATIO_1Y" jdbcType="DECIMAL" property="sortinoratio1y" />
+    <result column="SORTINORATIO_2Y" jdbcType="DECIMAL" property="sortinoratio2y" />
+    <result column="SORTINORATIO_3Y" jdbcType="DECIMAL" property="sortinoratio3y" />
+    <result column="SORTINORATIO_4Y" jdbcType="DECIMAL" property="sortinoratio4y" />
+    <result column="SORTINORATIO_5Y" jdbcType="DECIMAL" property="sortinoratio5y" />
+    <result column="SORTINORATIO_10Y" jdbcType="DECIMAL" property="sortinoratio10y" />
+    <result column="SORTINORATIO_INCEP" jdbcType="DECIMAL" property="sortinoratioIncep" />
+    <result column="SORTINORATIO_MAR_1Y" jdbcType="DECIMAL" property="sortinoratioMar1y" />
+    <result column="SORTINORATIO_MAR_2Y" jdbcType="DECIMAL" property="sortinoratioMar2y" />
+    <result column="SORTINORATIO_MAR_3Y" jdbcType="DECIMAL" property="sortinoratioMar3y" />
+    <result column="SORTINORATIO_MAR_4Y" jdbcType="DECIMAL" property="sortinoratioMar4y" />
+    <result column="SORTINORATIO_MAR_5Y" jdbcType="DECIMAL" property="sortinoratioMar5y" />
+    <result column="SORTINORATIO_MAR_10Y" jdbcType="DECIMAL" property="sortinoratioMar10y" />
+    <result column="SORTINORATIO_MAR_INCEP" jdbcType="DECIMAL" property="sortinoratioMarIncep" />
+    <result column="TREYNORRATIO_1Y" jdbcType="DECIMAL" property="treynorratio1y" />
+    <result column="TREYNORRATIO_2Y" jdbcType="DECIMAL" property="treynorratio2y" />
+    <result column="TREYNORRATIO_3Y" jdbcType="DECIMAL" property="treynorratio3y" />
+    <result column="TREYNORRATIO_4Y" jdbcType="DECIMAL" property="treynorratio4y" />
+    <result column="TREYNORRATIO_5Y" jdbcType="DECIMAL" property="treynorratio5y" />
+    <result column="TREYNORRATIO_10Y" jdbcType="DECIMAL" property="treynorratio10y" />
+    <result column="TREYNORRATIO_INCEP" jdbcType="DECIMAL" property="treynorratioIncep" />
+    <result column="JENSEN_1Y" jdbcType="DECIMAL" property="jensen1y" />
+    <result column="JENSEN_2Y" jdbcType="DECIMAL" property="jensen2y" />
+    <result column="JENSEN_3Y" jdbcType="DECIMAL" property="jensen3y" />
+    <result column="JENSEN_4Y" jdbcType="DECIMAL" property="jensen4y" />
+    <result column="JENSEN_5Y" jdbcType="DECIMAL" property="jensen5y" />
+    <result column="JENSEN_10Y" jdbcType="DECIMAL" property="jensen10y" />
+    <result column="JENSEN_INCEP" jdbcType="DECIMAL" property="jensenIncep" />
+    <result column="CALMARRATIO_1Y" jdbcType="DECIMAL" property="calmarratio1y" />
+    <result column="CALMARRATIO_2Y" jdbcType="DECIMAL" property="calmarratio2y" />
+    <result column="CALMARRATIO_3Y" jdbcType="DECIMAL" property="calmarratio3y" />
+    <result column="CALMARRATIO_4Y" jdbcType="DECIMAL" property="calmarratio4y" />
+    <result column="CALMARRATIO_5Y" jdbcType="DECIMAL" property="calmarratio5y" />
+    <result column="CALMARRATIO_10Y" jdbcType="DECIMAL" property="calmarratio10y" />
+    <result column="CALMARRATIO_INCEP" jdbcType="DECIMAL" property="calmarratioIncep" />
+    <result column="OMEGARATIO_1Y" jdbcType="DECIMAL" property="omegaratio1y" />
+    <result column="OMEGARATIO_2Y" jdbcType="DECIMAL" property="omegaratio2y" />
+    <result column="OMEGARATIO_3Y" jdbcType="DECIMAL" property="omegaratio3y" />
+    <result column="OMEGARATIO_4Y" jdbcType="DECIMAL" property="omegaratio4y" />
+    <result column="OMEGARATIO_5Y" jdbcType="DECIMAL" property="omegaratio5y" />
+    <result column="OMEGARATIO_10Y" jdbcType="DECIMAL" property="omegaratio10y" />
+    <result column="OMEGARATIO_INCEP" jdbcType="DECIMAL" property="omegaratioIncep" />
+    <result column="KAPPARATIO_1Y" jdbcType="DECIMAL" property="kapparatio1y" />
+    <result column="KAPPARATIO_2Y" jdbcType="DECIMAL" property="kapparatio2y" />
+    <result column="KAPPARATIO_3Y" jdbcType="DECIMAL" property="kapparatio3y" />
+    <result column="KAPPARATIO_4Y" jdbcType="DECIMAL" property="kapparatio4y" />
+    <result column="KAPPARATIO_5Y" jdbcType="DECIMAL" property="kapparatio5y" />
+    <result column="KAPPARATIO_10Y" jdbcType="DECIMAL" property="kapparatio10y" />
+    <result column="KAPPARATIO_INCEP" jdbcType="DECIMAL" property="kapparatioIncep" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="ISVALID" jdbcType="DECIMAL" property="isvalid" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="IS_QUALITY" jdbcType="DECIMAL" property="isQuality" />
+    <result column="IS_DELETE" jdbcType="DECIMAL" property="isDelete" />
+    <result column="DATA_CREATE_TIME" jdbcType="DECIMAL" property="dataCreateTime" />
+    <result column="DATA_UPDATE_TIME" jdbcType="DECIMAL" property="dataUpdateTime" />
+    <result column="HT_UNIQUE_CODE" jdbcType="VARCHAR" property="htUniqueCode" />
+    <result column="CALMARRATIO_YTD" jdbcType="DECIMAL" property="calmarratioYtd" />
+    <result column="JENSEN_6M" jdbcType="DECIMAL" property="jensen6m" />
+    <result column="JENSEN_YTD" jdbcType="DECIMAL" property="jensenYtd" />
+    <result column="KAPPARATIO_YTD" jdbcType="DECIMAL" property="kapparatioYtd" />
+    <result column="OMEGARATIO_YTD" jdbcType="DECIMAL" property="omegaratioYtd" />
+    <result column="SHARPERATIO_1M" jdbcType="DECIMAL" property="sharperatio1m" />
+    <result column="SHARPERATIO_3M" jdbcType="DECIMAL" property="sharperatio3m" />
+    <result column="SHARPERATIO_6M" jdbcType="DECIMAL" property="sharperatio6m" />
+    <result column="SHARPERATIO_YTD" jdbcType="DECIMAL" property="sharperatioYtd" />
+    <result column="SORTINORATIO_1M" jdbcType="DECIMAL" property="sortinoratio1m" />
+    <result column="SORTINORATIO_3M" jdbcType="DECIMAL" property="sortinoratio3m" />
+    <result column="SORTINORATIO_6M" jdbcType="DECIMAL" property="sortinoratio6m" />
+    <result column="SORTINORATIO_MAR_YTD" jdbcType="DECIMAL" property="sortinoratioMarYtd" />
+    <result column="SORTINORATIO_YTD" jdbcType="DECIMAL" property="sortinoratioYtd" />
+    <result column="TREYNORRATIO_1M" jdbcType="DECIMAL" property="treynorratio1m" />
+    <result column="TREYNORRATIO_3M" jdbcType="DECIMAL" property="treynorratio3m" />
+    <result column="TREYNORRATIO_6M" jdbcType="DECIMAL" property="treynorratio6m" />
+    <result column="TREYNORRATIO_YTD" jdbcType="DECIMAL" property="treynorratioYtd" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, FUND_ID, END_DATE, SHARPERATIO_1Y, SHARPERATIO_2Y, SHARPERATIO_3Y, SHARPERATIO_4Y, 
+    SHARPERATIO_5Y, SHARPERATIO_10Y, SHARPERATIO_INCEP, SORTINORATIO_1Y, SORTINORATIO_2Y, 
+    SORTINORATIO_3Y, SORTINORATIO_4Y, SORTINORATIO_5Y, SORTINORATIO_10Y, SORTINORATIO_INCEP, 
+    SORTINORATIO_MAR_1Y, SORTINORATIO_MAR_2Y, SORTINORATIO_MAR_3Y, SORTINORATIO_MAR_4Y, 
+    SORTINORATIO_MAR_5Y, SORTINORATIO_MAR_10Y, SORTINORATIO_MAR_INCEP, TREYNORRATIO_1Y, 
+    TREYNORRATIO_2Y, TREYNORRATIO_3Y, TREYNORRATIO_4Y, TREYNORRATIO_5Y, TREYNORRATIO_10Y, 
+    TREYNORRATIO_INCEP, JENSEN_1Y, JENSEN_2Y, JENSEN_3Y, JENSEN_4Y, JENSEN_5Y, JENSEN_10Y, 
+    JENSEN_INCEP, CALMARRATIO_1Y, CALMARRATIO_2Y, CALMARRATIO_3Y, CALMARRATIO_4Y, CALMARRATIO_5Y, 
+    CALMARRATIO_10Y, CALMARRATIO_INCEP, OMEGARATIO_1Y, OMEGARATIO_2Y, OMEGARATIO_3Y, 
+    OMEGARATIO_4Y, OMEGARATIO_5Y, OMEGARATIO_10Y, OMEGARATIO_INCEP, KAPPARATIO_1Y, KAPPARATIO_2Y, 
+    KAPPARATIO_3Y, KAPPARATIO_4Y, KAPPARATIO_5Y, KAPPARATIO_10Y, KAPPARATIO_INCEP, UPDATETIME, 
+    ISVALID, CREATETIME, IS_QUALITY, IS_DELETE, DATA_CREATE_TIME, DATA_UPDATE_TIME, HT_UNIQUE_CODE, 
+    CALMARRATIO_YTD, JENSEN_6M, JENSEN_YTD, KAPPARATIO_YTD, OMEGARATIO_YTD, SHARPERATIO_1M, 
+    SHARPERATIO_3M, SHARPERATIO_6M, SHARPERATIO_YTD, SORTINORATIO_1M, SORTINORATIO_3M, 
+    SORTINORATIO_6M, SORTINORATIO_MAR_YTD, SORTINORATIO_YTD, TREYNORRATIO_1M, TREYNORRATIO_3M, 
+    TREYNORRATIO_6M, TREYNORRATIO_YTD
+  </sql>
+  <select id="pageQuery" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" /> from
+    (SELECT t.*,ROWNUM rn FROM
+    (SELECT  <include refid="Base_Column_List" /> FROM PVN_FUND_RISKADJRET_STATS WHERE IS_DELETE = 0 ORDER BY ID ) t
+    WHERE  ROWNUM &lt;= #{endRow}) where rn > #{startRow}
+  </select>
+</mapper>

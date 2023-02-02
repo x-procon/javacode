@@ -86,10 +86,11 @@
     DATA_UPDATE_TIME, BUSINESS_TYPE, INTEGRITY_INFO, COMPANY_SHORT_NAME, HT_UNIQUE_CODE
   </sql>
 
+
   <select id="pageQuery" resultMap="BaseResultMap">
     SELECT  <include refid="Base_Column_List" /> from
     (SELECT t.*,ROWNUM rn FROM
-    (SELECT  <include refid="Base_Column_List" /> FROM PVN_COMPANY_INFO WHERE IS_DELETE = 0 ORDER BY COMPANY_ID ) t
+    (SELECT  <include refid="Base_Column_List" /> FROM PVN_COMPANY_INFO WHERE IS_DELETE = 0 ORDER BY COMPANY_ID) t
     WHERE  ROWNUM &lt;= #{endRow}) where rn > #{startRow}
   </select>
 

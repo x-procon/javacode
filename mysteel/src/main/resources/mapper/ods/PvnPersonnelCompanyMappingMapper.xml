@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.ods.PvnPersonnelCompanyMappingMapper">
+  <resultMap id="BaseResultMap" type="cc.procon.model.po.PvnPersonnelCompanyMapping">
+    <!--@mbg.generated-->
+    <!--@Table PVN_PERSONNEL_COMPANY_MAPPING-->
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="PERSONNEL_ID" jdbcType="VARCHAR" property="personnelId" />
+    <result column="COMPANY_ID" jdbcType="VARCHAR" property="companyId" />
+    <result column="COMPANY_ORDER" jdbcType="DECIMAL" property="companyOrder" />
+    <result column="PERSONNEL_ORDER" jdbcType="DECIMAL" property="personnelOrder" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="IS_KEYFIGURE" jdbcType="DECIMAL" property="isKeyfigure" />
+    <result column="IS_INCLUDE" jdbcType="DECIMAL" property="isInclude" />
+    <result column="IS_VISIBLE" jdbcType="DECIMAL" property="isVisible" />
+    <result column="IS_LEAVE" jdbcType="DECIMAL" property="isLeave" />
+    <result column="IS_DEFAULT" jdbcType="DECIMAL" property="isDefault" />
+    <result column="IS_SENIOR" jdbcType="DECIMAL" property="isSenior" />
+    <result column="IS_REPRESENT" jdbcType="DECIMAL" property="isRepresent" />
+    <result column="START_DATE" jdbcType="TIMESTAMP" property="startDate" />
+    <result column="END_DATE" jdbcType="TIMESTAMP" property="endDate" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="ISVALID" jdbcType="DECIMAL" property="isvalid" />
+    <result column="IS_QUALITY" jdbcType="DECIMAL" property="isQuality" />
+    <result column="IS_DELETE" jdbcType="DECIMAL" property="isDelete" />
+    <result column="DATA_CREATE_TIME" jdbcType="DECIMAL" property="dataCreateTime" />
+    <result column="DATA_UPDATE_TIME" jdbcType="DECIMAL" property="dataUpdateTime" />
+    <result column="HT_UNIQUE_CODE" jdbcType="VARCHAR" property="htUniqueCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, PERSONNEL_ID, COMPANY_ID, COMPANY_ORDER, PERSONNEL_ORDER, ADDRESS, IS_KEYFIGURE, 
+    IS_INCLUDE, IS_VISIBLE, IS_LEAVE, IS_DEFAULT, IS_SENIOR, IS_REPRESENT, START_DATE, 
+    END_DATE, CREATETIME, UPDATETIME, ISVALID, IS_QUALITY, IS_DELETE, DATA_CREATE_TIME, 
+    DATA_UPDATE_TIME, HT_UNIQUE_CODE
+  </sql>
+
+
+  <select id="pageQuery" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" /> from
+    (SELECT t.*,ROWNUM rn FROM
+    (SELECT  <include refid="Base_Column_List" /> FROM PVN_PERSONNEL_COMPANY_MAPPING WHERE IS_DELETE = 0 ORDER BY ID ) t
+    WHERE  ROWNUM &lt;= #{endRow}) where rn > #{startRow}
+  </select>
+
+</mapper>

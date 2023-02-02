@@ -8,7 +8,7 @@ import lombok.Data;
  * ${describe}
  *
  * @author procon
- * @since 2023-01-30
+ * @since 2023-01-31
  */
 @Data
 public class PvnPersonnelInfo {

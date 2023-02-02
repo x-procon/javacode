@@ -18,7 +18,7 @@ import java.util.List;
 * @since 2023-01-18
 
 */
-public interface PvnNavMapper {
+public interface PvnNav2Mapper {
     int deleteByPrimaryKey(Long id);
 
     int insert(PvnNav record);

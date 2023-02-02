@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.ods.PvnFundStrategyRanknumMapper">
+  <resultMap id="BaseResultMap" type="cc.procon.model.po.PvnFundStrategyRanknum">
+    <!--@mbg.generated-->
+    <!--@Table PVN_FUND_STRATEGY_RANKNUM-->
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="STRATEGY" jdbcType="DECIMAL" property="strategy" />
+    <result column="SUBSTRATEGY" jdbcType="DECIMAL" property="substrategy" />
+    <result column="END_DATE" jdbcType="VARCHAR" property="endDate" />
+    <result column="RANKFUNDS_1M" jdbcType="DECIMAL" property="rankfunds1m" />
+    <result column="RANKFUNDS_3M" jdbcType="DECIMAL" property="rankfunds3m" />
+    <result column="RANKFUNDS_6M" jdbcType="DECIMAL" property="rankfunds6m" />
+    <result column="RANKFUNDS_1Y" jdbcType="DECIMAL" property="rankfunds1y" />
+    <result column="RANKFUNDS_2Y" jdbcType="DECIMAL" property="rankfunds2y" />
+    <result column="RANKFUNDS_3Y" jdbcType="DECIMAL" property="rankfunds3y" />
+    <result column="RANKFUNDS_YTD" jdbcType="DECIMAL" property="rankfundsYtd" />
+    <result column="RATINGNUM_1Y" jdbcType="DECIMAL" property="ratingnum1y" />
+    <result column="RATINGNUM_2Y" jdbcType="DECIMAL" property="ratingnum2y" />
+    <result column="RATINGNUM_3Y" jdbcType="DECIMAL" property="ratingnum3y" />
+    <result column="CREATORID" jdbcType="DECIMAL" property="creatorid" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="UPDATERID" jdbcType="DECIMAL" property="updaterid" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="ISVALID" jdbcType="DECIMAL" property="isvalid" />
+    <result column="RANKFUNDS_4Y" jdbcType="DECIMAL" property="rankfunds4y" />
+    <result column="RANKFUNDS_5Y" jdbcType="DECIMAL" property="rankfunds5y" />
+    <result column="RANKFUNDS_6Y" jdbcType="DECIMAL" property="rankfunds6y" />
+    <result column="RANKFUNDS_7Y" jdbcType="DECIMAL" property="rankfunds7y" />
+    <result column="RANKFUNDS_8Y" jdbcType="DECIMAL" property="rankfunds8y" />
+    <result column="RANKFUNDS_9Y" jdbcType="DECIMAL" property="rankfunds9y" />
+    <result column="RANKFUNDS_10Y" jdbcType="DECIMAL" property="rankfunds10y" />
+    <result column="RATINGNUM_4Y" jdbcType="DECIMAL" property="ratingnum4y" />
+    <result column="RATINGNUM_5Y" jdbcType="DECIMAL" property="ratingnum5y" />
+    <result column="RATINGNUM_10Y" jdbcType="DECIMAL" property="ratingnum10y" />
+    <result column="IS_QUALITY" jdbcType="DECIMAL" property="isQuality" />
+    <result column="IS_DELETE" jdbcType="DECIMAL" property="isDelete" />
+    <result column="DATA_CREATE_TIME" jdbcType="DECIMAL" property="dataCreateTime" />
+    <result column="DATA_UPDATE_TIME" jdbcType="DECIMAL" property="dataUpdateTime" />
+    <result column="HT_UNIQUE_CODE" jdbcType="VARCHAR" property="htUniqueCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, STRATEGY, SUBSTRATEGY, END_DATE, RANKFUNDS_1M, RANKFUNDS_3M, RANKFUNDS_6M, RANKFUNDS_1Y,
+    RANKFUNDS_2Y, RANKFUNDS_3Y, RANKFUNDS_YTD, RATINGNUM_1Y, RATINGNUM_2Y, RATINGNUM_3Y,
+    CREATORID, CREATETIME, UPDATERID, UPDATETIME, ISVALID, RANKFUNDS_4Y, RANKFUNDS_5Y,
+    RANKFUNDS_6Y, RANKFUNDS_7Y, RANKFUNDS_8Y, RANKFUNDS_9Y, RANKFUNDS_10Y, RATINGNUM_4Y,
+    RATINGNUM_5Y, RATINGNUM_10Y, IS_QUALITY, IS_DELETE, DATA_CREATE_TIME, DATA_UPDATE_TIME,
+    HT_UNIQUE_CODE
+  </sql>
+  <select id="pageQuery" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" /> from
+    (SELECT t.*,ROWNUM rn FROM
+    (SELECT  <include refid="Base_Column_List" /> FROM PVN_FUND_STRATEGY_RANKNUM WHERE IS_DELETE = 0 ORDER BY ID ) t
+    WHERE  ROWNUM &lt;= #{endRow}) where rn > #{startRow}
+  </select>
+
+
+</mapper>

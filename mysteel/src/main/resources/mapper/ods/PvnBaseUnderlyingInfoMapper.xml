@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.ods.PvnBaseUnderlyingInfoMapper">
+  <resultMap id="BaseResultMap" type="cc.procon.model.po.PvnBaseUnderlyingInfo">
+    <!--@mbg.generated-->
+    <!--@Table PVN_BASE_UNDERLYING_INFO-->
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="UNI_CODE" jdbcType="VARCHAR" property="uniCode" />
+    <result column="UNDERLYING_CODE" jdbcType="VARCHAR" property="underlyingCode" />
+    <result column="UNDERLYING_LAST" jdbcType="VARCHAR" property="underlyingLast" />
+    <result column="UNDERLYING_NAME" jdbcType="VARCHAR" property="underlyingName" />
+    <result column="SEC_TYPE" jdbcType="DECIMAL" property="secType" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="ISVALID" jdbcType="DECIMAL" property="isvalid" />
+    <result column="IS_QUALITY" jdbcType="DECIMAL" property="isQuality" />
+    <result column="IS_DELETE" jdbcType="DECIMAL" property="isDelete" />
+    <result column="DATA_CREATE_TIME" jdbcType="DECIMAL" property="dataCreateTime" />
+    <result column="DATA_UPDATE_TIME" jdbcType="DECIMAL" property="dataUpdateTime" />
+    <result column="HT_UNIQUE_CODE" jdbcType="VARCHAR" property="htUniqueCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, UNI_CODE, UNDERLYING_CODE, UNDERLYING_LAST, UNDERLYING_NAME, SEC_TYPE, CREATETIME, 
+    UPDATETIME, ISVALID, IS_QUALITY, IS_DELETE, DATA_CREATE_TIME, DATA_UPDATE_TIME, HT_UNIQUE_CODE
+  </sql>
+
+  <select id="pageQuery" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" /> from
+    (SELECT t.*,ROWNUM rn FROM
+    (SELECT  <include refid="Base_Column_List" /> FROM PVN_BASE_UNDERLYING_INFO WHERE IS_DELETE = 0 ORDER BY ID ) t
+    WHERE  ROWNUM &lt;= #{endRow}) where rn > #{startRow}
+  </select>
+
+</mapper>

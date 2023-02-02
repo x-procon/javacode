@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.ods.PvnFundInfoMapper">
+  <resultMap id="BaseResultMap" type="cc.procon.model.po.PvnFundInfo">
+    <!--@mbg.generated-->
+    <!--@Table PVN_FUND_INFO-->
+    <id column="ID" jdbcType="DECIMAL" property="id" />
+    <result column="P_FUND_ID" jdbcType="VARCHAR" property="pFundId" />
+    <result column="FUND_ID" jdbcType="VARCHAR" property="fundId" />
+    <result column="FUND_NAME" jdbcType="VARCHAR" property="fundName" />
+    <result column="FUND_STRUCTURE" jdbcType="DECIMAL" property="fundStructure" />
+    <result column="FUND_TYPE" jdbcType="DECIMAL" property="fundType" />
+    <result column="RAISE_TYPE" jdbcType="DECIMAL" property="raiseType" />
+    <result column="FUND_CHARACTERISTIC" jdbcType="CLOB" property="fundCharacteristic" />
+    <result column="BASE_CURRENCY" jdbcType="DECIMAL" property="baseCurrency" />
+    <result column="INCEPTION_DATE" jdbcType="TIMESTAMP" property="inceptionDate" />
+    <result column="DOMICILE" jdbcType="DECIMAL" property="domicile" />
+    <result column="PRIMARY_BENCHMARK_ID" jdbcType="VARCHAR" property="primaryBenchmarkId" />
+    <result column="LOCKUP_PERIOD" jdbcType="DECIMAL" property="lockupPeriod" />
+    <result column="DURATION" jdbcType="DECIMAL" property="duration" />
+    <result column="INVESTMENT_SCOPE" jdbcType="CLOB" property="investmentScope" />
+    <result column="INVESTMENT_RESTRICTION" jdbcType="CLOB" property="investmentRestriction" />
+    <result column="FUND_INVESTMENT_PHILOSOPHY" jdbcType="CLOB" property="fundInvestmentPhilosophy" />
+    <result column="FUND_STRATEGY_DESCRIPTION" jdbcType="CLOB" property="fundStrategyDescription" />
+    <result column="ADVISOR_ID" jdbcType="VARCHAR" property="advisorId" />
+    <result column="BROKER_ID" jdbcType="VARCHAR" property="brokerId" />
+    <result column="BROKER_FUTURE_ID" jdbcType="VARCHAR" property="brokerFutureId" />
+    <result column="LIQUIDATION_AGENCY_ID" jdbcType="VARCHAR" property="liquidationAgencyId" />
+    <result column="TRUST_ID" jdbcType="VARCHAR" property="trustId" />
+    <result column="INVESTMENT_CONSULTANT_ID" jdbcType="VARCHAR" property="investmentConsultantId" />
+    <result column="ADMINISTRATOR_ID" jdbcType="VARCHAR" property="administratorId" />
+    <result column="LEGAL_COUNSEL_ID" jdbcType="VARCHAR" property="legalCounselId" />
+    <result column="AUDITOR_ID" jdbcType="VARCHAR" property="auditorId" />
+    <result column="NAV_FREQUENCY" jdbcType="VARCHAR" property="navFrequency" />
+    <result column="PERFORMANCE_DISCLOSURE_MARK" jdbcType="DECIMAL" property="performanceDisclosureMark" />
+    <result column="ISVALID" jdbcType="DECIMAL" property="isvalid" />
+    <result column="REGISTER_NUMBER" jdbcType="VARCHAR" property="registerNumber" />
+    <result column="REGISTER_DATE" jdbcType="TIMESTAMP" property="registerDate" />
+    <result column="ISVISIBLE" jdbcType="DECIMAL" property="isvisible" />
+    <result column="ISTIERED" jdbcType="DECIMAL" property="istiered" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="IS_RANKING" jdbcType="DECIMAL" property="isRanking" />
+    <result column="IS_RATING" jdbcType="DECIMAL" property="isRating" />
+    <result column="NAV_SOURCE_TYPE" jdbcType="DECIMAL" property="navSourceType" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="IS_FEE_BEFORE" jdbcType="DECIMAL" property="isFeeBefore" />
+    <result column="IS_DEDUCT_REWARD" jdbcType="DECIMAL" property="isDeductReward" />
+    <result column="TRUST_REGISTER_NUMBER" jdbcType="VARCHAR" property="trustRegisterNumber" />
+    <result column="IS_QUALITY" jdbcType="DECIMAL" property="isQuality" />
+    <result column="IS_DELETE" jdbcType="DECIMAL" property="isDelete" />
+    <result column="DATA_CREATE_TIME" jdbcType="DECIMAL" property="dataCreateTime" />
+    <result column="DATA_UPDATE_TIME" jdbcType="DECIMAL" property="dataUpdateTime" />
+    <result column="ISSUER_ID" jdbcType="VARCHAR" property="issuerId" />
+    <result column="FUND_SHORT_NAME" jdbcType="VARCHAR" property="fundShortName" />
+    <result column="SPECIAL_TIPS" jdbcType="VARCHAR" property="specialTips" />
+    <result column="AMAC_URL" jdbcType="VARCHAR" property="amacUrl" />
+    <result column="CUSTODIAN_ID" jdbcType="VARCHAR" property="custodianId" />
+    <result column="OPEN_DAY" jdbcType="CLOB" property="openDay" />
+    <result column="HT_UNIQUE_CODE" jdbcType="VARCHAR" property="htUniqueCode" />
+    <result column="FUND_PORTFOLIO" jdbcType="VARCHAR" property="fundPortfolio" />
+    <result column="INITIAL_UNIT_VALUE" jdbcType="DECIMAL" property="initialUnitValue" />
+    <result column="INVESTMENT_OBJECTIVE" jdbcType="VARCHAR" property="investmentObjective" />
+    <result column="LOCKUP_PERIOD_UNIT" jdbcType="DECIMAL" property="lockupPeriodUnit" />
+    <result column="LOCK_PERIOD" jdbcType="DECIMAL" property="lockPeriod" />
+    <result column="LOCK_PERIOD_UNIT" jdbcType="DECIMAL" property="lockPeriodUnit" />
+    <result column="MANAGER_TYPE" jdbcType="DECIMAL" property="managerType" />
+    <result column="PERFORMANCE_DISCLOSURE_TYPE" jdbcType="DECIMAL" property="performanceDisclosureType" />
+    <result column="REDEMPTION_DAY" jdbcType="VARCHAR" property="redemptionDay" />
+    <result column="SECONDARY_BENCHMARK" jdbcType="VARCHAR" property="secondaryBenchmark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    ID, P_FUND_ID, FUND_ID, FUND_NAME, FUND_STRUCTURE, FUND_TYPE, RAISE_TYPE, FUND_CHARACTERISTIC, 
+    BASE_CURRENCY, INCEPTION_DATE, DOMICILE, PRIMARY_BENCHMARK_ID, LOCKUP_PERIOD, DURATION, 
+    INVESTMENT_SCOPE, INVESTMENT_RESTRICTION, FUND_INVESTMENT_PHILOSOPHY, FUND_STRATEGY_DESCRIPTION, 
+    ADVISOR_ID, BROKER_ID, BROKER_FUTURE_ID, LIQUIDATION_AGENCY_ID, TRUST_ID, INVESTMENT_CONSULTANT_ID, 
+    ADMINISTRATOR_ID, LEGAL_COUNSEL_ID, AUDITOR_ID, NAV_FREQUENCY, PERFORMANCE_DISCLOSURE_MARK, 
+    ISVALID, REGISTER_NUMBER, REGISTER_DATE, ISVISIBLE, ISTIERED, UPDATETIME, IS_RANKING, 
+    IS_RATING, NAV_SOURCE_TYPE, CREATETIME, IS_FEE_BEFORE, IS_DEDUCT_REWARD, TRUST_REGISTER_NUMBER, 
+    IS_QUALITY, IS_DELETE, DATA_CREATE_TIME, DATA_UPDATE_TIME, ISSUER_ID, FUND_SHORT_NAME, 
+    SPECIAL_TIPS, AMAC_URL, CUSTODIAN_ID, OPEN_DAY, HT_UNIQUE_CODE, FUND_PORTFOLIO, INITIAL_UNIT_VALUE, 
+    INVESTMENT_OBJECTIVE, LOCKUP_PERIOD_UNIT, LOCK_PERIOD, LOCK_PERIOD_UNIT, MANAGER_TYPE, 
+    PERFORMANCE_DISCLOSURE_TYPE, REDEMPTION_DAY, SECONDARY_BENCHMARK
+  </sql>
+
+  <select id="pageQuery" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" /> from
+    (SELECT t.*,ROWNUM rn FROM
+    (SELECT  <include refid="Base_Column_List" /> FROM PVN_FUND_INFO WHERE IS_DELETE = 0 ORDER BY ID ) t
+    WHERE  ROWNUM &lt;= #{endRow}) where rn > #{startRow}
+  </select>
+</mapper>

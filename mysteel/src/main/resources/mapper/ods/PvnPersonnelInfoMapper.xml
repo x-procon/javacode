@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.ods.PvnPersonnelInfoMapper">
+  <resultMap id="BaseResultMap" type="cc.procon.model.po.PvnPersonnelInfo">
+    <!--@mbg.generated-->
+    <!--@Table PVN_PERSONNEL_INFO-->
+    <id column="PERSONNEL_ID" jdbcType="VARCHAR" property="personnelId" />
+    <result column="PERSONNEL_TYPE" jdbcType="DECIMAL" property="personnelType" />
+    <result column="PROFESSION_BACKGROUND" jdbcType="DECIMAL" property="professionBackground" />
+    <result column="AVATAR" jdbcType="VARCHAR" property="avatar" />
+    <result column="KEY_FIGURE" jdbcType="DECIMAL" property="keyFigure" />
+    <result column="COMPANY_ID" jdbcType="VARCHAR" property="companyId" />
+    <result column="POSITIONS" jdbcType="VARCHAR" property="positions" />
+    <result column="CAREER_START_YEAR" jdbcType="VARCHAR" property="careerStartYear" />
+    <result column="INVESTMENT_EXPERIENCE" jdbcType="DECIMAL" property="investmentExperience" />
+    <result column="SEX" jdbcType="DECIMAL" property="sex" />
+    <result column="GRADUATESCHOOL" jdbcType="VARCHAR" property="graduateschool" />
+    <result column="EDUCATION" jdbcType="DECIMAL" property="education" />
+    <result column="PROFILE" jdbcType="CLOB" property="profile" />
+    <result column="ORDERS" jdbcType="DECIMAL" property="orders" />
+    <result column="IFINCLUDE" jdbcType="DECIMAL" property="ifinclude" />
+    <result column="ISVISIBLE" jdbcType="DECIMAL" property="isvisible" />
+    <result column="ISVALID" jdbcType="DECIMAL" property="isvalid" />
+    <result column="UPDATETIME" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="IS_QUALIFY" jdbcType="DECIMAL" property="isQualify" />
+    <result column="GET_QUALIFY_METHOD" jdbcType="VARCHAR" property="getQualifyMethod" />
+    <result column="CREATETIME" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="IS_QUALITY" jdbcType="DECIMAL" property="isQuality" />
+    <result column="IS_DELETE" jdbcType="DECIMAL" property="isDelete" />
+    <result column="DATA_CREATE_TIME" jdbcType="DECIMAL" property="dataCreateTime" />
+    <result column="DATA_UPDATE_TIME" jdbcType="DECIMAL" property="dataUpdateTime" />
+    <result column="PERSONNEL_NAME" jdbcType="VARCHAR" property="personnelName" />
+    <result column="MAJOR" jdbcType="VARCHAR" property="major" />
+    <result column="TOPIC" jdbcType="CLOB" property="topic" />
+    <result column="HT_UNIQUE_CODE" jdbcType="VARCHAR" property="htUniqueCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    PERSONNEL_ID, PERSONNEL_TYPE, PROFESSION_BACKGROUND, AVATAR, KEY_FIGURE, COMPANY_ID, 
+    POSITIONS, CAREER_START_YEAR, INVESTMENT_EXPERIENCE, SEX, GRADUATESCHOOL, EDUCATION, 
+    PROFILE, ORDERS, IFINCLUDE, ISVISIBLE, ISVALID, UPDATETIME, IS_QUALIFY, GET_QUALIFY_METHOD, 
+    CREATETIME, IS_QUALITY, IS_DELETE, DATA_CREATE_TIME, DATA_UPDATE_TIME, PERSONNEL_NAME, 
+    MAJOR, TOPIC, HT_UNIQUE_CODE
+  </sql>
+
+
+  <select id="pageQuery" resultMap="BaseResultMap">
+    SELECT  <include refid="Base_Column_List" /> from
+    (SELECT t.*,ROWNUM rn FROM
+    (SELECT  <include refid="Base_Column_List" /> FROM PVN_PERSONNEL_INFO WHERE IS_DELETE = 0 ORDER BY PERSONNEL_ID ) t
+    WHERE  ROWNUM &lt;= #{endRow}) where rn > #{startRow}
+  </select>
+</mapper>

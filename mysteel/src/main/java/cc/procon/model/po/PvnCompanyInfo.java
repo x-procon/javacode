@@ -1,15 +1,14 @@
 package cc.procon.model.po;
 
-import lombok.Data;
-
 import java.math.BigDecimal;
 import java.util.Date;
+import lombok.Data;
 
 /**
  * ${describe}
  *
  * @author procon
- * @since 2023-01-29
+ * @since 2023-01-31
  */
 @Data
 public class PvnCompanyInfo {
