@@ -1,8 +1,10 @@
 package cc.procon.controller;
 
-import cc.procon.mapper.ods.EsMapper;
+import cc.procon.elasticsearch.ElasticSearchService;
 import cc.procon.mapper.ods.PvnFundRiskStatsMapper;
+import cc.procon.model.dto.IndexInitRequest;
 import cc.procon.model.po.PvnFundRiskStats;
+import cc.procon.service.EsService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -12,7 +14,9 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -29,7 +33,10 @@ import java.util.List;
 public class EsController {
      public static final int PAGE_SIZE = 10000;
     @Autowired
-    private EsMapper esMapper;
+    private EsService esService;
+
+    @Autowired
+    private ElasticSearchService elasticSearchService;
 
     @Autowired
     private PvnFundRiskStatsMapper pvnFundRiskStatsMapper;
@@ -65,6 +72,16 @@ public class EsController {
 
         }
 
+    }
+
+    @RequestMapping(value = "/createIndex")
+    public void createIndex(@RequestBody IndexInitRequest req){
+        esService.createEsIndex(req);
+    }
+
+    @RequestMapping(value = "/deleteIndex")
+    public void deleteIndex(@RequestParam String indexName){
+        elasticSearchService.deleteIndex(indexName);
     }
 
 

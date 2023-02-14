@@ -1,9 +1,16 @@
 package cc.procon.elasticsearch;
 
 
+import cc.procon.model.po.ColumnPO;
+import cc.procon.model.po.IndexInfoPO;
+import cc.procon.util.CamelConverter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
+import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.bulk.BackoffPolicy;
 import org.elasticsearch.action.bulk.BulkProcessor;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -18,6 +25,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.unit.ByteSizeUnit;
 import org.elasticsearch.common.unit.ByteSizeValue;
 import org.elasticsearch.core.TimeValue;
@@ -26,6 +34,8 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.rest.RestStatus;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.xcontent.XContentBuilder;
+import org.elasticsearch.xcontent.XContentFactory;
 import org.elasticsearch.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -215,6 +225,78 @@ public class ElasticSearchService {
         } catch (JsonProcessingException e) {
 
             log.error(e.getMessage(), "");
+        }
+    }
+
+
+    public void createEsIndex(IndexInfoPO indexInfo) throws IOException {
+        XContentBuilder builder = XContentFactory.jsonBuilder();
+        builder.startObject().startObject(indexInfo.getTableName().toLowerCase()).startObject("properties");
+        for (ColumnPO column : indexInfo.getColumnList()) {
+            String columnName = column.getName();
+            String columnType = column.getDataType();
+            if ("NUMBER".equals(columnType)) {
+                if (column.getDataAccuracy() != null && column.getDataAccuracy() > 0) {
+                    //存在精度值用double类型
+                    builder.startObject(CamelConverter.lineToHump(columnName)).field("type", "double").endObject();
+                } else {
+                    builder.startObject(CamelConverter.lineToHump(columnName)).field("type", "double").endObject();
+                }
+            } else if (columnType.contains("NVARCHAR2")) {
+                //经纬度坐标字段
+                if ("LOCATION_GEO_POINT".equals(columnName)) {
+                    builder.startObject(CamelConverter.lineToHump(columnName)).field("type", "geo_point").endObject();
+                } else {
+                    builder.startObject(CamelConverter.lineToHump(columnName)).field("type", "keyword").endObject();
+                }
+            } else if (columnType.contains("DATE")) {
+                builder.startObject(CamelConverter.lineToHump(columnName)).field("type", "date").endObject();
+            } else {
+                //oracle 数据库的CLOB数据类型使用SynConstants.ES_KEYWORD
+                builder.startObject(CamelConverter.lineToHump(columnName)).field("type", "text").endObject();
+            }
+        }
+        builder.endObject().endObject().endObject();
+        addIndex(indexInfo.getTableName().toLowerCase(), builder);
+    }
+
+
+    public Boolean deleteIndex(String indexName) {
+        log.info("deleteIndex === indexName :{}", indexName);
+        DeleteIndexRequest request = new DeleteIndexRequest(indexName);
+        try {
+            return restHighLevelClient.indices().delete(request, RequestOptions.DEFAULT).isAcknowledged();
+        } catch (ElasticsearchException e) {
+            if (e.status() == RestStatus.NOT_FOUND) {
+                log.info("索引名称{}未找到,删除失败.", indexName);
+            } else {
+                log.info("删除失败,其他异常信息:{}", e.getMessage());
+            }
+        } catch (Exception e) {
+            log.error("删除索引异常", e);
+        }
+
+        return false;
+    }
+
+
+
+
+    private void addIndex(String indexName, XContentBuilder builder) {
+
+        //创建索引
+        CreateIndexRequest request = new CreateIndexRequest(indexName);
+
+        request.settings(Settings.builder()
+                .put("number_of_shards", esProperties.getNumberOfShards())
+                .put("number_of_replicas", esProperties.getNumberOfReplicas())
+                .put("max_result_window", 1000000));
+        request.mapping(indexName, builder);
+        try {
+            CreateIndexResponse response = restHighLevelClient.indices().create(request, RequestOptions.DEFAULT);
+            log.info(response.index() + "-------addIndex-isAcknowledged:" + response.isAcknowledged());
+        } catch (IOException e) {
+            log.error("添加index异常", e);
         }
     }
 }
