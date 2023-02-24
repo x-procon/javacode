@@ -1,5 +1,9 @@
 package cc.procon;
 
+import lombok.extern.slf4j.Slf4j;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -33,8 +37,56 @@ import java.util.List;
  * @author procon
  * @since 2022-10-27
  */
+@Slf4j
 public class ThreeSum {
-    public List<List<Integer>> threeSum(int[] nums) {
-        return null;
+
+    public static void main(String[] args) {
+       int[] nums = {0,0,1};
+        List<List<Integer>> result = threeSum(nums);
+        log.info("结果是：{}",result);
+    }
+
+    /**
+     * 三数相加双指针法
+     * @param nums 数组
+     * @return 结果集合
+     */
+    public static List<List<Integer>> threeSum(int[] nums) {
+        int n = nums.length;
+        List<List<Integer>> result = new ArrayList<>();
+        //0.先对数组进行排序
+        Arrays.sort(nums);
+        for (int i = 0; i < n;i++){
+            //1.判断最小的是否大于0
+            if(nums[i] > 0){
+                break;
+            }
+            //2.判断之前是否已经遍历过
+            if(i>0 && nums[i] == nums[i-1]){
+                continue;
+            }
+            //3.定义左右指针
+            int lp = i + 1;
+            int rp = n-1;
+            while(lp < rp){
+                int sum  = nums[i] + nums[lp] + nums[rp];
+                if(sum == 0){
+                    result.add(Arrays.asList(nums[i],nums[lp],nums[rp]));
+                    lp++;
+                    rp--;
+                    while(lp < rp && nums[lp] == nums[lp -1]){
+                        lp++;
+                    }
+                    while (lp < rp && nums[rp] == nums[rp+1]){
+                        rp --;
+                    }
+                } else if(sum<0){
+                    lp++;
+                }else {
+                    rp--;
+                }
+            }
+        }
+        return result;
     }
 }

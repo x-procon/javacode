@@ -12,6 +12,7 @@
         <module>data-struct</module>
         <module>jdbc</module>
         <module>java-web</module>
+        <module>netty</module>
     </modules>
     <groupId>com.procon</groupId>
     <artifactId>parent</artifactId>
@@ -53,6 +54,9 @@
         <mysql-connector.version>8.0.31</mysql-connector.version>
         <junit.version>5.9.1</junit.version>
         <jakarta.servlet-appi.version>5.0.0</jakarta.servlet-appi.version>
+        <netty.version>4.1.89.Final</netty.version>
+        <gson.version>2.10.1</gson.version>
+        <guava.version>31.1-jre</guava.version>
     </properties>
     <!-- 依赖声明 -->
     <dependencyManagement>
@@ -236,6 +240,25 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-connector.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
+            </dependency>
+            <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>${gson.version}</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
 
         </dependencies>
