@@ -13,6 +13,7 @@
         <module>jdbc</module>
         <module>java-web</module>
         <module>netty</module>
+        <module>design-pattern</module>
     </modules>
     <groupId>com.procon</groupId>
     <artifactId>parent</artifactId>
