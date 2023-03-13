@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.dw.DwDimensionInfoMapper">
+
+    <resultMap id="BaseResultMap" type="cc.procon.model.po.DimensionInfoPO">
+        <!--@Table T_DAMP_DW_DIMENSION_INFO-->
+        <result property="id" column="id" />
+        <result property="tableName" column="table_name" />
+        <result property="cnName" column="cn_name" />
+        <result property="tableCode" column="table_code" />
+        <result property="sourceType" column="source_type" />
+        <result property="isForeign" column="is_foreign" />
+        <result property="frameId" column="frame_id" />
+        <result property="remarks" column="remarks" />
+        <result property="isDelete" column="is_delete" />
+        <result property="isEnable" column="is_enable" />
+        <result property="tableFileds" column="table_fileds" />
+        <result property="dataSource" column="data_source" />
+        <result property="dataName" column="data_name" />
+        <result property="dataClassifyCode" column="data_classify_code" />
+        <result property="valueName" column="value_name" />
+        <result property="valueCode" column="value_code" />
+        <result property="sourceTableName" column="source_table_name" />
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+        <result property="createUserId" column="create_user_id" />
+        <result property="createUserName" column="create_user_name" />
+        <result property="updateUserId" column="update_user_id" />
+        <result property="updateUserName" column="update_user_name" />
+    </resultMap>
+
+    <sql id="baseColumns">
+        id, cn_name,table_name, table_code, source_type, is_foreign, frame_id, remarks, is_delete, is_enable, table_fileds, data_source,
+        source_table_name, create_time, update_time, create_user_id, create_user_name, update_user_id, update_user_name, data_name, data_classify_code,value_name, value_code
+    </sql>
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+            <include refid="baseColumns"/>
+        from T_DAMP_DW_DIMENSION_INFO
+        where id = #{id}
+    </select>
+
+    <select id="queryByTableName" resultMap="BaseResultMap">
+        select
+        <include refid="baseColumns"/>
+        from T_DAMP_DW_DIMENSION_INFO
+        where is_delete = 0 and lower(table_name) = lower(#{tableName})
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+        <include refid="baseColumns"/>
+                from T_DAMP_DW_DIMENSION_INFO
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        <include refid="baseColumns"/>
+        from T_DAMP_DW_DIMENSION_INFO
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="tableName != null">
+                and table_name = #{tableName}
+            </if>
+            <if test="tableName != null">
+               and cn_name = #{cnName},
+            </if>
+            <if test="tableCode != null">
+                and table_code = #{tableCode}
+            </if>
+            <if test="sourceType != null">
+                and source_type = #{sourceType}
+            </if>
+            <if test="isForeign != null">
+                and is_foreign = #{isForeign}
+            </if>
+            <if test="frameId != null">
+                and frame_id = #{frameId}
+            </if>
+            <if test="remarks != null">
+                and remarks = #{remarks}
+            </if>
+            <if test="isDelete != null">
+                and is_delete = #{isDelete}
+            </if>
+            <if test="isEnable != null">
+                and is_enable = #{isEnable}
+            </if>
+            <if test="tableFileds != null">
+                and table_fileds = #{tableFileds}
+            </if>
+
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="createUserId != null">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="createUserName != null">
+                and create_user_name = #{createUserName}
+            </if>
+            <if test="updateUserId != null">
+                and update_user_id = #{updateUserId}
+            </if>
+            <if test="updateUserName != null">
+                and update_user_name = #{updateUserName}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert"  >
+        insert into T_DAMP_DW_DIMENSION_INFO(
+              <include refid="baseColumns"/>
+        )
+        values (#{id,jdbcType=VARCHAR},#{cnName,jdbcType=VARCHAR},#{tableName,jdbcType=VARCHAR}, #{tableCode,jdbcType=VARCHAR},
+                #{sourceType,jdbcType=NUMERIC}, #{isForeign,jdbcType=NUMERIC}, #{frameId,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR},
+                0, #{isEnable,jdbcType=NUMERIC}, #{tableFileds,jdbcType=CLOB},
+                #{dataSource,jdbcType=VARCHAR}, #{sourceTableName,jdbcType=VARCHAR},#{createTime,jdbcType=NUMERIC},
+                #{updateTime,jdbcType=NUMERIC}, #{createUserId,jdbcType=NUMERIC}, #{createUserName,jdbcType=VARCHAR},
+                #{updateUserId,jdbcType=NUMERIC}, #{updateUserName,jdbcType=VARCHAR}
+                , #{dataName,jdbcType=VARCHAR},#{dataClassifyCode,jdbcType=VARCHAR}, #{valueName,jdbcType=VARCHAR},#{valueCode,jdbcType=VARCHAR})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update T_DAMP_DW_DIMENSION_INFO
+        <set>
+            <if test="tableName != null">
+                table_name = #{tableName},
+            </if>
+            <if test="tableName != null">
+                cn_name = #{cnName},
+            </if>
+            <if test="tableCode != null">
+                table_code = #{tableCode},
+            </if>
+            <if test="sourceType != null">
+                source_type = #{sourceType},
+            </if>
+            <if test="dataName != null">
+                data_name = #{dataName},
+            </if>
+            <if test="dataClassifyCode != null">
+                data_classify_code = #{dataClassifyCode},
+            </if>
+            <if test="valueName != null">
+                value_name = #{valueName},
+            </if>
+            <if test="valueCode != null">
+                value_code = #{valueCode},
+            </if>
+            <if test="isForeign != null">
+                is_foreign = #{isForeign},
+            </if>
+            <if test="frameId != null">
+                frame_id = #{frameId},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable},
+            </if>
+            <if test="tableFileds != null">
+                table_fileds = #{tableFileds},
+            </if>
+            <if test="dataSource != null">
+                data_source = #{dataSource},
+            </if>
+            <if test="sourceTableName != null">
+                source_table_name = #{sourceTableName},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createUserName != null">
+                create_user_name = #{createUserName},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="updateUserName != null">
+                update_user_name = #{updateUserName},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from T_DAMP_DW_DIMENSION_INFO where id = #{id}
+    </delete>
+
+
+    <!--sql共用条件-->
+    <sql id="queryCommon">
+            <if test="cnName != null and cnName != ''">
+                and cn_name like concat(concat('%', #{cnName}), '%')
+            </if>
+            <if test="tableName != null and tableName != ''">
+                and table_name like concat(concat('%', #{tableName}), '%')
+            </if>
+            <if test="isEnable != null">
+                and is_enable = #{isEnable}
+            </if>
+            <if test="isForeign != null">
+                and is_foreign = #{isForeign}
+            </if>
+            <if test="frameId != null and frameId != ''">
+                and frame_id = #{frameId}
+            </if>
+
+            <if test="createTimeStart != null and createTimeStart > 0 ">
+                <![CDATA[AND create_time >= #{createTimeStart}]]>
+            </if>
+            <if test="createTimeEnd != null and createTimeEnd > 0 ">
+                <![CDATA[AND create_time <= #{createTimeEnd}]]>
+            </if>
+
+            <if test="frameIdList != null and frameIdList.size() > 0">
+                <choose>
+                    <when test="frameIdList.size() > 1000">
+                        and
+                        <foreach collection="frameIdList" item="frameId" open="(" separator="or" close=")">
+                            FRAME_ID = #{frameId}
+                        </foreach>
+                    </when>
+                    <otherwise>
+                        and FRAME_ID in
+                        <foreach collection="frameIdList" item="frameId" open="(" separator="," close=")">
+                            #{frameId}
+                        </foreach>
+                    </otherwise>
+                </choose>
+            </if>
+            and is_delete = 0
+    </sql>
+    <select id="selectTotalDimensions" resultType="int">
+        select count(1) as total from T_DAMP_DW_DIMENSION_INFO t
+        <where>
+            <include refid="queryCommon"/>
+        </where>
+    </select>
+    <!--列表检索-->
+    <select id="queryListData" resultMap="BaseResultMap">
+        select * from (
+            select
+                <include refid="baseColumns"/>, ROWNUM rn
+            from (
+                select
+                    <include refid="baseColumns"/>
+                from T_DAMP_DW_DIMENSION_INFO t
+                <where>
+                    <include refid="queryCommon"/>
+                </where>
+                <choose>
+                    <when test="sortColumn != null and sortOrder != null and sortColumn != '' and sortOrder != ''">
+                        order by ${sortColumn} ${sortOrder}
+                    </when>
+                    <otherwise>
+                        order by table_name asc
+                    </otherwise>
+                </choose>
+            ) where rownum <![CDATA[ <= ]]> #{endRow}
+        ) where rn <![CDATA[ > ]]> #{startRow}
+    </select>
+
+    <update id="createTableByFields">
+        create table ${tableName} (
+        <foreach collection="entities" item="entity" separator=",">
+            "${entity.name}"
+            <if test="entity.dataType == 'NVARCHAR2'">
+                ${entity.dataType}(${entity.dataLength})
+            </if>
+            <if test="entity.dataType == 'NUMBER'">
+                ${entity.dataType}
+                <if test="entity.dataLength != null and entity.dataAccuracy != null">
+                    (${entity.dataLength}, ${entity.dataAccuracy})
+                </if>
+            </if>
+            <if test="entity.dataType == 'DATE' or entity.dataType == 'CLOB'">
+                ${entity.dataType}
+            </if>
+            <if test="entity.isNullable != null and entity.isNullable == 1">
+                not null
+            </if>
+        </foreach>
+
+        <!-- 维表默认字段 -->
+        ,is_delete number(1) default 0 not null
+        ,is_quality number(1)  default 1 not null
+        ,HT_UNIQUE_CODE  VARCHAR2(32)
+        ,data_create_time number(13) default (SYSDATE - TO_DATE('1970-1-1 8', 'YYYY-MM-DD HH24')) * 86400000 + TO_NUMBER(TO_CHAR(SYSTIMESTAMP(3), 'FF'))
+        ,data_update_time number(13) default (SYSDATE - TO_DATE('1970-1-1 8', 'YYYY-MM-DD HH24')) * 86400000 + TO_NUMBER(TO_CHAR(SYSTIMESTAMP(3), 'FF'))
+        )
+    </update>
+
+    <select id="getIndexSeq" resultType="string">
+        select 'HT_UNIQUE_CODE_DW_' || DW_DIM_INDEX_SEQ.Nextval as indexSeq from dual
+    </select>
+    <update id="addIndexToDimenison">
+        create index ${indexSeq} on ${tableName} (HT_UNIQUE_CODE)
+    </update>
+
+    <update id="modifyColumnByFields">
+        <!--只允许修改表结构的字段长度-->
+        alter table ${tableName} modify
+        "${entity.name}"
+        <if test="entity.dataType == 'NVARCHAR2'">
+            ${entity.dataType}(${entity.dataLength})
+        </if>
+        <if test="entity.dataType == 'NUMBER'">
+            ${entity.dataType}
+            <if test="entity.dataLength != null and entity.dataAccuracy != null">
+                (${entity.dataLength}, ${entity.dataAccuracy})
+            </if>
+        </if>
+        <if test="entity.dataType == 'DATE' or entity.dataType == 'CLOB'">
+            ${entity.dataType}
+        </if>
+    </update>
+
+    <update id="addColumnByFields">
+        alter table ${tableName} add
+        "${entity.name}"
+        <if test="entity.dataType == 'NVARCHAR2'">
+            ${entity.dataType}(${entity.dataLength})
+        </if>
+        <if test="entity.dataType == 'NUMBER'">
+            ${entity.dataType}
+                <if test="entity.dataLength != null and entity.dataAccuracy != null">
+                    (${entity.dataLength}, ${entity.dataAccuracy})
+                </if>
+        </if>
+        <if test="entity.dataType == 'DATE' or entity.dataType == 'CLOB'">
+            ${entity.dataType}
+        </if>
+        <if test="entity.isNullable != null and entity.isNullable == 1">
+            not null
+        </if>
+    </update>
+
+    <select id="checkTableName" resultType="int">
+        select count(1) as total from illegal_table_names t where lower(t.table_name) = lower(#{tableName})
+    </select>
+
+    <select id="queryAllIllegalTableName" resultType="string">
+        select TABLE_NAME from illegal_table_names
+    </select>
+
+    <update id="doSwitchBatch">
+        update T_DAMP_DW_DIMENSION_INFO
+        <set>
+            <choose>
+                <when test="updateDto.handleType == 0">
+                     is_enable = 0,
+                </when>
+                <when test="updateDto.handleType == 1">
+                    is_enable = 1,
+                </when>
+                <when test="updateDto.handleType == 2">
+                    is_delete = 1,
+                </when>
+            </choose>
+            UPDATE_TIME = #{updateDto.updateTime},
+            UPDATE_USER_ID = #{updateDto.updateUserId},
+            UPDATE_USER_NAME = #{updateDto.updateUserName}
+        </set>
+        where id in
+        <foreach collection="updateDto.ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <select id="getMaxTableCode" resultType="string">
+        select TABLE_CODE
+        from (select TABLE_CODE
+              from T_DAMP_DW_DIMENSION_INFO
+              order by TABLE_CODE desc)
+        where ROWNUM = 1
+    </select>
+    <!--sql共用条件-->
+    <sql id="queryCommon2">
+            <if test="keyword != null and keyword != ''">
+                and (cn_name like concat(concat('%', #{keyword}), '%') or table_name like concat(concat('%', #{keyword}), '%'))
+            </if>
+            <if test="cnName != null and cnName != ''">
+                and cn_name like concat(concat('%', #{cnName}), '%')
+            </if>
+            <if test="tableCode != null and tableCode != ''">
+                and table_code like concat(concat('%', #{tableCode}), '%')
+            </if>
+            <if test="tableName != null and tableName != ''">
+                and table_name like concat(concat('%', #{tableName}), '%')
+            </if>
+            <if test="isForeign != null">
+                and is_foreign = #{isForeign}
+            </if>
+            <if test="isEnable != null">
+                and is_enable = #{isEnable}
+            </if>
+            <if test="startTime != null ">
+                <![CDATA[AND create_time >= #{startTime}]]>
+             </if>
+            <if test="endTime != null ">
+                <![CDATA[AND create_time <= #{endTime}]]>
+            </if>
+            <if test="upperTableNameList != null and upperTableNameList.size() > 0">
+            and upper(table_name) in
+            <foreach collection="upperTableNameList" item="tableName" open="(" separator="," close=")">
+                upper(#{tableName})
+            </foreach>
+            </if>
+
+            <if test="frameIdList != null and frameIdList.size() > 0">
+                <choose>
+                    <when test="frameIdList.size() > 1000">
+                        and
+                        <foreach collection="frameIdList" item="frameId" open="(" separator="or" close=")">
+                            FRAME_ID = #{frameId}
+                        </foreach>
+                    </when>
+                    <otherwise>
+                        and FRAME_ID in
+                        <foreach collection="frameIdList" item="frameId" open="(" separator="," close=")">
+                            #{frameId}
+                        </foreach>
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="dimensionIdList != null and dimensionIdList.size() > 0">
+                <choose>
+                    <when test="dimensionIdList.size() > 1000">
+                        and
+                        <foreach collection="dimensionIdList" item="dimensionId" open="(" separator="or" close=")">
+                            ID = #{dimensionId}
+                        </foreach>
+                    </when>
+                    <otherwise>
+                        and ID in
+                        <foreach collection="dimensionIdList" item="dimensionId" open="(" separator="," close=")">
+                            #{dimensionId}
+                        </foreach>
+                    </otherwise>
+                </choose>
+            </if>
+            <if test="includeDelete == null">
+                and IS_DELETE = 0
+            </if>
+            <if test="valueName != null and valueName != ''">
+                and VALUE_NAME like concat('%', concat(#{valueName}, '%'))
+            </if>
+    </sql>
+    <select id="countByCondition" resultType="int" parameterType="cc.procon.model.dto.DimensionCommonQueryDTO">
+        select count(1) as total from T_DAMP_DW_DIMENSION_INFO t
+        <where>
+            <include refid="queryCommon2"/>
+        </where>
+    </select>
+    <!--列表检索-->
+    <select id="pageByCondition" resultMap="BaseResultMap"  parameterType="cc.procon.model.dto.DimensionCommonQueryDTO">
+        select * from (
+            select
+                <include refid="baseColumns"/>, ROWNUM rn
+            from (
+                select
+                    <include refid="baseColumns"/>
+                from
+                T_DAMP_DW_DIMENSION_INFO t
+                <where>
+                    <include refid="queryCommon2"/>
+                </where>
+                <choose>
+                    <when test="sortColumn != null and sortOrder != null and sortColumn != '' and sortOrder != ''">
+                        order by ${sortColumn} ${sortOrder}
+                    </when>
+                    <otherwise>
+                        order by table_name asc
+                    </otherwise>
+                </choose>
+            ) where rownum <![CDATA[ <= ]]> #{endRow}
+        ) where rn <![CDATA[ > ]]> #{startRow}
+    </select>
+    <select id="listByCondition" resultMap="BaseResultMap"  parameterType="cc.procon.model.dto.DimensionCommonQueryDTO">
+        select <include refid="baseColumns"/>
+        from T_DAMP_DW_DIMENSION_INFO
+        <where>
+            <include refid="queryCommon2"/>
+        </where>
+        <choose>
+            <when test="sortColumn != null and sortOrder != null and sortColumn != '' and sortOrder != ''">
+                order by ${sortColumn} ${sortOrder}
+            </when>
+            <otherwise>
+                order by create_time desc
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="listIdByCondition" resultType="String"  parameterType="cc.procon.model.dto.DimensionCommonQueryDTO">
+        select ID
+        from T_DAMP_DW_DIMENSION_INFO
+        <where>
+            <include refid="queryCommon2"/>
+        </where>
+        <choose>
+            <when test="sortColumn != null and sortOrder != null and sortColumn != '' and sortOrder != ''">
+                order by ${sortColumn} ${sortOrder}
+            </when>
+            <otherwise>
+                order by create_time desc
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="listSimpleByCondition" resultMap="BaseResultMap"  parameterType="cc.procon.model.dto.DimensionCommonQueryDTO">
+        select id, cn_name, table_name, source_type
+        from T_DAMP_DW_DIMENSION_INFO
+        <where>
+            <include refid="queryCommon2"/>
+        </where>
+        <choose>
+            <when test="sortColumn != null and sortOrder != null and sortColumn != '' and sortOrder != ''">
+                order by ${sortColumn} ${sortOrder}
+            </when>
+            <otherwise>
+                order by create_time desc
+            </otherwise>
+        </choose>
+    </select>
+
+    <select id="countTableData" resultType="int">
+        select count(1) from ${tableName}
+    </select>
+
+    <update id="renameDimension">
+        rename ${tableName} to ${newTableName}
+    </update>
+
+
+
+    <select id="searchTableInfoByName" resultMap="BaseResultMap" parameterType="map">
+        select <include refid="baseColumns"/>
+        from (
+        select <include refid="baseColumns"/>, ROWNUM rn
+        from (
+        select <include refid="baseColumns"/>
+        from T_DAMP_DW_DIMENSION_INFO
+        <where>
+            <if test="searchText != null and searchText != ''">
+                and (lower(table_name) like '%'|| lower(#{searchText}) || '%'
+                or lower(cn_name) like '%'||lower( #{searchText}) || '%')
+            </if>
+            and is_delete = 0
+            and SOURCE_TYPE = #{sourceType}
+            <!--
+            and is_enable = 1
+            -->
+        </where>
+        order by table_name asc)
+        where rownum <![CDATA[ <= ]]> #{endRow}
+        )
+        where rn <![CDATA[ > ]]> #{startRow}
+    </select>
+
+
+
+
+
+
+
+    <sql id="searchTableInfoInIds">
+        select id,source_id, cn_name,table_name, table_code, ROWNUM rn
+        ,
+        <choose>
+            <when test="ids !=null">
+                <foreach collection="ids" item="id" open="DECODE(ID," close=",0)" separator=",">
+                    #{id},1
+                </foreach>
+            </when>
+            <otherwise>
+                0
+            </otherwise>
+        </choose>
+        SORT
+        from (
+        select ${alias}
+        from T_DAMP_DW_DIMENSION_INFO
+        <where>
+            <if test="searchText != null and searchText != ''">
+                and (lower(table_name) like '%'|| lower(#{searchText}) || '%'
+                or lower(cn_name) like '%'||lower( #{searchText}) || '%')
+            </if>
+            and is_delete = 0
+        </where>
+        )
+        order by SORT desc
+    </sql>
+
+
+    <select id="queryByTableNameAndSourceType" resultMap="BaseResultMap">
+        select
+        <include refid="baseColumns"/>
+        from T_DAMP_DW_DIMENSION_INFO
+        where  is_delete = 0 and lower(table_name) = lower(#{tableName}) and SOURCE_TYPE = #{sourceType}
+    </select>
+
+
+
+
+    <update id="modifyCommentOfTable">
+
+        <if test="tableComments != null">
+            comment on table ${tableName} is '${tableComments}'
+        </if>
+
+    </update>
+    <update id="modifyCommentOfField">
+        <if test="entity.cnName != null">
+            comment on column ${tableName}.${entity.name} is '${entity.remarks}'
+        </if>
+    </update>
+
+
+
+    <!-- DM层查询DW层维表信息   -->
+    <sql id="queryCommon3">
+        <if test="keyword != null and keyword != ''">
+            and (cn_name like concat(concat('%', #{keyword}), '%') or table_name like concat(concat('%', #{keyword}), '%'))
+        </if>
+        <if test="cnName != null and cnName != ''">
+            and cn_name like concat(concat('%', #{cnName}), '%')
+        </if>
+        <if test="tableCode != null and tableCode != ''">
+            and table_code like concat(concat('%', #{tableCode}), '%')
+        </if>
+        <if test="tableName != null and tableName != ''">
+            and table_name like concat(concat('%', #{tableName}), '%')
+        </if>
+        <if test="isForeign != null">
+            and is_foreign = #{isForeign}
+        </if>
+        <if test="isEnable != null">
+            and is_enable = #{isEnable}
+        </if>
+        <if test="startTime != null and startTime > 0 and endTime == null ">
+            and #{startTime} &lt;= create_time
+        </if>
+        <if test="startTime == null  and endTime != null and endTime > 0">
+            and  create_time &lt;= #{endTime}
+        </if>
+        <if test="startTime != null and startTime > 0 and endTime != null and endTime > 0">
+            and #{startTime} &lt;= create_time and create_time &lt;= #{endTime}
+        </if>
+        <if test="upperTableNameList != null and upperTableNameList.size() > 0">
+            and upper(table_name) in
+            <foreach collection="upperTableNameList" item="tableName" open="(" separator="," close=")">
+                upper(#{tableName})
+            </foreach>
+        </if>
+        <if test="frameIdList != null and frameIdList.size() > 0">
+            <choose>
+                <when test="frameIdList.size() > 1000">
+                    and
+                    <foreach collection="frameIdList" item="frameId" open="(" separator="or" close=")">
+                        FRAME_ID = #{frameId}
+                    </foreach>
+                </when>
+                <otherwise>
+                    and FRAME_ID in
+                    <foreach collection="frameIdList" item="frameId" open="(" separator="," close=")">
+                        #{frameId}
+                    </foreach>
+                </otherwise>
+            </choose>
+        </if>
+        <if test="includeDelete == null">
+            and IS_DELETE = 0
+        </if>
+        <if test="valueName != null and valueName != ''">
+            and VALUE_NAME like concat('%', concat(#{valueName}, '%'))
+        </if>
+    </sql>
+    <select id="pageDmDimensionByCondition" resultMap="BaseResultMap"
+            parameterType="cc.procon.model.dto.DimensionCommonQueryDTO">
+        select * from (
+        select
+        <include refid="baseColumns"/>, ROWNUM rn
+        from (
+        select
+        b.*
+        from (
+        <if test="dimensionIdList != null and dimensionIdList.size() > 0">
+            <foreach collection="dimensionIdList" item="dimensionId" separator="UNION ALL" index="index">
+                (SELECT ID
+                FROM
+                T_DAMP_DW_DIMENSION_INFO
+                WHERE ID = #{dimensionId})
+            </foreach>
+        </if>
+        ) a left join  T_DAMP_DW_DIMENSION_INFO b on a.id = b.id
+        <where>
+            <include refid="queryCommon3"/>
+        </where>
+
+        <choose>
+            <when test="sortColumn != null and sortOrder != null and sortColumn != '' and sortOrder != ''">
+                order by ${sortColumn} ${sortOrder}
+            </when>
+            <otherwise>
+                order by table_name asc
+            </otherwise>
+        </choose>
+        ) where rownum <![CDATA[ <= ]]> #{endRow}
+        ) where rn <![CDATA[ > ]]> #{startRow}
+    </select>
+
+
+    <select id="countDmByCondition" resultType="int" parameterType="cc.procon.model.dto.DimensionCommonQueryDTO">
+        select count(1) as total from
+        (
+        select
+        b.*
+        from (
+        <if test="dimensionIdList != null and dimensionIdList.size() > 0">
+            <foreach collection="dimensionIdList" item="dimensionId" separator="UNION ALL" index="index">
+                (SELECT ID
+                FROM
+                T_DAMP_DW_DIMENSION_INFO
+                WHERE ID = #{dimensionId})
+            </foreach>
+        </if>
+        ) a left join  T_DAMP_DW_DIMENSION_INFO b on a.id = b.id
+        <where>
+            <include refid="queryCommon3"/>
+        </where>
+        ) t
+    </select>
+</mapper>

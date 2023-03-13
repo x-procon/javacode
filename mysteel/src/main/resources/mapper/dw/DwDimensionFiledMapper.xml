@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mapper.dw.DwDimensionFiledMapper">
+
+    <resultMap id="BaseResultMap" type="cc.procon.model.po.DimensionFiledPO">
+        <!--@Table T_DAMP_DW_DIMENSION_FILED-->
+        <result property="id" column="id" />
+        <result property="tableId" column="table_id" />
+        <result property="sort" column="sort" />
+        <result property="name" column="name" />
+        <result property="cnName" column="cn_name" />
+        <result property="dataType" column="data_type" />
+        <result property="dataLength" column="data_length" />
+        <result property="isNullable" column="is_nullable" />
+        <result property="dataAccuracy" column="data_accuracy" />
+        <result property="dataFormat" column="data_format" />
+        <result property="remarks" column="remarks" />
+        <result property="isEnable" column="is_enable" />
+        <result property="createTime" column="create_time" />
+        <result property="updateTime" column="update_time" />
+        <result property="createUserId" column="create_user_id" />
+        <result property="createUserName" column="create_user_name" />
+        <result property="updateUserId" column="update_user_id" />
+        <result property="updateUserName" column="update_user_name" />
+    </resultMap>
+
+    <sql id="baseColumns" >
+        id, table_id, sort, name, cn_name, data_type, data_length, is_nullable, data_accuracy, data_format,
+        remarks, is_enable, create_time, update_time, create_user_id, create_user_name, update_user_id, update_user_name
+    </sql>
+    <!--查询单个-->
+    <select id="queryById" resultMap="BaseResultMap">
+        select
+        <include refid="baseColumns"/>
+        from T_DAMP_DW_DIMENSION_FILED
+        where id = #{id}
+    </select>
+
+    <!--查询单个-->
+    <select id="queryByTableIdAndName" resultMap="BaseResultMap">
+        select
+        <include refid="baseColumns"/>
+        from T_DAMP_DW_DIMENSION_FILED
+        where table_id = #{id} and name =#{name}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="BaseResultMap">
+        select
+        <include refid="baseColumns"/>
+                from T_DAMP_DW_DIMENSION_FILED
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="BaseResultMap">
+        select
+        <include refid="baseColumns"/>
+        from T_DAMP_DW_DIMENSION_FILED
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="tableId != null">
+                and table_id = #{tableId}
+            </if>
+            <if test="sort != null">
+                and sort = #{sort}
+            </if>
+            <if test="name != null">
+                and name = #{name}
+            </if>
+            <if test="cnName != null">
+                and cn_name = #{cnName}
+            </if>
+            <if test="dataType != null">
+                and data_type = #{dataType}
+            </if>
+            <if test="dataLength != null">
+                and data_length = #{dataLength}
+            </if>
+            <if test="isNullable != null">
+                and is_nullable = #{isNullable}
+            </if>
+            <if test="dataAccuracy != null">
+                and data_accuracy = #{dataAccuracy}
+            </if>
+            <if test="dataFormat != null">
+                and data_format = #{dataFormat}
+            </if>
+            <if test="remarks != null">
+                and remarks = #{remarks}
+            </if>
+            <if test="isEnable != null">
+                and is_enable = #{isEnable}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="createUserId != null">
+                and create_user_id = #{createUserId}
+            </if>
+            <if test="createUserName != null">
+                and create_user_name = #{createUserName}
+            </if>
+            <if test="updateUserId != null">
+                and update_user_id = #{updateUserId}
+            </if>
+            <if test="updateUserName != null">
+                and update_user_name = #{updateUserName}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert">
+        insert into T_DAMP_DW_DIMENSION_FILED(<include refid="baseColumns"/>)
+        values (#{id,jdbcType=VARCHAR},#{tableId,jdbcType=VARCHAR}, #{sort,jdbcType=NUMERIC}, #{name,jdbcType=VARCHAR}, #{cnName,jdbcType=VARCHAR},
+                #{dataType,jdbcType=NUMERIC}, #{dataLength,jdbcType=NUMERIC}, #{isNullable,jdbcType=NUMERIC},
+                #{dataAccuracy,jdbcType=NUMERIC}, #{dataFormat,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR},
+                #{isEnable,jdbcType=NUMERIC}, #{createTime,jdbcType=NUMERIC}, #{updateTime,jdbcType=NUMERIC}, #{createUserId,jdbcType=NUMERIC},
+                #{createUserName,jdbcType=VARCHAR}, #{updateUserId,jdbcType=NUMERIC}, #{updateUserName,jdbcType=VARCHAR})
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update T_DAMP_DW_DIMENSION_FILED
+        <set>
+            <if test="tableId != null">
+                table_id = #{tableId},
+            </if>
+            <if test="sort != null">
+                sort = #{sort},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="cnName != null">
+                cn_name = #{cnName},
+            </if>
+            <if test="dataType != null">
+                data_type = #{dataType},
+            </if>
+            <if test="dataLength != null">
+                data_length = #{dataLength},
+            </if>
+            <if test="isNullable != null">
+                is_nullable = #{isNullable},
+            </if>
+            <if test="dataAccuracy != null">
+                data_accuracy = #{dataAccuracy},
+            </if>
+            <if test="dataFormat != null">
+                data_format = #{dataFormat},
+            </if>
+            <if test="remarks != null">
+                remarks = #{remarks},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="createUserId != null">
+                create_user_id = #{createUserId},
+            </if>
+            <if test="createUserName != null">
+                create_user_name = #{createUserName},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId},
+            </if>
+            <if test="updateUserName != null">
+                update_user_name = #{updateUserName},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from T_DAMP_DW_DIMENSION_FILED where id = #{id}
+    </delete>
+
+
+    <select id="queryFieldsByTableName" resultMap="BaseResultMap">
+        SELECT T2.* FROM T_DAMP_DW_DIMENSION_INFO T1
+        INNER JOIN T_DAMP_DW_DIMENSION_FILED T2
+        ON T1.ID = T2.TABLE_ID
+        WHERE T1.IS_DELETE = 0 AND UPPER (T1.TABLE_NAME) = UPPER(#{tableName}) order by T2.sort asc
+    </select>
+
+    <sql id="CommonSql">
+        <if test="dimensionId != null and dimensionId != ''">
+            AND TABLE_ID = #{dimensionId}
+        </if>
+    </sql>
+
+
+    <resultMap id="resultMapForDw" type="java.util.HashMap">
+        <!--@Table T_DAMP_ODS_DIMENSION_INFO-->
+        <result property="id" column="id" />
+        <result property="tableId" column="table_id" />
+        <result property="cnName" column="cn_name" />
+        <result property="filedName" column="name" />
+    </resultMap>
+
+    <select id="searchTableFiledByTableId" resultMap="resultMapForDw" parameterType="map">
+        select * from (
+        select id, cn_name,table_id, name,rownum rn
+        from T_DAMP_DW_DIMENSION_FILED
+        <where>
+            <if test="searchText != null and searchText != ''">
+                and (lower(name) like '%'|| lower(#{searchText}) || '%'
+                or lower(cn_name) like '%'||lower( #{searchText}) || '%')
+            </if>
+            <if test="filedType != null and filedType != ''">
+                and lower(data_type) = lower(#{filedType})
+            </if>
+            <if test="filedBanned != null and filedBanned != ''">
+                and lower(data_type) != lower(#{filedBanned})
+            </if>
+            <if test="selectIds!=null and selectIds.size() >0">
+                and id not in
+                <foreach collection="selectIds" item="id" open="(" close=")" separator=",">
+                    #{id}
+                </foreach>
+            </if>
+            and is_enable = 1
+            and table_id = #{tableId}
+            and rownum <![CDATA[ <= ]]> #{endRow}
+        </where>
+        order by sort asc
+        ) where rn <![CDATA[ > ]]> #{startRow}
+    </select>
+
+
+    <select id="queryTabColsByTableName" resultMap="BaseResultMap">
+        SELECT
+        col.COLUMN_ID AS SORT,
+        col.COLUMN_NAME AS NAME,
+        NVL(colc.COMMENTS,'-') AS CN_NAME,
+        NVL(colc.COMMENTS,'-') AS REMARKS,
+        col.DATA_TYPE AS DATA_TYPE,
+        NVL(col.DATA_PRECISION,col.DATA_LENGTH) AS DATA_LENGTH,
+        decode(col.NULLABLE, 'Y', 0, 1) as IS_NULLABLE,
+        col.DATA_SCALE AS DATA_ACCURACY
+        FROM
+        USER_TAB_COLS col
+        LEFT JOIN USER_COL_COMMENTS colc ON colc.table_name = col.table_NAME
+        AND col.COLUMN_NAME = colc.COLUMN_NAME
+        WHERE
+        col.TABLE_NAME = #{tableName} AND col.COLUMN_NAME NOT IN('IS_QUALITY','IS_DELETE','DATA_CREATE_TIME','DATA_UPDATE_TIME','HT_UNIQUE_CODE') ORDER BY col.COLUMN_ID
+    </select>
+</mapper>
