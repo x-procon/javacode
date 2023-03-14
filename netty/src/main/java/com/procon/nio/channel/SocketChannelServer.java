@@ -1,6 +1,6 @@
-package com.procon.netty.channel;
+package com.procon.nio.channel;
 
-import com.procon.netty.utils.ByteBufferUtil;
+import com.procon.nio.utils.ByteBufferUtil;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
