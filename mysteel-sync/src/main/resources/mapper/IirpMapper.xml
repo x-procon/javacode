@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mysteel.sync.mapper.IirpMapper">
+
+    <insert id="indexFrameBatchInsert" parameterType="map">
+        <!--@mbg.generated-->
+        insert into mb_df_metadata_0001
+        (ms_id, frame_id, pid, pro_code, code, frame_level, cn_name, en_name, cn_description,
+        en_description, frame_path, priority, is_show, is_publish, is_delete, create_time,
+        create_user_id, create_user_name, update_user_id, update_user_name, is_top, source_update_time,
+        update_time, frame_id_path)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.msId,jdbcType=VARCHAR}, #{item.frameId,jdbcType=BIGINT}, #{item.pid,jdbcType=BIGINT},
+            #{item.proCode,jdbcType=VARCHAR}, #{item.code,jdbcType=VARCHAR}, #{item.frameLevel,jdbcType=INTEGER},
+            #{item.cnName,jdbcType=VARCHAR}, #{item.enName,jdbcType=VARCHAR}, #{item.cnDescription,jdbcType=VARCHAR},
+            #{item.enDescription,jdbcType=VARCHAR}, #{item.framePath,jdbcType=VARCHAR}, #{item.priority,jdbcType=INTEGER},
+            #{item.isShow,jdbcType=INTEGER}, #{item.isPublish,jdbcType=INTEGER}, #{item.isDelete,jdbcType=INTEGER},
+            #{item.createTime,jdbcType=DATE}, #{item.createUserId,jdbcType=VARCHAR}, #{item.createUserName,jdbcType=VARCHAR},
+            #{item.updateUserId,jdbcType=VARCHAR}, #{item.updateUserName,jdbcType=VARCHAR},
+            #{item.isTop,jdbcType=INTEGER}, #{item.sourceUpdateTime,jdbcType=DATE}, #{item.updateTime,jdbcType=DATE},
+            #{item.frameIdPath,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+
+    <insert id="indexBatchInsert" parameterType="map">
+        <!--@mbg.generated-->
+        insert into mb_df_metadata_0002
+        (ms_id, frame_id, index_code, pro_code, priority, is_publish, is_delete, create_time,
+        create_user_id, create_user_name, source_update_time, update_user_id, update_user_name,
+        update_time)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.msId,jdbcType=VARCHAR}, #{item.frameId,jdbcType=BIGINT}, #{item.indexCode,jdbcType=VARCHAR},
+            #{item.proCode,jdbcType=VARCHAR}, #{item.priority,jdbcType=INTEGER}, #{item.isPublish,jdbcType=BOOLEAN},
+            #{item.isDelete,jdbcType=BOOLEAN}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=VARCHAR},
+            #{item.createUserName,jdbcType=VARCHAR}, #{item.sourceUpdateTime,jdbcType=TIMESTAMP},
+            #{item.updateUserId,jdbcType=VARCHAR}, #{item.updateUserName,jdbcType=VARCHAR},
+            #{item.updateTime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+
+    <select id="queryAllIndexFrame" resultType="cc.procon.mysteel.sync.model.MbDfMetadata0001">
+        SELECT * FROM mb_df_metadata_0001
+    </select>
+</mapper>

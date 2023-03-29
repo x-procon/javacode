@@ -10,8 +10,6 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.IOException;
-
 /**
  * demo server
  *
@@ -20,7 +18,7 @@ import java.io.IOException;
  */
 @Slf4j
 public class DemoServer {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         serverBootstrap.group(new NioEventLoopGroup())
                 .channel(NioServerSocketChannel.class)
@@ -30,7 +28,7 @@ public class DemoServer {
                         ch.pipeline().addLast(new StringDecoder());
                         ch.pipeline().addLast(new SimpleChannelInboundHandler<String>() {
                             @Override
-                            protected void channelRead0(ChannelHandlerContext ctx, String msg) throws Exception {
+                            protected void channelRead0(ChannelHandlerContext ctx, String msg) {
                               log.info(msg);
                             }
                         });

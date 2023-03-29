@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cc.procon.mysteel.sync.mapper.ScMapper">
+    <resultMap id="IndexFrameResultMap" type="cc.procon.mysteel.sync.model.MbDfMetadata0001">
+        <!--@mbg.generated-->
+        <!--@Table mb_df_metadata_0001-->
+        <id column="ms_id" jdbcType="VARCHAR" property="msId"/>
+        <result column="frame_id" jdbcType="BIGINT" property="frameId"/>
+        <result column="pid" jdbcType="BIGINT" property="pid"/>
+        <result column="pro_code" jdbcType="VARCHAR" property="proCode"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="frame_level" jdbcType="INTEGER" property="frameLevel"/>
+        <result column="cn_name" jdbcType="VARCHAR" property="cnName"/>
+        <result column="en_name" jdbcType="VARCHAR" property="enName"/>
+        <result column="cn_description" jdbcType="VARCHAR" property="cnDescription"/>
+        <result column="en_description" jdbcType="VARCHAR" property="enDescription"/>
+        <result column="frame_path" jdbcType="VARCHAR" property="framePath"/>
+        <result column="priority" jdbcType="INTEGER" property="priority"/>
+        <result column="is_show" jdbcType="BOOLEAN" property="isShow"/>
+        <result column="is_publish" jdbcType="BOOLEAN" property="isPublish"/>
+        <result column="is_delete" jdbcType="BOOLEAN" property="isDelete"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId"/>
+        <result column="update_user_name" jdbcType="VARCHAR" property="updateUserName"/>
+        <result column="is_top" jdbcType="BOOLEAN" property="isTop"/>
+        <result column="source_update_time" jdbcType="TIMESTAMP" property="sourceUpdateTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="frame_id_path" jdbcType="VARCHAR" property="frameIdPath"/>
+    </resultMap>
+
+
+    <resultMap id="IndexResultMap" type="cc.procon.mysteel.sync.model.MbDfMetadata0002">
+        <!--@mbg.generated-->
+        <!--@Table mb_df_metadata_0002-->
+        <id column="ms_id" jdbcType="VARCHAR" property="msId"/>
+        <result column="frame_id" jdbcType="BIGINT" property="frameId"/>
+        <result column="index_code" jdbcType="VARCHAR" property="indexCode"/>
+        <result column="pro_code" jdbcType="VARCHAR" property="proCode"/>
+        <result column="priority" jdbcType="INTEGER" property="priority"/>
+        <result column="is_publish" jdbcType="BOOLEAN" property="isPublish"/>
+        <result column="is_delete" jdbcType="BOOLEAN" property="isDelete"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_user_id" jdbcType="VARCHAR" property="createUserId"/>
+        <result column="create_user_name" jdbcType="VARCHAR" property="createUserName"/>
+        <result column="source_update_time" jdbcType="TIMESTAMP" property="sourceUpdateTime"/>
+        <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId"/>
+        <result column="update_user_name" jdbcType="VARCHAR" property="updateUserName"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <select id="selectChildrenFrameByParentId" resultMap="IndexFrameResultMap">
+        SELECT *
+        FROM MB_DF_METADATA_0001 t 	WHERE IS_DELETE = 1
+        START WITH t.PID = #{pid}
+        CONNECT BY PRIOR t.FRAME_ID = t.PID
+        ORDER BY FRAME_ID
+    </select>
+
+    <select id="selectAllBottomFrameByParentId" resultMap="IndexFrameResultMap">
+        SELECT t4.*
+        FROM (SELECT * FROM MB_DF_METADATA_0001 t 	WHERE IS_DELETE = 1 START WITH t.PID = #{pid} CONNECT BY PRIOR t.FRAME_ID = t.PID) t4
+                 LEFT JOIN (SELECT COUNT(*) isParent,
+                                   t2.pid
+                            FROM (SELECT *
+                                  FROM MB_DF_METADATA_0001 t 	WHERE IS_DELETE = 1
+                                  START WITH t.PID = #{pid}
+                                  CONNECT BY PRIOR t.FRAME_ID = t.PID
+                                  ORDER BY FRAME_LEVEL) t2
+                            GROUP BY t2.pid) t3 ON t4.FRAME_ID = t3.PID
+        WHERE isParent is null
+    </select>
+
+    <select id="selectAllIndexByFrameList" resultMap="IndexResultMap">
+        select *
+        from MB_DF_METADATA_0002
+        where 1=1
+        <if test="frameIds != null and frameIds.size > 0">
+            <choose>
+                <when test="frameIds.size > 1000">
+                    AND
+                    <foreach collection="frameIds" item="item" open="(" separator="or" close=")">
+                        FRAME_ID = #{item}
+                    </foreach>
+                </when>
+                <otherwise>
+                    AND FRAME_ID in
+                    <foreach collection="frameIds" item="item" index="index" open="(" close=")" separator=",">
+                        #{item}
+                    </foreach>
+                </otherwise>
+            </choose>
+        </if>
+
+    </select>
+</mapper>
