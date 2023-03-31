@@ -29,8 +29,28 @@ public class SyncDataService {
     public void indexFrameDataSync(Integer pid){
         List<MbDfMetadata0001> mbDfMetadata0001List = scMapper.selectChildrenFrameByParentId(pid);
         List<List<MbDfMetadata0001>> partition = Lists.partition(mbDfMetadata0001List, 3000);
+        log.info("开始导入框架信息");
         for (List<MbDfMetadata0001> mbDfMetadata0001s : partition) {
             iirpMapper.indexFrameBatchInsert(mbDfMetadata0001s);
+            //导入指标信息
+
+        }
+        log.info("开始导入指标信息");
+        //导入指标信息
+        List<Long> collect = mbDfMetadata0001List.stream().map(MbDfMetadata0001::getFrameId).toList();
+        List<List<Long>> partition1 = Lists.partition(collect, 500);
+        for (List<Long> frameIds : partition1) {
+
+            List<MbDfMetadata0002> mbDfMetadata0002s = scMapper.selectAllIndexByFrameList(frameIds);
+            if (!CollectionUtils.isEmpty(mbDfMetadata0002s)) {
+                int sum = 0;
+                List<List<MbDfMetadata0002>> partition2 = Lists.partition(mbDfMetadata0002s, 3000);
+                for (List<MbDfMetadata0002> mbDfMetadata0002s1 : partition2) {
+                    int j = iirpMapper.indexBatchInsert(mbDfMetadata0002s1);
+                    sum += j;
+                }
+                log.info("共导入指标{}个", sum);
+            }
         }
 
     }
@@ -40,18 +60,7 @@ public class SyncDataService {
         List<MbDfMetadata0001> mbDfMetadata0001List = iirpMapper.queryAllIndexFrame();
         List<Long> collect = mbDfMetadata0001List.stream().map(MbDfMetadata0001::getFrameId).toList();
         List<List<Long>> partition = Lists.partition(collect, 500);
-        for (List<Long> frameIds : partition) {
-            List<MbDfMetadata0002> mbDfMetadata0002s = scMapper.selectAllIndexByFrameList(frameIds);
-            if(!CollectionUtils.isEmpty(mbDfMetadata0002s)){
-                 int sum = 0;
-                List<List<MbDfMetadata0002>> partition1 = Lists.partition(mbDfMetadata0002s, 3000);
-                for (List<MbDfMetadata0002> dfMetadata0002s : partition1) {
-                    int i = iirpMapper.indexBatchInsert(dfMetadata0002s);
-                    sum += i;
-                }
-                log.info("共导入指标{}个",sum);
-            }
-        }
+
 
     }
 }
