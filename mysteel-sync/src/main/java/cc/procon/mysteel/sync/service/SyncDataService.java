@@ -58,8 +58,8 @@ public class SyncDataService {
 
     public void indexDataSync(){
         List<MbDfMetadata0001> mbDfMetadata0001List = iirpMapper.queryAllIndexFrame();
-        List<Long> collect = mbDfMetadata0001List.stream().map(MbDfMetadata0001::getFrameId).toList();
-        List<List<Long>> partition = Lists.partition(collect, 500);
+        log.info("{}",mbDfMetadata0001List.size());
+
 
 
     }
