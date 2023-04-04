@@ -35,7 +35,7 @@ public interface IirpMapper {
      * 查询所有框架
      * @return 杰哥
      */
-    List<MbDfMetadata0001> queryAllIndexFrame();
+    List<Long> queryAllIndexFrame();
 }
 
 

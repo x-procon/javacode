@@ -3,7 +3,6 @@ package cc.procon.mysteel.sync.controller;
 import cc.procon.mysteel.sync.service.SyncDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -16,13 +15,9 @@ public class SyncController {
     @Autowired
     private SyncDataService syncDataService;
     @RequestMapping("/index-frame")
-    public void indexFrame(@RequestParam("pid") Integer pid){
-        syncDataService.indexFrameDataSync(pid);
+    public void indexFrame(){
+        syncDataService.indexFrameDataSync();
     }
 
-    @RequestMapping("/index")
-    public void indexFrame(){
-        syncDataService.indexDataSync();
-    }
 
 }

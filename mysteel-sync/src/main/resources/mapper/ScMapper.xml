@@ -48,11 +48,24 @@
         <result column="update_user_id" jdbcType="VARCHAR" property="updateUserId"/>
         <result column="update_user_name" jdbcType="VARCHAR" property="updateUserName"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="index_name" jdbcType="VARCHAR" property="indexName" />
+        <result column="index_short_name" jdbcType="VARCHAR" property="indexShortName" />
     </resultMap>
+
+
+    <select id="selectParentFrame" resultMap="IndexFrameResultMap">
+        SELECT *
+        FROM MB_DF_METADATA_0001 t
+        WHERE IS_DELETE = 1
+          AND PID = 0
+          AND FRAME_LEVEL = 1
+          AND PRO_CODE = 'PD_01'
+    </select>
 
     <select id="selectChildrenFrameByParentId" resultMap="IndexFrameResultMap">
         SELECT *
-        FROM MB_DF_METADATA_0001 t 	WHERE IS_DELETE = 1
+        FROM MB_DF_METADATA_0001 t
+        WHERE IS_DELETE = 1
         START WITH t.PID = #{pid}
         CONNECT BY PRIOR t.FRAME_ID = t.PID
         ORDER BY FRAME_ID
@@ -60,11 +73,16 @@
 
     <select id="selectAllBottomFrameByParentId" resultMap="IndexFrameResultMap">
         SELECT t4.*
-        FROM (SELECT * FROM MB_DF_METADATA_0001 t 	WHERE IS_DELETE = 1 START WITH t.PID = #{pid} CONNECT BY PRIOR t.FRAME_ID = t.PID) t4
+        FROM (SELECT *
+              FROM MB_DF_METADATA_0001 t
+              WHERE IS_DELETE = 1
+              START WITH t.PID = #{pid}
+              CONNECT BY PRIOR t.FRAME_ID = t.PID) t4
                  LEFT JOIN (SELECT COUNT(*) isParent,
                                    t2.pid
                             FROM (SELECT *
-                                  FROM MB_DF_METADATA_0001 t 	WHERE IS_DELETE = 1
+                                  FROM MB_DF_METADATA_0001 t
+                                  WHERE IS_DELETE = 1
                                   START WITH t.PID = #{pid}
                                   CONNECT BY PRIOR t.FRAME_ID = t.PID
                                   ORDER BY FRAME_LEVEL) t2
@@ -73,9 +91,10 @@
     </select>
 
     <select id="selectAllIndexByFrameList" resultMap="IndexResultMap">
-        select *
-        from MB_DF_METADATA_0002
-        where 1=1
+        select t1.*, t2.INDEX_NAME,t2.INDEX_SHORT_NAME
+        FROM MB_DF_METADATA_0002 t1
+                 LEFT JOIN MB_INDEX_MAIN_INFO t2 ON t1.INDEX_CODE = t2.INDEX_CODE
+        where PRO_CODE = 'PD_01' AND t1.IS_DELETE = 1
         <if test="frameIds != null and frameIds.size > 0">
             <choose>
                 <when test="frameIds.size > 1000">
@@ -92,6 +111,5 @@
                 </otherwise>
             </choose>
         </if>
-
     </select>
 </mapper>

@@ -26,21 +26,25 @@ public class SyncDataService {
     @Autowired
     private ScMapper scMapper;
 
-    public void indexFrameDataSync(Integer pid){
-        List<MbDfMetadata0001> mbDfMetadata0001List = scMapper.selectChildrenFrameByParentId(pid);
-        List<List<MbDfMetadata0001>> partition = Lists.partition(mbDfMetadata0001List, 3000);
-        log.info("开始导入框架信息");
-        for (List<MbDfMetadata0001> mbDfMetadata0001s : partition) {
-            iirpMapper.indexFrameBatchInsert(mbDfMetadata0001s);
-            //导入指标信息
-
+    public void indexFrameDataSync(){
+        List<MbDfMetadata0001> mbDfMetadata0001s1 = scMapper.selectParentFrame();
+        iirpMapper.indexFrameBatchInsert(mbDfMetadata0001s1);
+        if(!CollectionUtils.isEmpty(mbDfMetadata0001s1)){
+            for (MbDfMetadata0001 mbDfMetadata0001 : mbDfMetadata0001s1) {
+                log.info("开始导入一级目录为:{}的数据",mbDfMetadata0001.getCnName());
+                List<MbDfMetadata0001> mbDfMetadata0001List = scMapper.selectChildrenFrameByParentId(mbDfMetadata0001.getFrameId());
+                List<List<MbDfMetadata0001>> partition = Lists.partition(mbDfMetadata0001List, 3000);
+                log.info("开始导入框架信息");
+                for (List<MbDfMetadata0001> mbDfMetadata0001s : partition) {
+                    iirpMapper.indexFrameBatchInsert(mbDfMetadata0001s);
+                }
+            }
         }
         log.info("开始导入指标信息");
         //导入指标信息
-        List<Long> collect = mbDfMetadata0001List.stream().map(MbDfMetadata0001::getFrameId).toList();
+        List<Long> collect = iirpMapper.queryAllIndexFrame();
         List<List<Long>> partition1 = Lists.partition(collect, 500);
         for (List<Long> frameIds : partition1) {
-
             List<MbDfMetadata0002> mbDfMetadata0002s = scMapper.selectAllIndexByFrameList(frameIds);
             if (!CollectionUtils.isEmpty(mbDfMetadata0002s)) {
                 int sum = 0;
@@ -56,11 +60,4 @@ public class SyncDataService {
     }
 
 
-    public void indexDataSync(){
-        List<MbDfMetadata0001> mbDfMetadata0001List = iirpMapper.queryAllIndexFrame();
-        log.info("{}",mbDfMetadata0001List.size());
-
-
-
-    }
 }

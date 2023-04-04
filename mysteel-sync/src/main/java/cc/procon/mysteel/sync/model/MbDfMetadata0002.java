@@ -88,4 +88,7 @@ public class MbDfMetadata0002 {
     * 进入数仓时间
     */
     private Date updateTime;
+
+    private String indexName;
+    private String indexShortName;
 }

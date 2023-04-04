@@ -29,7 +29,7 @@
         insert into mb_df_metadata_0002
         (ms_id, frame_id, index_code, pro_code, priority, is_publish, is_delete, create_time,
         create_user_id, create_user_name, source_update_time, update_user_id, update_user_name,
-        update_time)
+        update_time,index_name,index_short_name)
         values
         <foreach collection="list" item="item" separator=",">
             (#{item.msId,jdbcType=VARCHAR}, #{item.frameId,jdbcType=BIGINT}, #{item.indexCode,jdbcType=VARCHAR},
@@ -37,11 +37,11 @@
             #{item.isDelete,jdbcType=BOOLEAN}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.createUserId,jdbcType=VARCHAR},
             #{item.createUserName,jdbcType=VARCHAR}, #{item.sourceUpdateTime,jdbcType=TIMESTAMP},
             #{item.updateUserId,jdbcType=VARCHAR}, #{item.updateUserName,jdbcType=VARCHAR},
-            #{item.updateTime,jdbcType=TIMESTAMP})
+            #{item.updateTime,jdbcType=TIMESTAMP},#{item.indexName,jdbcType=VARCHAR},#{item.indexShortName,jdbcType=VARCHAR})
         </foreach>
     </insert>
 
-    <select id="queryAllIndexFrame" resultType="cc.procon.mysteel.sync.model.MbDfMetadata0001">
-        SELECT * FROM mb_df_metadata_0001
+    <select id="queryAllIndexFrame" resultType="Long">
+        SELECT frame_id FROM mb_df_metadata_0001
     </select>
 </mapper>

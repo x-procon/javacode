@@ -15,12 +15,18 @@ import java.util.List;
 @DS("sc")
 @Mapper
 public interface ScMapper {
+
+    /**
+     * 查询所有顶级节点
+     * @return 结果
+     */
+    List<MbDfMetadata0001> selectParentFrame();
     /**
      * 根据pid查询子级框架
      * @param pid 父级id
      * @return 结果
      */
-    List<MbDfMetadata0001> selectChildrenFrameByParentId(@Param("pid") Integer pid);
+    List<MbDfMetadata0001> selectChildrenFrameByParentId(@Param("pid") Long pid);
 
     /**
      * 查询所有跟节点
