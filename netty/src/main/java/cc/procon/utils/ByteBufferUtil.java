@@ -1,4 +1,4 @@
-package com.procon.nio.utils;
+package cc.procon.utils;
 
 import io.netty.util.internal.StringUtil;
 import lombok.extern.slf4j.Slf4j;

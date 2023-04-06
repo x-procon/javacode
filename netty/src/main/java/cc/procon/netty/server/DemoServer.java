@@ -1,4 +1,4 @@
-package com.procon.netty.server;
+package cc.procon.netty.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelHandlerContext;
